@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4DE32818-79B7-4459-8E2B-39D796EF0505}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -48,47 +48,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbmCliente\Form1.cs">
+    <Compile Include="AbmCliente\ClientesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmCliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmCliente\ClientesForm.Designer.cs">
+      <DependentUpon>ClientesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmProveedor\Form1.cs">
+    <Compile Include="AbmProveedor\ProveedoresForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmProveedor\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmProveedor\ProveedoresForm.Designer.cs">
+      <DependentUpon>ProveedoresForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ArmarCupon\Form1.cs">
+    <Compile Include="ArmarCupon\ArmarCuponesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ArmarCupon\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ArmarCupon\ArmarCuponesForm.Designer.cs">
+      <DependentUpon>ArmarCuponesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CargaCredito\Form1.cs">
+    <Compile Include="CargaCredito\CargarCreditoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CargaCredito\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CargaCredito\CargarCreditoForm.Designer.cs">
+      <DependentUpon>CargarCreditoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ComprarCupon\Form1.cs">
+    <Compile Include="ComprarCupon\ComprarCuponForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ComprarCupon\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ComprarCupon\ComprarCuponForm.Designer.cs">
+      <DependentUpon>ComprarCuponForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ComprarGiftCard\Form1.cs">
+    <Compile Include="ComprarGiftCard\ComprarGiftCardForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ComprarGiftCard\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ComprarGiftCard\ComprarGiftCardForm.Designer.cs">
+      <DependentUpon>ComprarGiftCardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FacturarProveedor\Form1.cs">
+    <Compile Include="FacturarProveedor\FacturaProveedorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FacturarProveedor\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FacturarProveedor\FacturaProveedorForm.Designer.cs">
+      <DependentUpon>FacturaProveedorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HistorialCupones\HistorialCuponesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistorialCupones\HistorialCuponesForm.Designer.cs">
+      <DependentUpon>HistorialCuponesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.Designer.cs">
+      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -96,29 +108,11 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="HistorialCupones\Form1.cs">
+    <Compile Include="PedirDevolucion\PedirDevolucionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HistorialCupones\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ListadoEstadistico\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListadoEstadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PedirDevolucion\Form2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PedirDevolucion\Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PublicarCupon\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PublicarCupon\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="PedirDevolucion\PedirDevolucionForm.Designer.cs">
+      <DependentUpon>PedirDevolucionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,9 +124,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RegistroConsumoCupon\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -148,11 +139,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="RegistroConsumoCupon\Form1.cs">
+    <Compile Include="PublicarCupon\PublicarCuponForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegistroConsumoCupon\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="PublicarCupon\PublicarCuponForm.Designer.cs">
+      <DependentUpon>PublicarCuponForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroConsumoCupon\RegistroConsumoCuponForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistroConsumoCupon\RegistroConsumoCuponForm.Designer.cs">
+      <DependentUpon>RegistroConsumoCuponForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

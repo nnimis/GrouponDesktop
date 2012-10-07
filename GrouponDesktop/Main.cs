@@ -8,23 +8,26 @@ using System.Text;
 using System.Windows.Forms;
 using GrouponDesktop.Business;
 using GrouponDesktop.Common;
+using System.Reflection;
+using GrouponDesktop.Login;
+using GrouponDesktop.Core;
 
 namespace GrouponDesktop
 {
-    public partial class Main : Form
+    public partial class MainView : Form
     {
-        public Main()
+        public MainView()
         {
             InitializeComponent();
         }
 
-        private List<Cliente> Clientes { get; set; }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void MainView_Load(object sender, EventArgs e)
         {
-            ClienteManager mgr = new ClienteManager();
-            
-            dataGridView1.DataSource = mgr.ObtenerClientes();
+            //Setear a esta ventana como la principal del sistema
+            ViewsManager.SetMainWindow(this);
+
+            //Mostrar Login
+            ViewsManager.LoadView(new LoginForm());
         }
     }
 }

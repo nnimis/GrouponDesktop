@@ -6,9 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GrouponDesktop.Core;
 
 namespace GrouponDesktop.HistorialCupones
 {
+    [PermissionRequired(Functionalities.VerHistorialCupones)]
     public partial class HistorialCuponesForm : Form
     {
         public HistorialCuponesForm()

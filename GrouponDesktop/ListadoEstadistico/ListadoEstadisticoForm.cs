@@ -6,9 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GrouponDesktop.Core;
 
 namespace GrouponDesktop.ListadoEstadistico
 {
+    [PermissionRequired(Functionalities.ListarEstadisticas)]
     public partial class ListadoEstadisticoForm : Form
     {
         public ListadoEstadisticoForm()

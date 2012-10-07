@@ -6,9 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GrouponDesktop.Core;
 
 namespace GrouponDesktop.PublicarCupon
 {
+    [PermissionRequired(Functionalities.PublicarCupones)]
     public partial class PublicarCuponForm : Form
     {
         public PublicarCuponForm()

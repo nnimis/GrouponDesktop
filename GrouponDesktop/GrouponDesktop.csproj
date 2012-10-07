@@ -84,6 +84,12 @@
     <Compile Include="ComprarGiftCard\ComprarGiftCardForm.Designer.cs">
       <DependentUpon>ComprarGiftCardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\AppExceptionHandler.cs" />
+    <Compile Include="Core\Common\PermissionRequiredAttribute.cs" />
+    <Compile Include="Core\Common\Functionalities.cs" />
+    <Compile Include="Core\Common\User.cs" />
+    <Compile Include="Core\Session.cs" />
+    <Compile Include="Core\ViewsManager.cs" />
     <Compile Include="FacturarProveedor\FacturaProveedorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,12 @@
     <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.Designer.cs">
       <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,14 +128,53 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AbmCliente\ClientesForm.resx">
+      <DependentUpon>ClientesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmProveedor\ProveedoresForm.resx">
+      <DependentUpon>ProveedoresForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArmarCupon\ArmarCuponesForm.resx">
+      <DependentUpon>ArmarCuponesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CargaCredito\CargarCreditoForm.resx">
+      <DependentUpon>CargarCreditoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprarCupon\ComprarCuponForm.resx">
+      <DependentUpon>ComprarCuponForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprarGiftCard\ComprarGiftCardForm.resx">
+      <DependentUpon>ComprarGiftCardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FacturarProveedor\FacturaProveedorForm.resx">
+      <DependentUpon>FacturaProveedorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistorialCupones\HistorialCuponesForm.resx">
+      <DependentUpon>HistorialCuponesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">
+      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PedirDevolucion\PedirDevolucionForm.resx">
+      <DependentUpon>PedirDevolucionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PublicarCupon\PublicarCuponForm.resx">
+      <DependentUpon>PublicarCuponForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistroConsumoCupon\RegistroConsumoCuponForm.resx">
+      <DependentUpon>RegistroConsumoCuponForm.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

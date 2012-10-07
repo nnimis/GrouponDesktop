@@ -6,9 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GrouponDesktop.Core;
 
 namespace GrouponDesktop.ComprarGiftCard
 {
+    [PermissionRequired(Functionalities.GiftCards)]
     public partial class ComprarGiftCardForm : Form
     {
         public ComprarGiftCardForm()

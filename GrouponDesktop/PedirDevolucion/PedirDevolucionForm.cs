@@ -6,9 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GrouponDesktop.Core;
 
 namespace GrouponDesktop.PedirDevolucion
 {
+    [PermissionRequired(Functionalities.PedirDevoluciones)]
     public partial class PedirDevolucionForm : Form
     {
         public PedirDevolucionForm()

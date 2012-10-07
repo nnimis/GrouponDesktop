@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using GrouponDesktop.Core;
 
 namespace GrouponDesktop
 {
@@ -13,9 +14,10 @@ namespace GrouponDesktop
         [STAThread]
         static void Main()
         {
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(AppExceptionHandler.Invoke);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Application.Run(new MainView());
         }
     }
 }

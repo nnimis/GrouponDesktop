@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4E7562B4-E184-439D-AB83-75F3862E86A3}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -47,7 +47,9 @@
   <ItemGroup>
     <Compile Include="Cliente.cs" />
     <Compile Include="Exceptions\ClienteDuplicadoException.cs" />
+    <Compile Include="Functionalities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

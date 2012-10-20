@@ -9,6 +9,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrouponDesktop.Business", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrouponDesktop.Common", "GrouponDesktop.Common\GrouponDesktop.Common.csproj", "{4E7562B4-E184-439D-AB83-75F3862E86A3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0BCB6F29-E10D-4D24-B0B7-6A08C4DA5FA7}"
+	ProjectSection(SolutionItems) = preProject
+		CREATE_DB.sql = CREATE_DB.sql
+		INSERT_Administrador.sql = INSERT_Administrador.sql
+		INSERT_Funcionalidades.sql = INSERT_Funcionalidades.sql
+		SP_GetRoleFunctionalities.sql = SP_GetRoleFunctionalities.sql
+		SP_Login.sql = SP_Login.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entregable", "Entregable", "{0F377803-840F-4080-932A-1F5DE60D09E2}"
+	ProjectSection(SolutionItems) = preProject
+		Script.sql = Script.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,5 +48,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0F377803-840F-4080-932A-1F5DE60D09E2} = {0BCB6F29-E10D-4D24-B0B7-6A08C4DA5FA7}
 	EndGlobalSection
 EndGlobal

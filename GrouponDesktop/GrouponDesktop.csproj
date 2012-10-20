@@ -85,9 +85,7 @@
       <DependentUpon>ComprarGiftCardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\AppExceptionHandler.cs" />
-    <Compile Include="Core\Common\PermissionRequiredAttribute.cs" />
-    <Compile Include="Core\Common\Functionalities.cs" />
-    <Compile Include="Core\Common\User.cs" />
+    <Compile Include="Core\PermissionRequiredAttribute.cs" />
     <Compile Include="Core\Session.cs" />
     <Compile Include="Core\ViewsManager.cs" />
     <Compile Include="FacturarProveedor\FacturaProveedorForm.cs">

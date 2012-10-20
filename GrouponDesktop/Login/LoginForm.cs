@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GrouponDesktop.Core;
+using GrouponDesktop.Business;
+using System.Security.Cryptography;
 
 namespace GrouponDesktop.Login
 {
@@ -19,13 +21,9 @@ namespace GrouponDesktop.Login
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            throw new Exception("Usuario no encontrado");
-            //TODO: levantar este usuario de la DB, validar user y pass
-            var user = new User();
-            user.Permissions.Add(Functionalities.AdministrarClientes);
-            user.Permissions.Add(Functionalities.AdministrarProveedores);
-            user.Permissions.Add(Functionalities.PublicarCupones);
-
+            var svc = new LoginService();
+            var user = svc.Login(txtUserName.Text, txtPassword.Text);
+            
             //Iniciar sesion con el usuario cargado
             Session.StartSession(user);
             ViewsManager.ClearViews();

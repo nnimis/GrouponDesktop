@@ -183,6 +183,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Scripts\CREATE_DB.sql" />
+    <None Include="Scripts\Entregable\Script.sql" />
+    <None Include="Scripts\INSERT_Administrador.sql" />
+    <None Include="Scripts\INSERT_Funcionalidades.sql" />
+    <None Include="Scripts\SP_GetRoleFunctionalities.sql" />
+    <None Include="Scripts\SP_Login.sql" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>

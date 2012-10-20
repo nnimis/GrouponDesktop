@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GrouponDesktop.Common;
 
 namespace GrouponDesktop.Core
 {
@@ -10,7 +11,7 @@ namespace GrouponDesktop.Core
     /// necesarios para poder navegar sobre cada uno. En base a estos permisos es que
     /// se muestran o no los formularios en el menu
     /// </summary>
-    class PermissionRequiredAttribute : Attribute
+    public class PermissionRequiredAttribute : Attribute
     {
         /// <summary>
         /// Permisos requeridos para poder navegar el formulario

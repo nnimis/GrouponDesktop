@@ -1,0 +1,13 @@
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('AdministrarClientes');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('AdministrarProveedores');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('AdministrarCupones');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('CargarCredito');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('CrearCupon');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('ComprarCupones');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('GiftCards');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('Facturar');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('VerHistorialCupones');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('ListarEstadisticas');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('PedirDevoluciones');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('PublicarCupones');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('RegistrarConsumoCupones');

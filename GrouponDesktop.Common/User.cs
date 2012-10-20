@@ -3,17 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GrouponDesktop.Core
+namespace GrouponDesktop.Common
 {
     /// <summary>
     /// Representa a un usuario logueado en el sistema
     /// </summary>
-    class User
+    public class User
     {
         /// <summary>
         /// Permisos con los que cuenta el usuario
         /// </summary>
         public List<Functionalities> Permissions { get; private set; }
+
+        /// <summary>
+        /// User ID
+        /// </summary>
+        public int UserID { get; set; }
+
+        /// <summary>
+        /// Role ID
+        /// </summary>
+        public int RoleID { get; set; }
+
+        /// <summary>
+        /// Nombre del usuario
+        /// </summary>
+        public string UserName { get; set; }
 
         public User()
         {

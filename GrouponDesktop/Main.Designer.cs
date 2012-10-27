@@ -34,6 +34,7 @@
             // mainMenu
             // 
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.Margin = new System.Windows.Forms.Padding(0, 30, 0, 30);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Size = new System.Drawing.Size(914, 24);
             this.mainMenu.TabIndex = 0;
@@ -49,6 +50,7 @@
             this.MainMenuStrip = this.mainMenu;
             this.MaximizeBox = false;
             this.Name = "MainView";
+            this.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Groupon Desktop";

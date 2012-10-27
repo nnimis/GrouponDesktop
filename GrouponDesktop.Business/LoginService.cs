@@ -23,7 +23,7 @@ namespace GrouponDesktop.Business
         {
             var encryptedPassword = ComputeHash(password, new SHA256CryptoServiceProvider());
             DataRow result = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-            "Login", SqlDataAccessArgs
+            "GRUPO_N.Login", SqlDataAccessArgs
                 .CreateWith("@Nombre", userName)
                 .And("@Password", encryptedPassword)
             .Arguments);
@@ -45,16 +45,12 @@ namespace GrouponDesktop.Business
 
         private void SetUserFunctionalities(User user)
         {
-            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-            "GetRoleFunctionalities", SqlDataAccessArgs
-                .CreateWith("@Rol_ID", user.RoleID)
-            .Arguments);
+            var manager = new FunctionalitiesManager();
+            var functionalities = manager.GetRoleFunctionalities(user.RoleID);
 
-            foreach (DataRow row in result.Rows)
+            foreach (var functionality in functionalities)
             {
-                var permission = row["Descripcion"].ToString();
-                var enumItem = (Functionalities)Enum.Parse(typeof(Functionalities), permission);
-                user.Permissions.Add(enumItem);
+                user.Permissions.Add(functionality);
             }
         }
 

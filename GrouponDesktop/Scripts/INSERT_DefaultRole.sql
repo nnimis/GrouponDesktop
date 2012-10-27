@@ -1,0 +1,1 @@
+INSERT INTO GRUPO_N.Rol (Descripcion) VALUES ('Rol por Defecto')

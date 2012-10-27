@@ -11,3 +11,4 @@ INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('ListarEstadisticas');
 INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('PedirDevoluciones');
 INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('PublicarCupones');
 INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('RegistrarConsumoCupones');
+INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('AdministrarRoles');

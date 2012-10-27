@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GrouponDesktop.Common;
+using GrouponDesktop.Business;
 
 namespace GrouponDesktop.Core
 {
@@ -23,7 +24,14 @@ namespace GrouponDesktop.Core
         public static void StartSession(User user)
         {
             User = user;
+            if(user.Permissions.Contains(Functionalities.AdministrarRoles))
+            {
+                var manager = new RolesManager();
+                DefaultRoleID = manager.GetDefaultRoleID();
+            }
             ViewsManager.LoadMenu();
         }
+
+        public static int DefaultRoleID { get; private set; }
     }
 }

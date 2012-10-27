@@ -37,7 +37,26 @@ namespace GrouponDesktop.Core
             form.WindowState = FormWindowState.Maximized;
             form.MdiParent = _mainWindow;
             form.TopMost = true;
+            form.Top = 1;
+
             form.Show();
+        }
+
+        /// <summary>
+        /// Carga un formulario como modal en el sistema
+        /// </summary>
+        /// <param name="form">Formulario a mostrar</param>
+        public static void LoadModal(Form form)
+        {
+            form.Text = string.Empty;
+            form.ShowIcon = false;
+            form.MaximizeBox = false;
+            form.MinimizeBox = false;
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.ShowInTaskbar = false;
+            form.TopMost = true;
+
+            form.ShowDialog();
         }
 
         /// <summary>
@@ -63,11 +82,11 @@ namespace GrouponDesktop.Core
         {
             foreach (var chilren in _mainWindow.MdiChildren)
             {
-                chilren.Close();
+                chilren.Hide();
             }
 
             if (_mainWindow.ActiveMdiChild != null)
-                _mainWindow.ActiveMdiChild.Close();
+                _mainWindow.ActiveMdiChild.Hide();
         }
 
         /// <summary>
@@ -110,7 +129,16 @@ namespace GrouponDesktop.Core
         private static void Navigate(object sender, EventArgs e)
         {
             var formType = (sender as ToolStripMenuItem).Tag as Type;
-            LoadView(Activator.CreateInstance(formType) as Form);
+            if (_Views.ContainsKey(formType))
+            {
+                LoadView(_Views[formType]);
+            }
+            else
+            {
+                var viewInstance = Activator.CreateInstance(formType) as Form;
+                _Views.Add(formType, viewInstance);
+                LoadView(viewInstance);
+            }
         }
 
         /// <summary>
@@ -131,6 +159,8 @@ namespace GrouponDesktop.Core
 
             return true;
         }
+
+        private static Dictionary<Type, Form> _Views = new Dictionary<Type, Form>();
 
         #endregion
     }

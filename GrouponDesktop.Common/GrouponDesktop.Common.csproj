@@ -49,6 +49,7 @@
     <Compile Include="Exceptions\ClienteDuplicadoException.cs" />
     <Compile Include="Functionalities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rol.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -60,6 +60,19 @@
     <Compile Include="AbmProveedor\ProveedoresForm.Designer.cs">
       <DependentUpon>ProveedoresForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmRol\RolesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\RolesForm.Designer.cs">
+      <DependentUpon>RolesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\AddEditRoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\AddEditRoleForm.Designer.cs">
+      <DependentUpon>AddEditRoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\RoleUpdatedEventArgs.cs" />
     <Compile Include="ArmarCupon\ArmarCuponesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +145,12 @@
     <EmbeddedResource Include="AbmProveedor\ProveedoresForm.resx">
       <DependentUpon>ProveedoresForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\AddEditRoleForm.resx">
+      <DependentUpon>AddEditRoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\RolesForm.resx">
+      <DependentUpon>RolesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ArmarCupon\ArmarCuponesForm.resx">
       <DependentUpon>ArmarCuponesForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -183,12 +202,22 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Scripts\FN_GetFunctionalityByName.sql" />
+    <None Include="Scripts\INSERT_DefaultRole.sql" />
+    <None Include="Scripts\FN_GetIdRolDefault.sql" />
+    <None Include="Scripts\Stores\SP_InsertRoleFunctionality.sql" />
+    <None Include="Scripts\Stores\SP_DeleteRoleFunctionalities.sql" />
+    <None Include="Scripts\Stores\SP_UpdateRole.sql" />
+    <None Include="Scripts\Stores\SP_GetIdRolDefault.sql" />
+    <None Include="Scripts\Stores\SP_DeleteRole.sql" />
+    <None Include="Scripts\Stores\SP_GetRoles.sql" />
     <None Include="Scripts\CREATE_DB.sql" />
     <None Include="Scripts\Entregable\Script.sql" />
     <None Include="Scripts\INSERT_Administrador.sql" />
     <None Include="Scripts\INSERT_Funcionalidades.sql" />
-    <None Include="Scripts\SP_GetRoleFunctionalities.sql" />
-    <None Include="Scripts\SP_Login.sql" />
+    <None Include="Scripts\Stores\SP_GetRoleFunctionalities.sql" />
+    <None Include="Scripts\Stores\SP_InsertRole.sql" />
+    <None Include="Scripts\Stores\SP_Login.sql" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>

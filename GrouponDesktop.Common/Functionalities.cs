@@ -22,6 +22,7 @@ namespace GrouponDesktop.Common
         ListarEstadisticas,
         PedirDevoluciones,
         PublicarCupones,
-        RegistrarConsumoCupones
+        RegistrarConsumoCupones,
+        AdministrarRoles
     }
 }

@@ -218,6 +218,8 @@
     <None Include="Scripts\Stores\SP_GetRoleFunctionalities.sql" />
     <None Include="Scripts\Stores\SP_InsertRole.sql" />
     <None Include="Scripts\Stores\SP_Login.sql" />
+    <None Include="Scripts\Tablas\TB_Roles.sql" />
+    <None Include="Scripts\Tablas\TB_Usuarios.sql" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>

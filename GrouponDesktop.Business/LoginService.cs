@@ -21,15 +21,17 @@ namespace GrouponDesktop.Business
         /// <returns>ID del usuario en caso de login correcto, si no tira una Exception</returns>
         public User Login(string userName, string password)
         {
+            this.ValidateLockedUser(userName);
+
             var encryptedPassword = ComputeHash(password, new SHA256CryptoServiceProvider());
             DataRow result = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-            "GRUPO_N.Login", SqlDataAccessArgs
+                "GRUPO_N.Login", SqlDataAccessArgs
                 .CreateWith("@Nombre", userName)
                 .And("@Password", encryptedPassword)
             .Arguments);
 
             if (result == null)
-                throw new Exception("Usuario no encontrado");
+                throw new Exception("Usuario o contraseña inválidos");
 
             var user = new User()
             {
@@ -41,6 +43,20 @@ namespace GrouponDesktop.Business
             SetUserFunctionalities(user);
 
             return user;
+        }
+
+        private void ValidateLockedUser(string userName)
+        {
+            var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.GetUserLoginAttempts", SqlDataAccessArgs
+                .CreateWith("@Nombre", userName)
+            .Arguments);
+
+            if (result == null)
+                throw new Exception("Usuario o contraseña inválidos");
+
+            if (int.Parse(result.ToString()) == 3)
+                throw new Exception("Usuario Bloqueado, contacte al administrador del sistema");
         }
 
         private void SetUserFunctionalities(User user)

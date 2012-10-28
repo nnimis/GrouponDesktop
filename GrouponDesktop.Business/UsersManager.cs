@@ -14,7 +14,7 @@ namespace GrouponDesktop.Business
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
                 "GRUPO_N.DeleteUser", SqlDataAccessArgs
-                .CreateWith("@ID_Usuario", user.UserID)
+                .CreateWith("@User_ID", user.UserID)
             .Arguments);
         }
     }

@@ -101,6 +101,12 @@
     <Compile Include="Core\PermissionRequiredAttribute.cs" />
     <Compile Include="Core\Session.cs" />
     <Compile Include="Core\ViewsManager.cs" />
+    <Compile Include="Cuenta\CuentaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cuenta\CuentaForm.Designer.cs">
+      <DependentUpon>CuentaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FacturarProveedor\FacturaProveedorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +169,9 @@
     <EmbeddedResource Include="ComprarGiftCard\ComprarGiftCardForm.resx">
       <DependentUpon>ComprarGiftCardForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Cuenta\CuentaForm.resx">
+      <DependentUpon>CuentaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FacturarProveedor\FacturaProveedorForm.resx">
       <DependentUpon>FacturaProveedorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,6 +214,8 @@
     <None Include="Scripts\FN_GetFunctionalityByName.sql" />
     <None Include="Scripts\INSERT_DefaultRole.sql" />
     <None Include="Scripts\FN_GetIdRolDefault.sql" />
+    <None Include="Scripts\Stores\SP_DeleteUser.sql" />
+    <None Include="Scripts\Stores\SP_UpdatePassword.sql" />
     <None Include="Scripts\Stores\SP_InsertRoleFunctionality.sql" />
     <None Include="Scripts\Stores\SP_DeleteRoleFunctionalities.sql" />
     <None Include="Scripts\Stores\SP_UpdateRole.sql" />

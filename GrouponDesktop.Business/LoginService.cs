@@ -45,6 +45,29 @@ namespace GrouponDesktop.Business
             return user;
         }
 
+        public bool UpdateUserPassword(User user, string oldPassword, string newPassword)
+        {
+            var encryptedOldPassword = ComputeHash(oldPassword, new SHA256CryptoServiceProvider());
+            var encryptedNewPassword = ComputeHash(newPassword, new SHA256CryptoServiceProvider());
+            var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.UpdateUserPassword", SqlDataAccessArgs
+                .CreateWith("@ID_Usuario", user.UserID)
+                .And("@OldPassword", encryptedOldPassword)
+                .And("@NewPassword", encryptedNewPassword)
+            .Arguments);
+
+            return (result != null);
+        }
+
+        public string ComputeHash(string input, HashAlgorithm algorithm)
+        {
+            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
+            return BitConverter.ToString(hashedBytes);
+        }
+
+        #region Private Methods
+
         private void ValidateLockedUser(string userName)
         {
             var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
@@ -70,11 +93,6 @@ namespace GrouponDesktop.Business
             }
         }
 
-        public string ComputeHash(string input, HashAlgorithm algorithm)
-        {
-            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-            Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
-            return BitConverter.ToString(hashedBytes);
-        }
+        #endregion
     }
 }

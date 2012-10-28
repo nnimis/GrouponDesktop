@@ -98,6 +98,16 @@ namespace GrouponDesktop.Core
             MessageBox.Show(message);
         }
 
+        /// <summary>
+        /// Reinicia el sistema
+        /// </summary>
+        public static void Reset()
+        {
+            _mainWindow.MainMenuStrip.Items.Clear();
+            _Views.Clear();
+            LoadView(new Login.LoginForm());
+        }
+
         #region Private Members
 
         /// <summary>

@@ -12,6 +12,12 @@ END
 
 GO
 
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Usuario_Activo]') AND type = 'D')
+BEGIN
+ALTER TABLE [GRUPO_N].[Usuario] DROP CONSTRAINT [DF_Usuario_Activo]
+END
+
+GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GRUPO_N].[Usuario]') AND type in (N'U'))
 DROP TABLE [GRUPO_N].[Usuario]
 GO
@@ -28,6 +34,7 @@ CREATE TABLE [GRUPO_N].[Usuario](
 	[Password] [nvarchar](255) NOT NULL,
 	[ID_Rol] [int] NOT NULL,
 	[Intentos] [int] NOT NULL,
+	[Activo] [bit] NOT NULL,
  CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -44,4 +51,7 @@ ALTER TABLE [GRUPO_N].[Usuario] CHECK CONSTRAINT [FK_Usuario_Rol]
 GO
 
 ALTER TABLE [GRUPO_N].[Usuario] ADD  CONSTRAINT [DF_Usuario_Intentos]  DEFAULT ((0)) FOR [Intentos]
+GO
+
+ALTER TABLE [GRUPO_N].[Usuario] ADD  CONSTRAINT [DF_Usuario_Activo]  DEFAULT ((1)) FOR [Activo]
 GO

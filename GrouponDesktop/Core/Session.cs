@@ -32,6 +32,15 @@ namespace GrouponDesktop.Core
             ViewsManager.LoadMenu();
         }
 
+        /// <summary>
+        /// Cierra la sesion actual
+        /// </summary>
+        public static void Close()
+        {
+            User = null;
+            ViewsManager.Reset();
+        }
+
         public static int DefaultRoleID { get; private set; }
     }
 }

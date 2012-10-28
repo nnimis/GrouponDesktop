@@ -17,6 +17,9 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
+	SELECT ID, ID_Rol, Nombre FROM GRUPO_N.Usuario WHERE
+	Nombre = @Nombre AND Password = @Password AND Activo = 1
+
 	IF @@ROWCOUNT = 0 
 		BEGIN
 			UPDATE GRUPO_N.Usuario SET Intentos = Intentos + 1

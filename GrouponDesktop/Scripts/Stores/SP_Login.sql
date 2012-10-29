@@ -1,4 +1,4 @@
-USE [GD1C2012]
+USE [GD2C2012]
 GO
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GRUPO_N].[Login]') AND type in (N'P', N'PC'))

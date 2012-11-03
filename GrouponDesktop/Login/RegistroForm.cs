@@ -15,6 +15,14 @@ namespace GrouponDesktop.Login
     {
         public event EventHandler<UserCreatedEventArgs> OnUserCreated;
         private List<Profile> Profiles;
+        private UserControl clienteUserControl = new ClienteUserControl();
+        private Profile _profile
+        {
+            get
+            {
+                return (Profile)cbxProfiles.SelectedItem;
+            }
+        }
 
         public RegistroForm()
         {
@@ -31,11 +39,20 @@ namespace GrouponDesktop.Login
 
         private void cbxProfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            userPanel.Controls.Clear();
+            if (_profile == Profile.Cliente)
+            {
+                userPanel.Controls.Add(clienteUserControl);
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (_profile == Profile.Cliente)
+            {
+                var cliente = ((ClienteUserControl)clienteUserControl).GetCliente();
+            }
+
             if (OnUserCreated != null)
                 OnUserCreated(this, new UserCreatedEventArgs() { Username = this.txtUsername.Text, Password = this.txtPassword.Text });
         }

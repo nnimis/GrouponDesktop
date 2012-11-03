@@ -48,7 +48,6 @@ namespace GrouponDesktop.Core
         /// <param name="form">Formulario a mostrar</param>
         public static void LoadModal(Form form)
         {
-            form.Text = string.Empty;
             form.ShowIcon = false;
             form.MaximizeBox = false;
             form.MinimizeBox = false;

@@ -38,11 +38,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbxProfiles = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.userPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(427, 322);
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Location = new System.Drawing.Point(443, 510);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
@@ -52,8 +54,9 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(12, 322);
+            this.btnCancel.Location = new System.Drawing.Point(12, 510);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -129,13 +132,24 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Perfil";
             // 
+            // userPanel
+            // 
+            this.userPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.userPanel.Location = new System.Drawing.Point(12, 131);
+            this.userPanel.Name = "userPanel";
+            this.userPanel.Size = new System.Drawing.Size(506, 373);
+            this.userPanel.TabIndex = 10;
+            // 
             // RegistroForm
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(514, 357);
+            this.ClientSize = new System.Drawing.Size(530, 545);
+            this.Controls.Add(this.userPanel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cbxProfiles);
             this.Controls.Add(this.txtConfirmPassword);
@@ -147,7 +161,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Name = "RegistroForm";
-            this.Text = "RegistroForm";
+            this.Text = "Registro";
             this.Load += new System.EventHandler(this.RegistroForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -166,5 +180,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbxProfiles;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel userPanel;
     }
 }

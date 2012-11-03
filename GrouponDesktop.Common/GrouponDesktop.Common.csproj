@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="City.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Exceptions\ClienteDuplicadoException.cs" />
     <Compile Include="Functionalities.cs" />

@@ -125,6 +125,12 @@
     <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.Designer.cs">
       <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\ClienteUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Login\ClienteUserControl.Designer.cs">
+      <DependentUpon>ClienteUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +194,9 @@
     <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">
       <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login\ClienteUserControl.resx">
+      <DependentUpon>ClienteUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -227,6 +236,7 @@
     <None Include="Scripts\Functions\FN_GetFunctionalityByName.sql" />
     <None Include="Scripts\Functions\FN_GetIdRolDefault.sql" />
     <None Include="Scripts\Stores\SP_DeleteUser.sql" />
+    <None Include="Scripts\Stores\SP_GetCiudades.sql" />
     <None Include="Scripts\Stores\SP_UpdatePassword.sql" />
     <None Include="Scripts\Stores\SP_InsertRoleFunctionality.sql" />
     <None Include="Scripts\Stores\SP_DeleteRoleFunctionalities.sql" />

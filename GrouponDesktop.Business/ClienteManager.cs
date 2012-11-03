@@ -28,27 +28,21 @@ namespace GrouponDesktop.Business
         /// <summary>
         /// Guarda un cliente en la base de datos
         /// </summary>
-        /// <param name="cliente">Instancia de la clase <seealso cref="GrouponDesktop.Common.Cliente">Cliente</seealso> a guardar en la DB</param>
-        /// <exception cref="GrouponDesktop.Common.Exceptions.ClienteDuplicadoException">En caso de cliente duplicado, tira una ClienteDuplicadoException</exception>
-        public void GuardarCliente(Cliente cliente)
+        public void GuardarCliente(Cliente cliente, string password)
         {
-            try
-            {
-                SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                "GuardarCliente", SqlDataAccessArgs
-                    .CreateWith("@Nombre", cliente.Nombre)
-                    .And("@Apellido", cliente.Apellido)
-                    .And("@DNI", cliente.DNI)
-                .Arguments);
-            }
-            catch (SqlException exc)
-            {
-                throw new ClienteDuplicadoException();
-            }
-            catch (Exception exc)
-            {
+            var usersManager = new UsersManager();
+            cliente.UserID = usersManager.CreateProfileAccount(cliente as User, Cliente.Profile, password);
+            var entityDetailManager = new DetalleEntidadManager();
+            var detalleID = entityDetailManager.AddDetalleEntidad(cliente as User);
 
-            }
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.InsertCliente", SqlDataAccessArgs
+                .CreateWith("@DNI", cliente.DNI)
+                .And("@Nombre", cliente.Nombre)
+                .And("@Apellido", cliente.Apellido)
+                .And("@FechaNacimiento", cliente.FechaNacimiento)
+                .And("@ID_Detalle", detalleID)
+            .Arguments);
         }
     }
 }

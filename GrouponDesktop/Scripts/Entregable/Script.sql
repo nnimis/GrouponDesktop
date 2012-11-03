@@ -228,7 +228,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [GRUPO_N].[DetalleEntidad](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[Teleefono] [numeric](18, 0) NOT NULL,
+	[Telefono] [numeric](18, 0) NOT NULL,
 	[Email] [nvarchar](255) NOT NULL,
 	[ID_Usuario] [int] NOT NULL,
  CONSTRAINT [PK_DetalleEntidad] PRIMARY KEY CLUSTERED 

@@ -48,13 +48,31 @@ namespace GrouponDesktop.Login
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (_profile == Profile.Cliente)
+            try
             {
-                var cliente = ((ClienteUserControl)clienteUserControl).GetCliente();
-            }
+                if (_profile == Profile.Cliente)
+                {
+                    var cliente = ((ClienteUserControl)clienteUserControl).GetCliente();
+                    cliente.UserName = txtUsername.Text;
+                    var manager = new ClienteManager();
+                    manager.GuardarCliente(cliente, txtPassword.Text);
+                }
 
-            if (OnUserCreated != null)
-                OnUserCreated(this, new UserCreatedEventArgs() { Username = this.txtUsername.Text, Password = this.txtPassword.Text });
+                if (OnUserCreated != null)
+                {
+                    OnUserCreated(this, new UserCreatedEventArgs() { Username = this.txtUsername.Text, Password = this.txtPassword.Text });
+                    this.Close();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Por favor, verifique los datos ingresados");
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

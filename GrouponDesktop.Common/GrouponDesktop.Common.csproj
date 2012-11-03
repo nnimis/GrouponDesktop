@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="City.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="DetalleEntidad.cs" />
+    <Compile Include="Rubro.cs" />
     <Compile Include="Exceptions\ClienteDuplicadoException.cs" />
     <Compile Include="Functionalities.cs" />
     <Compile Include="Profile.cs" />

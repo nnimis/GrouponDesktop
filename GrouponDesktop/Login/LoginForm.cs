@@ -21,12 +21,7 @@ namespace GrouponDesktop.Login
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            var svc = new LoginService();
-            var user = svc.Login(txtUserName.Text, txtPassword.Text);
-            
-            //Iniciar sesion con el usuario cargado
-            Session.StartSession(user);
-            ViewsManager.ClearViews();
+            Login(txtUserName.Text, txtPassword.Text);
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -38,7 +33,17 @@ namespace GrouponDesktop.Login
 
         private void registroForm_OnUserCreated(object sender, UserCreatedEventArgs e)
         {
+            Login(e.Username, e.Password);
+        }
 
+        private void Login(string userName, string pass)
+        {
+            var svc = new LoginService();
+            var user = svc.Login(userName, pass);
+
+            //Iniciar sesion con el usuario cargado
+            Session.StartSession(user);
+            ViewsManager.ClearViews();
         }
     }
 }

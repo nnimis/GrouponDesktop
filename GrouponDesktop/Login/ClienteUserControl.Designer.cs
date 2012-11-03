@@ -45,6 +45,10 @@
             this.clbCiudades = new System.Windows.Forms.CheckedListBox();
             this.cities = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.txtTelefono = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cbxCiudad = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -129,7 +133,7 @@
             // 
             // txtCP
             // 
-            this.txtCP.Location = new System.Drawing.Point(102, 141);
+            this.txtCP.Location = new System.Drawing.Point(102, 194);
             this.txtCP.Name = "txtCP";
             this.txtCP.Size = new System.Drawing.Size(200, 20);
             this.txtCP.TabIndex = 11;
@@ -137,7 +141,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(75, 144);
+            this.label6.Location = new System.Drawing.Point(75, 197);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(21, 13);
             this.label6.TabIndex = 10;
@@ -146,7 +150,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 170);
+            this.label7.Location = new System.Drawing.Point(5, 223);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(93, 13);
             this.label7.TabIndex = 12;
@@ -155,7 +159,7 @@
             // dtFechaNacimiento
             // 
             this.dtFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFechaNacimiento.Location = new System.Drawing.Point(102, 167);
+            this.dtFechaNacimiento.Location = new System.Drawing.Point(102, 220);
             this.dtFechaNacimiento.Name = "dtFechaNacimiento";
             this.dtFechaNacimiento.Size = new System.Drawing.Size(200, 20);
             this.dtFechaNacimiento.TabIndex = 13;
@@ -163,7 +167,7 @@
             // clbCiudades
             // 
             this.clbCiudades.FormattingEnabled = true;
-            this.clbCiudades.Location = new System.Drawing.Point(102, 193);
+            this.clbCiudades.Location = new System.Drawing.Point(102, 246);
             this.clbCiudades.Name = "clbCiudades";
             this.clbCiudades.Size = new System.Drawing.Size(200, 139);
             this.clbCiudades.TabIndex = 14;
@@ -171,7 +175,7 @@
             // cities
             // 
             this.cities.AutoSize = true;
-            this.cities.Location = new System.Drawing.Point(28, 193);
+            this.cities.Location = new System.Drawing.Point(28, 239);
             this.cities.Name = "cities";
             this.cities.Size = new System.Drawing.Size(66, 13);
             this.cities.TabIndex = 15;
@@ -180,16 +184,54 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(34, 206);
+            this.label8.Location = new System.Drawing.Point(34, 259);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(60, 13);
             this.label8.TabIndex = 16;
             this.label8.Text = "preferencia";
             // 
+            // txtTelefono
+            // 
+            this.txtTelefono.Location = new System.Drawing.Point(102, 167);
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(200, 20);
+            this.txtTelefono.TabIndex = 18;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(46, 170);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Telefono";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(46, 144);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(40, 13);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Ciudad";
+            // 
+            // cbxCiudad
+            // 
+            this.cbxCiudad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxCiudad.FormattingEnabled = true;
+            this.cbxCiudad.Location = new System.Drawing.Point(102, 141);
+            this.cbxCiudad.Name = "cbxCiudad";
+            this.cbxCiudad.Size = new System.Drawing.Size(200, 21);
+            this.cbxCiudad.TabIndex = 20;
+            // 
             // ClienteUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbxCiudad);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.txtTelefono);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cities);
             this.Controls.Add(this.clbCiudades);
@@ -208,7 +250,7 @@
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label1);
             this.Name = "ClienteUserControl";
-            this.Size = new System.Drawing.Size(336, 349);
+            this.Size = new System.Drawing.Size(336, 402);
             this.Load += new System.EventHandler(this.ClienteUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -234,5 +276,9 @@
         private System.Windows.Forms.CheckedListBox clbCiudades;
         private System.Windows.Forms.Label cities;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtTelefono;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cbxCiudad;
     }
 }

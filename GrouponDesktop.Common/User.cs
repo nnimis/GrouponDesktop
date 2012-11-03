@@ -30,9 +30,12 @@ namespace GrouponDesktop.Common
         /// </summary>
         public string UserName { get; set; }
 
+        public DetalleEntidad DetalleEntidad { get; set; }
+
         public User()
         {
             Permissions = new List<Functionalities>();
+            DetalleEntidad = new DetalleEntidad();
         }
     }
 }

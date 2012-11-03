@@ -20,9 +20,17 @@ namespace GrouponDesktop.Login
             {
                 Apellido = txtApellido.Text,
                 Nombre = txtNombre.Text,
-                DNI = txtDNI.Text,
+                DNI = long.Parse(txtDNI.Text),
                 FechaNacimiento = dtFechaNacimiento.Value,
-                Ciudades = ciudades
+                Ciudades = ciudades,
+                DetalleEntidad = new DetalleEntidad()
+                {
+                    CP = txtCP.Text,
+                    Direccion = txtDireccion.Text,
+                    Telefono = long.Parse(txtTelefono.Text.Trim().Replace("-", "")),
+                    Email = txtMail.Text,
+                    Ciudad = (City)cbxCiudad.SelectedItem
+                }
             };
         }
 
@@ -36,7 +44,10 @@ namespace GrouponDesktop.Login
             var manager = new CiudadesManager();
             var cities = manager.GetAll();
             clbCiudades.DisplayMember = "Name";
+            cbxCiudad.DisplayMember = "Name";
             cities.ForEach(x => clbCiudades.Items.Add(x, true));
+            cities.ForEach(x => cbxCiudad.Items.Add(x));
+            cbxCiudad.SelectedIndex = 0;
         }
     }
 }

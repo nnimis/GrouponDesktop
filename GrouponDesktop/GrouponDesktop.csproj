@@ -131,6 +131,13 @@
     <Compile Include="Login\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\RegistroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\RegistroForm.Designer.cs">
+      <DependentUpon>RegistroForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\UserCreatedEventArgs.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +191,9 @@
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login\RegistroForm.resx">
+      <DependentUpon>RegistroForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -211,9 +221,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Scripts\FN_GetFunctionalityByName.sql" />
-    <None Include="Scripts\INSERT_DefaultRole.sql" />
-    <None Include="Scripts\FN_GetIdRolDefault.sql" />
+    <None Include="Scripts\INSERT_Roles.sql" />
+    <None Include="Scripts\Functions\FN_GetIdRolByName.sql" />
+    <None Include="Scripts\INSERT_Perfiles.sql" />
+    <None Include="Scripts\Functions\FN_GetFunctionalityByName.sql" />
+    <None Include="Scripts\Functions\FN_GetIdRolDefault.sql" />
     <None Include="Scripts\Stores\SP_DeleteUser.sql" />
     <None Include="Scripts\Stores\SP_UpdatePassword.sql" />
     <None Include="Scripts\Stores\SP_InsertRoleFunctionality.sql" />
@@ -229,6 +241,7 @@
     <None Include="Scripts\Stores\SP_GetRoleFunctionalities.sql" />
     <None Include="Scripts\Stores\SP_InsertRole.sql" />
     <None Include="Scripts\Stores\SP_Login.sql" />
+    <None Include="Scripts\Tablas\TB_Perfil.sql" />
     <None Include="Scripts\Tablas\TB_Roles.sql" />
     <None Include="Scripts\Tablas\TB_Usuarios.sql" />
     <Compile Include="Properties\Settings.Designer.cs">

@@ -49,6 +49,7 @@
     <Compile Include="ClienteManager.cs" />
     <Compile Include="FunctionalitiesManager.cs" />
     <Compile Include="LoginService.cs" />
+    <Compile Include="ProfileManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesManager.cs" />
     <Compile Include="UsersManager.cs" />

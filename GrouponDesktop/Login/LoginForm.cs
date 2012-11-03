@@ -28,5 +28,17 @@ namespace GrouponDesktop.Login
             Session.StartSession(user);
             ViewsManager.ClearViews();
         }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            var registroForm = new RegistroForm();
+            registroForm.OnUserCreated += new EventHandler<UserCreatedEventArgs>(registroForm_OnUserCreated);
+            ViewsManager.LoadModal(registroForm);
+        }
+
+        private void registroForm_OnUserCreated(object sender, UserCreatedEventArgs e)
+        {
+
+        }
     }
 }

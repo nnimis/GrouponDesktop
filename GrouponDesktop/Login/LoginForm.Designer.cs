@@ -34,6 +34,7 @@
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRegister = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,6 +84,7 @@
             // panel1
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel1.Controls.Add(this.btnRegister);
             this.panel1.Controls.Add(this.txtPassword);
             this.panel1.Controls.Add(this.btnLogin);
             this.panel1.Controls.Add(this.label1);
@@ -92,6 +94,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(235, 112);
             this.panel1.TabIndex = 5;
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(13, 74);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(75, 23);
+            this.btnRegister.TabIndex = 5;
+            this.btnRegister.Text = "Registro";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // LoginForm
             // 
@@ -116,5 +128,6 @@
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnRegister;
     }
 }

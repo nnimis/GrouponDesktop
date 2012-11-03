@@ -270,19 +270,19 @@ CREATE TABLE [GRUPO_N].[Direccion](
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [GRUPO_N].[Ciente]    Script Date: 10/20/2012 11:59:17 ******/
+/****** Object:  Table [GRUPO_N].[Cliente]    Script Date: 10/20/2012 11:59:17 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [GRUPO_N].[Ciente](
+CREATE TABLE [GRUPO_N].[Cliente](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[DNI] [numeric](18, 0) NOT NULL,
 	[Nombre] [nvarchar](255) NOT NULL,
 	[Apellido] [nchar](255) NOT NULL,
 	[FechaNacimiento] [datetime] NOT NULL,
 	[ID_Detalle] [int] NOT NULL,
- CONSTRAINT [PK_Ciente] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Cliente] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -477,17 +477,17 @@ REFERENCES [GRUPO_N].[CompraCupon] ([ID])
 GO
 ALTER TABLE [GRUPO_N].[CanjeCupon] CHECK CONSTRAINT [FK_CanjeCupon_CompraCupon]
 GO
-/****** Object:  ForeignKey [FK_Ciente_DetalleEntidad]    Script Date: 10/20/2012 11:59:17 ******/
-ALTER TABLE [GRUPO_N].[Ciente]  WITH CHECK ADD  CONSTRAINT [FK_Ciente_DetalleEntidad] FOREIGN KEY([ID_Detalle])
+/****** Object:  ForeignKey [FK_Cliente_DetalleEntidad]    Script Date: 10/20/2012 11:59:17 ******/
+ALTER TABLE [GRUPO_N].[Cliente]  WITH CHECK ADD  CONSTRAINT [FK_Cliente_DetalleEntidad] FOREIGN KEY([ID_Detalle])
 REFERENCES [GRUPO_N].[DetalleEntidad] ([ID])
 GO
-ALTER TABLE [GRUPO_N].[Ciente] CHECK CONSTRAINT [FK_Ciente_DetalleEntidad]
+ALTER TABLE [GRUPO_N].[Cliente] CHECK CONSTRAINT [FK_Cliente_DetalleEntidad]
 GO
-/****** Object:  ForeignKey [FK_ClienteCiudad_Ciente]    Script Date: 10/20/2012 11:59:17 ******/
-ALTER TABLE [GRUPO_N].[ClienteCiudad]  WITH CHECK ADD  CONSTRAINT [FK_ClienteCiudad_Ciente] FOREIGN KEY([ID_Cliente])
-REFERENCES [GRUPO_N].[Ciente] ([ID])
+/****** Object:  ForeignKey [FK_ClienteCiudad_Cliente]    Script Date: 10/20/2012 11:59:17 ******/
+ALTER TABLE [GRUPO_N].[ClienteCiudad]  WITH CHECK ADD  CONSTRAINT [FK_ClienteCiudad_Cliente] FOREIGN KEY([ID_Cliente])
+REFERENCES [GRUPO_N].[Cliente] ([ID])
 GO
-ALTER TABLE [GRUPO_N].[ClienteCiudad] CHECK CONSTRAINT [FK_ClienteCiudad_Ciente]
+ALTER TABLE [GRUPO_N].[ClienteCiudad] CHECK CONSTRAINT [FK_ClienteCiudad_Cliente]
 GO
 /****** Object:  ForeignKey [FK_ClienteCiudad_Ciudad]    Script Date: 10/20/2012 11:59:17 ******/
 ALTER TABLE [GRUPO_N].[ClienteCiudad]  WITH CHECK ADD  CONSTRAINT [FK_ClienteCiudad_Ciudad] FOREIGN KEY([ID_Ciudad])
@@ -495,11 +495,11 @@ REFERENCES [GRUPO_N].[Ciudad] ([ID])
 GO
 ALTER TABLE [GRUPO_N].[ClienteCiudad] CHECK CONSTRAINT [FK_ClienteCiudad_Ciudad]
 GO
-/****** Object:  ForeignKey [FK_CompraCupon_Ciente]    Script Date: 10/20/2012 11:59:17 ******/
-ALTER TABLE [GRUPO_N].[CompraCupon]  WITH CHECK ADD  CONSTRAINT [FK_CompraCupon_Ciente] FOREIGN KEY([ID_Cliente])
-REFERENCES [GRUPO_N].[Ciente] ([ID])
+/****** Object:  ForeignKey [FK_CompraCupon_Cliente]    Script Date: 10/20/2012 11:59:17 ******/
+ALTER TABLE [GRUPO_N].[CompraCupon]  WITH CHECK ADD  CONSTRAINT [FK_CompraCupon_Cliente] FOREIGN KEY([ID_Cliente])
+REFERENCES [GRUPO_N].[Cliente] ([ID])
 GO
-ALTER TABLE [GRUPO_N].[CompraCupon] CHECK CONSTRAINT [FK_CompraCupon_Ciente]
+ALTER TABLE [GRUPO_N].[CompraCupon] CHECK CONSTRAINT [FK_CompraCupon_Cliente]
 GO
 /****** Object:  ForeignKey [FK_CompraCupon_Cupon]    Script Date: 10/20/2012 11:59:17 ******/
 ALTER TABLE [GRUPO_N].[CompraCupon]  WITH CHECK ADD  CONSTRAINT [FK_CompraCupon_Cupon] FOREIGN KEY([ID_Cupon])
@@ -531,11 +531,11 @@ REFERENCES [GRUPO_N].[Usuario] ([ID])
 GO
 ALTER TABLE [GRUPO_N].[DetalleEntidad] CHECK CONSTRAINT [FK_DetalleEntidad_Usuario]
 GO
-/****** Object:  ForeignKey [FK_Devolucion_Ciente]    Script Date: 10/20/2012 11:59:17 ******/
-ALTER TABLE [GRUPO_N].[Devolucion]  WITH CHECK ADD  CONSTRAINT [FK_Devolucion_Ciente] FOREIGN KEY([ID_Cliente])
-REFERENCES [GRUPO_N].[Ciente] ([ID])
+/****** Object:  ForeignKey [FK_Devolucion_Cliente]    Script Date: 10/20/2012 11:59:17 ******/
+ALTER TABLE [GRUPO_N].[Devolucion]  WITH CHECK ADD  CONSTRAINT [FK_Devolucion_Cliente] FOREIGN KEY([ID_Cliente])
+REFERENCES [GRUPO_N].[Cliente] ([ID])
 GO
-ALTER TABLE [GRUPO_N].[Devolucion] CHECK CONSTRAINT [FK_Devolucion_Ciente]
+ALTER TABLE [GRUPO_N].[Devolucion] CHECK CONSTRAINT [FK_Devolucion_Cliente]
 GO
 /****** Object:  ForeignKey [FK_Devolucion_Cupon]    Script Date: 10/20/2012 11:59:17 ******/
 ALTER TABLE [GRUPO_N].[Devolucion]  WITH CHECK ADD  CONSTRAINT [FK_Devolucion_Cupon] FOREIGN KEY([ID_Cupon])
@@ -567,23 +567,23 @@ REFERENCES [GRUPO_N].[Factura] ([ID])
 GO
 ALTER TABLE [GRUPO_N].[FacturasCanjesCupones] CHECK CONSTRAINT [FK_FacturasCanjesCupones_Factura]
 GO
-/****** Object:  ForeignKey [FK_GiftCard_Ciente_Destino]    Script Date: 10/20/2012 11:59:17 ******/
-ALTER TABLE [GRUPO_N].[GiftCard]  WITH CHECK ADD  CONSTRAINT [FK_GiftCard_Ciente_Destino] FOREIGN KEY([ID_Cliente_Destino])
-REFERENCES [GRUPO_N].[Ciente] ([ID])
+/****** Object:  ForeignKey [FK_GiftCard_Cliente_Destino]    Script Date: 10/20/2012 11:59:17 ******/
+ALTER TABLE [GRUPO_N].[GiftCard]  WITH CHECK ADD  CONSTRAINT [FK_GiftCard_Cliente_Destino] FOREIGN KEY([ID_Cliente_Destino])
+REFERENCES [GRUPO_N].[Cliente] ([ID])
 GO
-ALTER TABLE [GRUPO_N].[GiftCard] CHECK CONSTRAINT [FK_GiftCard_Ciente_Destino]
+ALTER TABLE [GRUPO_N].[GiftCard] CHECK CONSTRAINT [FK_GiftCard_Cliente_Destino]
 GO
-/****** Object:  ForeignKey [FK_GiftCard_Ciente_Origen]    Script Date: 10/20/2012 11:59:17 ******/
-ALTER TABLE [GRUPO_N].[GiftCard]  WITH CHECK ADD  CONSTRAINT [FK_GiftCard_Ciente_Origen] FOREIGN KEY([ID_Cliente_Origen])
-REFERENCES [GRUPO_N].[Ciente] ([ID])
+/****** Object:  ForeignKey [FK_GiftCard_Cliente_Origen]    Script Date: 10/20/2012 11:59:17 ******/
+ALTER TABLE [GRUPO_N].[GiftCard]  WITH CHECK ADD  CONSTRAINT [FK_GiftCard_Cliente_Origen] FOREIGN KEY([ID_Cliente_Origen])
+REFERENCES [GRUPO_N].[Cliente] ([ID])
 GO
-ALTER TABLE [GRUPO_N].[GiftCard] CHECK CONSTRAINT [FK_GiftCard_Ciente_Origen]
+ALTER TABLE [GRUPO_N].[GiftCard] CHECK CONSTRAINT [FK_GiftCard_Cliente_Origen]
 GO
-/****** Object:  ForeignKey [FK_Pago_Ciente]    Script Date: 10/20/2012 11:59:17 ******/
-ALTER TABLE [GRUPO_N].[Pago]  WITH CHECK ADD  CONSTRAINT [FK_Pago_Ciente] FOREIGN KEY([ID_Cliente])
-REFERENCES [GRUPO_N].[Ciente] ([ID])
+/****** Object:  ForeignKey [FK_Pago_Cliente]    Script Date: 10/20/2012 11:59:17 ******/
+ALTER TABLE [GRUPO_N].[Pago]  WITH CHECK ADD  CONSTRAINT [FK_Pago_Cliente] FOREIGN KEY([ID_Cliente])
+REFERENCES [GRUPO_N].[Cliente] ([ID])
 GO
-ALTER TABLE [GRUPO_N].[Pago] CHECK CONSTRAINT [FK_Pago_Ciente]
+ALTER TABLE [GRUPO_N].[Pago] CHECK CONSTRAINT [FK_Pago_Cliente]
 GO
 /****** Object:  ForeignKey [FK_Pago_TipoPago]    Script Date: 10/20/2012 11:59:17 ******/
 ALTER TABLE [GRUPO_N].[Pago]  WITH CHECK ADD  CONSTRAINT [FK_Pago_TipoPago] FOREIGN KEY([ID_TipoPago])
@@ -627,11 +627,11 @@ REFERENCES [GRUPO_N].[Rol] ([ID])
 GO
 ALTER TABLE [GRUPO_N].[RolesFuncionalidades] CHECK CONSTRAINT [FK_RolesFuncionalidades_Rol]
 GO
-/****** Object:  ForeignKey [FK_Tarjeta_Ciente]    Script Date: 10/20/2012 11:59:17 ******/
-ALTER TABLE [GRUPO_N].[Tarjeta]  WITH CHECK ADD  CONSTRAINT [FK_Tarjeta_Ciente] FOREIGN KEY([ID_Cliente])
-REFERENCES [GRUPO_N].[Ciente] ([ID])
+/****** Object:  ForeignKey [FK_Tarjeta_Cliente]    Script Date: 10/20/2012 11:59:17 ******/
+ALTER TABLE [GRUPO_N].[Tarjeta]  WITH CHECK ADD  CONSTRAINT [FK_Tarjeta_Cliente] FOREIGN KEY([ID_Cliente])
+REFERENCES [GRUPO_N].[Cliente] ([ID])
 GO
-ALTER TABLE [GRUPO_N].[Tarjeta] CHECK CONSTRAINT [FK_Tarjeta_Ciente]
+ALTER TABLE [GRUPO_N].[Tarjeta] CHECK CONSTRAINT [FK_Tarjeta_Cliente]
 GO
 /****** Object:  ForeignKey [FK_Usuario_Rol]    Script Date: 10/20/2012 11:59:17 ******/
 ALTER TABLE [GRUPO_N].[Usuario]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Rol] FOREIGN KEY([ID_Rol])
@@ -668,7 +668,9 @@ INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('PublicarCupones');
 INSERT INTO GRUPO_N.Funcionalidad (Descripcion) VALUES ('RegistrarConsumoCupones');
 
 --INSERT Usuario ADMINISTRADOR
-INSERT INTO GRUPO_N.Rol (Descripcion) VALUES ('Administrador')
+INSERT INTO GRUPO_N.Rol (Descripcion) VALUES ('Administrativo');
+INSERT INTO GRUPO_N.Rol (Descripcion) VALUES ('Proveedor');
+INSERT INTO GRUPO_N.Rol (Descripcion) VALUES ('Cliente');
 
 INSERT INTO GRUPO_N.RolesFuncionalidades (ID_Rol, ID_Funcionalidad)
 SELECT 1, ID FROM GRUPO_N.Funcionalidad

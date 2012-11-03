@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GrouponDesktop.Login;
 
 namespace GrouponDesktop.Core
 {
@@ -65,7 +66,9 @@ namespace GrouponDesktop.Core
         {
             var formTypes = typeof(MainView).Assembly.GetTypes()
                 .Where(x => x.IsSubclassOf(typeof(Form))
-                    && x != typeof(MainView) && x != typeof(Login.LoginForm));
+                    && x != typeof(MainView)
+                    && x != typeof(RegistroForm)
+                    && x != typeof(LoginForm));
 
             foreach (var formType in formTypes)
             {

@@ -13,6 +13,11 @@ namespace GrouponDesktop.Business
     {
         public List<City> GetAll()
         {
+            if (SessionData.Contains("Cities"))
+            {
+                return SessionData.Get<List<City>>("Cities");
+            }
+
             var ret = new List<City>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
                 "GRUPO_N.GetCiudades");
@@ -24,6 +29,8 @@ namespace GrouponDesktop.Business
                     ret.Add(new City() { ID = int.Parse(row["ID"].ToString()), Name = row["Descripcion"].ToString() });
                 }
             }
+
+            SessionData.Set("Cities", ret);
 
             return ret;
         }

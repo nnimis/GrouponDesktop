@@ -137,6 +137,12 @@
     <Compile Include="Login\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\ProveedorUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Login\ProveedorUserControl.Designer.cs">
+      <DependentUpon>ProveedorUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\RegistroForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login\ProveedorUserControl.resx">
+      <DependentUpon>ProveedorUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\RegistroForm.resx">
       <DependentUpon>RegistroForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,12 +239,14 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Scripts\Functions\FN_GetIdRoleByProfile.sql" />
     <None Include="Scripts\Functions\FN_GetIdProfileByName.sql" />
     <None Include="Scripts\INSERT_Roles.sql" />
     <None Include="Scripts\Functions\FN_GetIdRolByName.sql" />
     <None Include="Scripts\INSERT_Perfiles.sql" />
     <None Include="Scripts\Functions\FN_GetFunctionalityByName.sql" />
     <None Include="Scripts\Functions\FN_GetIdRolDefault.sql" />
+    <None Include="Scripts\INSERT_Rubros.sql" />
     <None Include="Scripts\Stores\SP_GetIdRoleByProfile.sql" />
     <None Include="Scripts\Stores\SP_GetRubros.sql" />
     <None Include="Scripts\Stores\SP_DeleteUser.sql" />
@@ -259,6 +270,7 @@
     <None Include="Scripts\Stores\SP_InsertRole.sql" />
     <None Include="Scripts\Stores\SP_Login.sql" />
     <None Include="Scripts\Tablas\ALTER_Cliente.sql" />
+    <None Include="Scripts\Tablas\ALTER_Proveedor.sql" />
     <None Include="Scripts\Tablas\TB_Perfil.sql" />
     <None Include="Scripts\Tablas\TB_Roles.sql" />
     <None Include="Scripts\Tablas\TB_Usuarios.sql" />

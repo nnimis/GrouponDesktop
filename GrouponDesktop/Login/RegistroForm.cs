@@ -16,6 +16,7 @@ namespace GrouponDesktop.Login
         public event EventHandler<UserCreatedEventArgs> OnUserCreated;
         private List<Profile> Profiles;
         private UserControl clienteUserControl = new ClienteUserControl();
+        private UserControl proveedorUserControl = new ProveedorUserControl();
         private Profile _profile
         {
             get
@@ -44,6 +45,10 @@ namespace GrouponDesktop.Login
             {
                 userPanel.Controls.Add(clienteUserControl);
             }
+            else
+            {
+                userPanel.Controls.Add(proveedorUserControl);
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -56,6 +61,13 @@ namespace GrouponDesktop.Login
                     cliente.UserName = txtUsername.Text;
                     var manager = new ClienteManager();
                     manager.GuardarCliente(cliente, txtPassword.Text);
+                }
+                else
+                {
+                    var proveedor = ((ProveedorUserControl)proveedorUserControl).GetProveedor();
+                    proveedor.UserName = txtUsername.Text;
+                    var manager = new ProveedorManager();
+                    manager.GuardarProveedor(proveedor, txtPassword.Text);
                 }
 
                 if (OnUserCreated != null)

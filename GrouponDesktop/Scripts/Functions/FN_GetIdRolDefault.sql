@@ -1,4 +1,4 @@
-USE [GD1C2012]
+USE [GD2C2012]
 GO
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GRUPO_N].[GetIdRolDefault]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))

@@ -186,7 +186,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [GRUPO_N].[Rubro](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[Descripcion] [nchar](10) NOT NULL,
+	[Descripcion] [nvarchar](100) NOT NULL,
  CONSTRAINT [PK_Rubro] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -229,7 +229,7 @@ GO
 CREATE TABLE [GRUPO_N].[DetalleEntidad](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Telefono] [numeric](18, 0) NOT NULL,
-	[Email] [nvarchar](255) NOT NULL,
+	[Email] [nvarchar](255) NULL,
 	[ID_Usuario] [int] NOT NULL,
  CONSTRAINT [PK_DetalleEntidad] PRIMARY KEY CLUSTERED 
 (
@@ -467,6 +467,33 @@ CREATE TABLE [GRUPO_N].[FacturasCanjesCupones](
 	[ID_CanjeCupon] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+/****** Object:  Table [GRUPO_N].[Perfil]    Script Date: 11/03/2012 13:05:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [GRUPO_N].[Perfil](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [nvarchar](100) NOT NULL,
+	[ID_Rol] [int] NOT NULL,
+ CONSTRAINT [PK_Perfil] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  ForeignKey [FK_Perfil_Rol]    Script Date: 11/04/2012 11:59:17 ******/
+ALTER TABLE [GRUPO_N].[Perfil]  WITH CHECK ADD  CONSTRAINT [FK_Perfil_Rol] FOREIGN KEY([ID_Rol])
+REFERENCES [GRUPO_N].[Rol] ([ID])
+GO
+
+ALTER TABLE [GRUPO_N].[Perfil] CHECK CONSTRAINT [FK_Perfil_Rol]
 GO
 /****** Object:  Default [DF_Cupon_Publicado]    Script Date: 10/20/2012 11:59:17 ******/
 ALTER TABLE [GRUPO_N].[Cupon] ADD  CONSTRAINT [DF_Cupon_Publicado]  DEFAULT ((0)) FOR [Publicado]

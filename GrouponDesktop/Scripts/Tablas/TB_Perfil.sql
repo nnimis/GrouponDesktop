@@ -1,4 +1,4 @@
-﻿USE [GD1C2012]
+﻿USE [GD2C2012]
 GO
 
 /****** Object:  Table [GRUPO_N].[Perfil]    Script Date: 11/03/2012 13:05:16 ******/

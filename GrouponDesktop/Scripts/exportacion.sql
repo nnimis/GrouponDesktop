@@ -71,6 +71,11 @@ BEGIN
 	--Cargo Proveedores, ciudades y rubros de los mismos
 	EXECUTE GRUPO_N.Migracion_Ingresar_Proveedor @Provee_RS, @Provee_Dom, @Provee_Ciudad, @Provee_Telefono, @Provee_CUIT, @Provee_Rubro;
 
+	--Cargo los cupones
+	EXECUTE GRUPO_N.Migracion_Ingresar_Cupon @Provee_RS,@Groupon_Precio, @Groupon_Precio_Ficticio, @Groupon_Fecha, @Groupon_Fecha_Venc, @Groupon_Cantidad, @Groupon_Descripcion;
+	
+	--Cargo la compra del cupón
+	
 	--PRINT @Cli_Nombre + ' ' + @Cli_Apellido --+ ' DNI:' + @Cli_DNI
 	-- Lectura de la siguiente fila del cursor
 	FETCH cTablaMaestra INTO @Cli_Nombre, @Cli_Apellido, @Cli_DNI, @Cli_Direccion, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nacimiento, @Cli_Ciudad, @Credito_Monto, @Credito_Fecha_Carga,

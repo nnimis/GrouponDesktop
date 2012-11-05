@@ -251,6 +251,7 @@
     <None Include="Scripts\Stores\SP_GetRubros.sql" />
     <None Include="Scripts\Stores\SP_DeleteUser.sql" />
     <None Include="Scripts\Stores\SP_GetCiudades.sql" />
+    <None Include="Scripts\Stores\SP_GetUserLoginAttempts.sql" />
     <None Include="Scripts\Stores\SP_InsertCliente.sql" />
     <None Include="Scripts\Stores\SP_InsertDetalleEntidad.sql" />
     <None Include="Scripts\Stores\SP_InsertProfileUser.sql" />

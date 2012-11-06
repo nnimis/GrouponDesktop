@@ -247,6 +247,7 @@
     <None Include="Scripts\Functions\FN_GetFunctionalityByName.sql" />
     <None Include="Scripts\Functions\FN_GetIdRolDefault.sql" />
     <None Include="Scripts\INSERT_Rubros.sql" />
+    <None Include="Scripts\Stores\SP_GetClientes.sql" />
     <None Include="Scripts\Stores\SP_GetIdRoleByProfile.sql" />
     <None Include="Scripts\Stores\SP_GetRubros.sql" />
     <None Include="Scripts\Stores\SP_DeleteUser.sql" />

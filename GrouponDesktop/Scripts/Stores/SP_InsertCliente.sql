@@ -12,6 +12,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [GRUPO_N].[InsertCliente]
+	@ID int,
 	@DNI numeric(18,0),
 	@Nombre nvarchar(255),
 	@Apellido nvarchar(255),
@@ -20,8 +21,8 @@ CREATE PROCEDURE [GRUPO_N].[InsertCliente]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	INSERT INTO GRUPO_N.Cliente(DNI, Nombre, Apellido, FechaNacimiento, ID_Detalle) VALUES 
-	(@DNI, @Nombre, @Apellido, @FechaNacimiento, @ID_Detalle)
+	INSERT INTO GRUPO_N.Cliente(ID, DNI, Nombre, Apellido, FechaNacimiento, ID_Detalle) VALUES 
+	(@ID, @DNI, @Nombre, @Apellido, @FechaNacimiento, @ID_Detalle)
 	
 	SELECT @@Identity AS ID
 END

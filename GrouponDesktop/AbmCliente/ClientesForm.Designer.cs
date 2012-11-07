@@ -81,6 +81,7 @@
             this.btnAgregar.TabIndex = 0;
             this.btnAgregar.Text = "Nuevo";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // dgvClientes
             // 

@@ -8,40 +8,72 @@ using System.Text;
 using System.Windows.Forms;
 using GrouponDesktop.Business;
 using GrouponDesktop.Common;
+using GrouponDesktop.Login;
 
-namespace GrouponDesktop.Login
+namespace GrouponDesktop
 {
     public partial class RegistroForm : Form
     {
-        public event EventHandler<UserCreatedEventArgs> OnUserCreated;
+        public event EventHandler<UserSavedEventArgs> OnUserSaved;
         private List<Profile> Profiles;
-        private UserControl clienteUserControl = new ClienteUserControl();
-        private UserControl proveedorUserControl = new ProveedorUserControl();
-        private Profile _profile
+        private ClienteUserControl clienteUserControl = new ClienteUserControl();
+        private ProveedorUserControl proveedorUserControl = new ProveedorUserControl();
+        private Proveedor _proveedor = new Proveedor();
+        private Cliente _cliente = new Cliente();
+        public Profile Profile
         {
             get
             {
                 return (Profile)cbxProfiles.SelectedItem;
+            }
+            set
+            {
+                cbxProfiles.SelectedItem = value;
+                cbxProfiles.Enabled = false;
+                cbxProfiles.Visible = false;
+                lblPerfil.Visible = false;
             }
         }
 
         public RegistroForm()
         {
             InitializeComponent();
-        }
-
-        private void RegistroForm_Load(object sender, EventArgs e)
-        {
             var manager = new ProfileManager();
             Profiles = manager.GetRegistrationProfiles();
             Profiles.ForEach(x => cbxProfiles.Items.Add(x));
             cbxProfiles.SelectedIndex = 0;
         }
 
+        public void SetUser(User user)
+        {
+            txtUsername.Text = user.UserName;
+            txtUsername.Enabled = false;
+            txtPassword.Enabled = false;
+            txtConfirmPassword.Enabled = false;
+            cbxProfiles.Enabled = false;
+            if (user is Cliente)
+            {
+                _cliente = user as Cliente;
+                cbxProfiles.SelectedItem = Profile.Cliente;
+                clienteUserControl.SetUser(_cliente);
+            }
+            else
+            {
+                _proveedor = user as Proveedor;
+                cbxProfiles.SelectedItem = Profile.Proveedor;
+                proveedorUserControl.SetUser(_proveedor);
+            }
+        }
+
+        private void RegistroForm_Load(object sender, EventArgs e)
+        {
+            
+        }
+
         private void cbxProfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             userPanel.Controls.Clear();
-            if (_profile == Profile.Cliente)
+            if (Profile == Profile.Cliente)
             {
                 userPanel.Controls.Add(clienteUserControl);
             }
@@ -55,24 +87,27 @@ namespace GrouponDesktop.Login
         {
             try
             {
-                if (_profile == Profile.Cliente)
+                User user = null;
+                if (Profile == Profile.Cliente)
                 {
-                    var cliente = ((ClienteUserControl)clienteUserControl).GetCliente();
-                    cliente.UserName = txtUsername.Text;
+                    _cliente = ((ClienteUserControl)clienteUserControl).GetCliente();
+                    _cliente.UserName = txtUsername.Text;
                     var manager = new ClienteManager();
-                    manager.GuardarCliente(cliente, txtPassword.Text);
+                    manager.GuardarCliente(_cliente, txtPassword.Text);
+                    user = _cliente;
                 }
                 else
                 {
-                    var proveedor = ((ProveedorUserControl)proveedorUserControl).GetProveedor();
-                    proveedor.UserName = txtUsername.Text;
+                    _proveedor = ((ProveedorUserControl)proveedorUserControl).GetProveedor();
+                    _proveedor.UserName = txtUsername.Text;
                     var manager = new ProveedorManager();
-                    manager.GuardarProveedor(proveedor, txtPassword.Text);
+                    manager.GuardarProveedor(_proveedor, txtPassword.Text);
+                    user = _proveedor; 
                 }
 
-                if (OnUserCreated != null)
+                if (OnUserSaved != null)
                 {
-                    OnUserCreated(this, new UserCreatedEventArgs() { Username = this.txtUsername.Text, Password = this.txtPassword.Text });
+                    OnUserSaved(this, new UserSavedEventArgs() { Username = this.txtUsername.Text, Password = this.txtPassword.Text, User = user });
                     this.Close();
                 }
             }

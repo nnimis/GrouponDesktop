@@ -13,32 +13,12 @@ namespace GrouponDesktop.Login
 {
     public partial class ProveedorUserControl : UserControl
     {
+        private Proveedor _proveedor;
+
         public ProveedorUserControl()
         {
             InitializeComponent();
-        }
-
-        public Proveedor GetProveedor()
-        {
-            return new Proveedor()
-            {
-                CUIT = txtCUIT.Text,
-                NombreContacto = txtContacto.Text,
-                RazonSocial = txtRazonSocial.Text,
-                Rubro = (Rubro)cbxRubro.SelectedItem,
-                DetalleEntidad = new DetalleEntidad()
-                {
-                    Ciudad = (City)cbxCiudad.SelectedItem,
-                    CP = txtCP.Text,
-                    Email = txtMail.Text,
-                    Direccion = txtDireccion.Text,
-                    Telefono = long.Parse(txtTelefono.Text)
-                }
-            };
-        }
-
-        private void ProveedorUserControl_Load(object sender, EventArgs e)
-        {
+            _proveedor = new Proveedor();
             var citiesManager = new CiudadesManager();
             var cities = citiesManager.GetAll();
             var rubrosManager = new RubrosManager();
@@ -48,6 +28,43 @@ namespace GrouponDesktop.Login
             cbxCiudad.DataSource = cities;
             cbxCiudad.DisplayMember = "Name";
             cbxCiudad.SelectedIndex = 0;
+        }
+
+        public Proveedor GetProveedor()
+        {
+            _proveedor.CUIT = txtCUIT.Text;
+            _proveedor.NombreContacto = txtContacto.Text;
+            _proveedor.RazonSocial = txtRazonSocial.Text;
+            _proveedor.Rubro = (Rubro)cbxRubro.SelectedItem;
+            _proveedor.DetalleEntidad = new DetalleEntidad()
+            {
+                Ciudad = (City)cbxCiudad.SelectedItem,
+                CP = txtCP.Text,
+                Email = txtMail.Text,
+                Direccion = txtDireccion.Text,
+                Telefono = long.Parse(txtTelefono.Text)
+            };
+
+            return _proveedor;
+        }
+
+        public void SetUser(Proveedor proveedor)
+        {
+            _proveedor = proveedor;
+            txtContacto.Text = proveedor.NombreContacto;
+            txtCUIT.Text = proveedor.CUIT;
+            txtRazonSocial.Text = proveedor.RazonSocial;
+            txtCP.Text = proveedor.DetalleEntidad.CP;
+            txtDireccion.Text = proveedor.DetalleEntidad.Direccion;
+            txtTelefono.Text = proveedor.DetalleEntidad.Telefono.ToString();
+            txtMail.Text = proveedor.DetalleEntidad.Email;
+            cbxCiudad.SelectedItem = proveedor.DetalleEntidad.Ciudad;
+            cbxRubro.SelectedItem = proveedor.Rubro;
+        }
+
+        private void ProveedorUserControl_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

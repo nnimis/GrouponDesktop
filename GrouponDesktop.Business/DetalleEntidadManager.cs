@@ -19,6 +19,20 @@ namespace GrouponDesktop.Business
                 .And("@ID_Usuario", user.UserID)
                 .And("@Direccion", user.DetalleEntidad.Direccion)
                 .And("@ID_Ciudad", user.DetalleEntidad.Ciudad.ID)
+                .And("@CP", user.DetalleEntidad.CP)
+            .Arguments);
+        }
+
+        internal void UpdateDetalleEntidad(User user)
+        {
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.UpdateDetalleEntidad", SqlDataAccessArgs
+                .CreateWith("@Telefono", user.DetalleEntidad.Telefono)
+                .And("@Email", user.DetalleEntidad.Email)
+                .And("@ID_Usuario", user.UserID)
+                .And("@Direccion", user.DetalleEntidad.Direccion)
+                .And("@ID_Ciudad", user.DetalleEntidad.Ciudad.ID)
+                .And("@CP", user.DetalleEntidad.CP)
             .Arguments);
         }
     }

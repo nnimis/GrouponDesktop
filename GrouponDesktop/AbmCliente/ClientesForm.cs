@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GrouponDesktop.Core;
 using GrouponDesktop.Common;
 using GrouponDesktop.Business;
+using GrouponDesktop.Login;
 
 namespace GrouponDesktop.AbmCliente
 {
@@ -55,17 +56,32 @@ namespace GrouponDesktop.AbmCliente
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            //if (rolesDataGridView.SelectedRows == null || rolesDataGridView.SelectedRows.Count == 0) return;
-            //var row = rolesDataGridView.SelectedRows[0];
-            //var rol = row.DataBoundItem as Rol;
-            //if (rol.ID == Session.DefaultRoleID)
-            //{
-            //    MessageBox.Show("Rol no editable");
-            //    return;
-            //}
-            //var addEditForm = new AddEditRoleForm(rol);
-            //addEditForm.OnRoleUpdated += new EventHandler<RoleUpdatedEventArgs>(addEditForm_OnRoleUpdated);
-            //ViewsManager.LoadModal(addEditForm);
+            if (dgvClientes.SelectedRows == null || dgvClientes.SelectedRows.Count == 0) return;
+            var row = dgvClientes.SelectedRows[0];
+            var cliente = row.DataBoundItem as Cliente;
+            var regForm = new RegistroForm();
+            regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+            regForm.SetUser(cliente);
+            
+            ViewsManager.LoadModal(regForm);
+        }
+
+        void regForm_OnUserSaved(object sender, UserSavedEventArgs e)
+        {
+            MessageBox.Show("Se han guardado los datos del cliente " + e.Username);
+            var dataSource = dgvClientes.DataSource as BindingList<Cliente>;
+            var cliente = e.User as Cliente;
+            if (dataSource.Contains(cliente)) dataSource.Remove(cliente);
+            dataSource.Add(cliente);
+            dgvClientes.Refresh();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            var regForm = new RegistroForm();
+            regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+            regForm.Profile = Profile.Cliente;
+            ViewsManager.LoadModal(regForm);
         }
     }
 }

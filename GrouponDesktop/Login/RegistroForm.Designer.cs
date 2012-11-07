@@ -1,4 +1,5 @@
-﻿namespace GrouponDesktop.Login
+﻿using System.Windows.Forms;
+namespace GrouponDesktop
 {
     partial class RegistroForm
     {
@@ -37,7 +38,7 @@
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbxProfiles = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblPerfil = new System.Windows.Forms.Label();
             this.userPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
@@ -124,14 +125,14 @@
             this.cbxProfiles.TabIndex = 8;
             this.cbxProfiles.SelectedIndexChanged += new System.EventHandler(this.cbxProfiles_SelectedIndexChanged);
             // 
-            // label4
+            // lblPerfil
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(84, 107);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(30, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Perfil";
+            this.lblPerfil.AutoSize = true;
+            this.lblPerfil.Location = new System.Drawing.Point(84, 107);
+            this.lblPerfil.Name = "lblPerfil";
+            this.lblPerfil.Size = new System.Drawing.Size(30, 13);
+            this.lblPerfil.TabIndex = 9;
+            this.lblPerfil.Text = "Perfil";
             // 
             // userPanel
             // 
@@ -151,7 +152,7 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(530, 545);
             this.Controls.Add(this.userPanel);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblPerfil);
             this.Controls.Add(this.cbxProfiles);
             this.Controls.Add(this.txtConfirmPassword);
             this.Controls.Add(this.label3);
@@ -180,7 +181,7 @@
         private System.Windows.Forms.TextBox txtConfirmPassword;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbxProfiles;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblPerfil;
         private System.Windows.Forms.Panel userPanel;
     }
 }

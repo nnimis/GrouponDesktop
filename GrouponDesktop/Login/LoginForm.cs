@@ -27,11 +27,11 @@ namespace GrouponDesktop.Login
         private void btnRegister_Click(object sender, EventArgs e)
         {
             var registroForm = new RegistroForm();
-            registroForm.OnUserCreated += new EventHandler<UserCreatedEventArgs>(registroForm_OnUserCreated);
+            registroForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(registroForm_OnUserCreated);
             ViewsManager.LoadModal(registroForm);
         }
 
-        private void registroForm_OnUserCreated(object sender, UserCreatedEventArgs e)
+        private void registroForm_OnUserCreated(object sender, UserSavedEventArgs e)
         {
             Login(e.Username, e.Password);
         }

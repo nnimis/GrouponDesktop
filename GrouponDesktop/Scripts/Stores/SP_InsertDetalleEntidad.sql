@@ -5,9 +5,6 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GRUPO_N].[I
 DROP PROCEDURE [GRUPO_N].[InsertDetalleEntidad]
 GO
 
-USE [GD2C2012]
-GO
-
 SET ANSI_NULLS ON
 GO
 
@@ -19,7 +16,8 @@ CREATE PROCEDURE [GRUPO_N].[InsertDetalleEntidad]
 	@Email nvarchar(255),
 	@ID_Usuario int,
 	@Direccion nvarchar(255),
-	@ID_Ciudad int
+	@ID_Ciudad int,
+	@CP nvarchar(50)
 AS
 BEGIN
 	DECLARE @DetalleEntidad int
@@ -27,10 +25,11 @@ BEGIN
 	INSERT INTO GRUPO_N.DetalleEntidad (Telefono, Email, ID_Usuario) VALUES (@Telefono, @Email, @ID_Usuario)
 	
 	SET @DetalleEntidad = @@Identity
-	INSERT INTO GRUPO_N.Direccion (Descripcion, ID_Ciudad, ID_Detalle) VALUES (@Direccion, @ID_Ciudad, @DetalleEntidad)
+	INSERT INTO GRUPO_N.Direccion (Descripcion, ID_Ciudad, ID_Detalle, CP) VALUES (@Direccion, @ID_Ciudad, @DetalleEntidad, @CP)
 	
 	SELECT @DetalleEntidad AS ID
 END
+
 
 GO
 

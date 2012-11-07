@@ -149,7 +149,7 @@
     <Compile Include="Login\RegistroForm.Designer.cs">
       <DependentUpon>RegistroForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\UserCreatedEventArgs.cs" />
+    <Compile Include="Login\UserSavedEventArgs.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -305,7 +305,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Scripts\Stores\SP_GetClienteCiudades.sql" />
     <None Include="Scripts\Stores\SP_InsertProveedor.sql" />
+    <None Include="Scripts\Stores\SP_UpdateCliente.sql" />
+    <None Include="Scripts\Stores\SP_UpdateDetalleEntidad.sql" />
+    <None Include="Scripts\Tablas\ALTER_Cupon.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Stores\SP_DeleteCiudadesCliente.sql" />
+    <None Include="Scripts\Stores\SP_GetProveedores.sql" />
+    <None Include="Scripts\Stores\SP_InsertCiudadCliente.sql" />
+    <None Include="Scripts\Tablas\ALTER_Direccion.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Stores\SP_UpdateProveedor.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

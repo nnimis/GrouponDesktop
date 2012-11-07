@@ -49,7 +49,7 @@ SELECT  [Cli_Nombre] ,[Cli_Apellido], [Cli_Dni], [Cli_Direccion], [Cli_Telefono]
       ,[Groupon_Precio_Ficticio], [Groupon_Fecha], [Groupon_Fecha_Venc], [Groupon_Cantidad], [Groupon_Descripcion]
       ,[Groupon_Fecha_Compra], [Groupon_Codigo], [Groupon_Devolucion_Fecha], [Groupon_Entregado_Fecha]
       ,[Factura_Nro],[Factura_Fecha]
-FROM gd_esquema.Maestra WHERE 1=1 ORDER BY [Provee_RS], [Groupon_Fecha], [Groupon_Fecha_Venc], [Groupon_Cantidad], [Groupon_Descripcion],[Groupon_Precio], [Groupon_Precio_Ficticio] ASC
+FROM gd_esquema.Maestra WHERE 1=1 ORDER BY [Provee_RS], [Groupon_Fecha], [Groupon_Fecha_Venc], [Groupon_Cantidad], [Groupon_Descripcion],[Groupon_Precio], [Groupon_Precio_Ficticio], [Groupon_Fecha_Compra],[Groupon_Devolucion_Fecha], [Groupon_Entregado_Fecha], [Factura_Fecha] ASC
 
 -- Apertura del cursor
 PRINT 'Abriendo cursor con tabla maestra...'
@@ -66,16 +66,16 @@ FETCH cTablaMaestra INTO @Cli_Nombre, @Cli_Apellido, @Cli_DNI, @Cli_Direccion, @
 WHILE (@@FETCH_STATUS = 0 )
 BEGIN
 	-- Cargo el cliente 
-	--EXECUTE GRUPO_N.Migracion_Ingresar_Cliente @Cli_Nombre, @Cli_Apellido, @Cli_DNI, @Cli_Direccion, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nacimiento, @Cli_Ciudad;
+	EXECUTE GRUPO_N.Migracion_Ingresar_Cliente @Cli_Nombre, @Cli_Apellido, @Cli_DNI, @Cli_Direccion, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nacimiento, @Cli_Ciudad;
 	
 	--Cargo Proveedores, ciudades y rubros de los mismos
-	--EXECUTE GRUPO_N.Migracion_Ingresar_Proveedor @Provee_RS, @Provee_Dom, @Provee_Ciudad, @Provee_Telefono, @Provee_CUIT, @Provee_Rubro;
+	EXECUTE GRUPO_N.Migracion_Ingresar_Proveedor @Provee_RS, @Provee_Dom, @Provee_Ciudad, @Provee_Telefono, @Provee_CUIT, @Provee_Rubro;
 
 	--Cargo los cupones
-	--EXECUTE GRUPO_N.Migracion_Ingresar_Cupon @Provee_RS,@Groupon_Precio, @Groupon_Precio_Ficticio, @Groupon_Fecha, @Groupon_Fecha_Venc, @Groupon_Cantidad, @Groupon_Descripcion, @Groupon_Codigo, @Groupon_Devolucion_Fecha, @Groupon_Entregado_Fecha, @Factura_Nro;
+	EXECUTE GRUPO_N.Migracion_Ingresar_Cupon @Provee_RS,@Groupon_Precio, @Groupon_Precio_Ficticio, @Groupon_Fecha, @Groupon_Fecha_Venc, @Groupon_Cantidad, @Groupon_Descripcion, @Groupon_Codigo, @Groupon_Devolucion_Fecha, @Groupon_Entregado_Fecha, @Factura_Nro;
 	
 	--Cargo la compra del cupón
-	--EXECUTE GRUPO_N.Migracion_Ingresar_Pedido_Cupon @Provee_RS,	@Cli_Telefono, @Groupon_Precio,	@Groupon_Precio_Ficticio, @Groupon_Fecha, @Groupon_Fecha_Venc, @Groupon_Cantidad, @Groupon_Descripcion,	@Groupon_Fecha_Compra, @Groupon_Codigo,	@Groupon_Devolucion_Fecha, @Groupon_Entregado_Fecha, @Factura_Nro, @Factura_Fecha;	
+	EXECUTE GRUPO_N.Migracion_Ingresar_Pedido_Cupon @Provee_RS,	@Cli_Telefono, @Groupon_Precio,	@Groupon_Precio_Ficticio, @Groupon_Fecha, @Groupon_Fecha_Venc, @Groupon_Cantidad, @Groupon_Descripcion,	@Groupon_Fecha_Compra, @Groupon_Codigo,	@Groupon_Devolucion_Fecha, @Groupon_Entregado_Fecha, @Factura_Nro, @Factura_Fecha;	
 	
 	--Cargo el retiro del cupón
 	EXECUTE GRUPO_N.Migracion_Ingresar_Retiro_Cupon @Provee_RS,	@Cli_Telefono, @Groupon_Precio,	@Groupon_Precio_Ficticio, @Groupon_Fecha, @Groupon_Fecha_Venc, @Groupon_Cantidad, @Groupon_Descripcion,	@Groupon_Fecha_Compra, @Groupon_Codigo,	@Groupon_Devolucion_Fecha, @Groupon_Entregado_Fecha, @Factura_Nro, @Factura_Fecha;	

@@ -64,7 +64,6 @@ namespace GrouponDesktop.Business
                 .And("@Nombre", cliente.Nombre)
                 .And("@Apellido", cliente.Apellido)
                 .And("@FechaNacimiento", cliente.FechaNacimiento)
-                .And("@ID_Detalle", detalleID)
             .Arguments);
         }
 

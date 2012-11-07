@@ -16,13 +16,12 @@ CREATE PROCEDURE [GRUPO_N].[InsertCliente]
 	@DNI numeric(18,0),
 	@Nombre nvarchar(255),
 	@Apellido nvarchar(255),
-	@FechaNacimiento datetime,
-	@ID_Detalle int
+	@FechaNacimiento datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
-	INSERT INTO GRUPO_N.Cliente(ID, DNI, Nombre, Apellido, FechaNacimiento, ID_Detalle) VALUES 
-	(@ID, @DNI, @Nombre, @Apellido, @FechaNacimiento, @ID_Detalle)
+	INSERT INTO GRUPO_N.Cliente(ID, DNI, Nombre, Apellido, FechaNacimiento) VALUES 
+	(@ID, @DNI, @Nombre, @Apellido, @FechaNacimiento)
 	
 	SELECT @@Identity AS ID
 END

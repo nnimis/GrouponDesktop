@@ -31,9 +31,9 @@ namespace GrouponDesktop.Business
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
                 "GRUPO_N.InsertProveedor", SqlDataAccessArgs
                 .CreateWith("@RazonSocial", proveedor.RazonSocial)
+                .And("@ID", proveedor.UserID)
                 .And("@ID_Rubro", proveedor.Rubro.ID)
                 .And("@CUIT", proveedor.CUIT)
-                .And("@ID_Detalle", detalleID)
             .Arguments);
         }
     }

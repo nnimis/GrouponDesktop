@@ -42,15 +42,12 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-BEGIN TRANSACTION
-GO
 CREATE TABLE [GRUPO_N].[Cliente](
 	[ID] int NOT NULL,
 	[DNI] [numeric](18, 0) NOT NULL,
 	[Nombre] [nvarchar](255) NOT NULL,
 	[Apellido] [nchar](255) NOT NULL,
 	[FechaNacimiento] [datetime] NOT NULL,
-	[ID_Detalle] [int] NOT NULL,
 	[Saldo] [numeric](18, 2) NOT NULL,
 	CONSTRAINT [PK_Cliente] PRIMARY KEY CLUSTERED 
 	(
@@ -65,13 +62,6 @@ REFERENCES [GRUPO_N].[Usuario] ([ID])
 GO
 
 ALTER TABLE [GRUPO_N].[Cliente] CHECK CONSTRAINT [FK_Cliente_Usuario]
-GO
-
-ALTER TABLE [GRUPO_N].[Cliente]  WITH CHECK ADD  CONSTRAINT [FK_Ciente_DetalleEntidad] FOREIGN KEY([ID_Detalle])
-REFERENCES [GRUPO_N].[DetalleEntidad] ([ID])
-GO
-
-ALTER TABLE [GRUPO_N].[Cliente] CHECK CONSTRAINT [FK_Ciente_DetalleEntidad]
 GO
 
 ALTER TABLE [GRUPO_N].[Cliente] ADD  CONSTRAINT [DF_Ciente_Saldo]  DEFAULT ((10)) FOR [Saldo]

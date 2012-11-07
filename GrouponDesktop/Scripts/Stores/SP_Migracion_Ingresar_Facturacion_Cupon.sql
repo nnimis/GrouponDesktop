@@ -39,15 +39,12 @@ BEGIN
 		SET @Id_Cliente = GRUPO_N.GetIdClienteByTelefono(@Cli_Telefono);
 		--PRINT 'Se va a ingresar compra con ID_Cliente: ' + CAST(@Id_Cliente AS NVARCHAR(20))
 		SET @Id_Cupon = GRUPO_N.GetIdCuponByAllKeys(@Provee_RS,@Groupon_Precio,@Groupon_Precio_Ficticio,@Groupon_Fecha,@Groupon_Fecha_Venc,@Groupon_Cantidad,@Groupon_Descripcion);
-		PRINT 'ID_CUPON: ' + CAST(@Id_Cupon AS NVARCHAR(20))
 		SELECT @Id_Compra = ID FROM GRUPO_N.CompraCupon WHERE Codigo = @Groupon_Codigo AND ID_Cliente = @Id_Cliente AND ID_Cupon = @Id_Cupon;
-		PRINT 'ID_COMPRA: ' + CAST(@Id_Compra AS NVARCHAR(20))
 		SELECT @Id_Canje = ID FROM GRUPO_N.CanjeCupon WHERE ID_CompraCupon = @Id_Compra;
-		PRINT 'ID_CANJE: ' + ISNULL('NULL',CAST(@Id_Canje AS NVARCHAR(20)))
 		SELECT @Id_Factura = ID FROM GRUPO_N.Factura WHERE Numero = @Factura_Nro AND Fecha = @Factura_Fecha;
 		IF(@Id_Factura IS NULL)
 		BEGIN
-			PRINT 'Vamos a ingresar la factura de un cupon ' + @Groupon_Descripcion
+			--PRINT 'Vamos a ingresar la factura de un cupon ' + @Groupon_Descripcion
 			INSERT INTO GRUPO_N.Factura(Numero, Fecha) 
 								VALUES (@Factura_Nro, @Factura_Fecha);
 			SELECT @Id_Factura = ID FROM GRUPO_N.Factura WHERE Numero = @Factura_Nro AND Fecha = @Factura_Fecha;

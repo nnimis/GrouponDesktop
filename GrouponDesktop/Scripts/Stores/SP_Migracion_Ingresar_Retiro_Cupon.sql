@@ -42,7 +42,7 @@ BEGIN
 		SELECT @Id_Canje = ID FROM GRUPO_N.CanjeCupon WHERE Fecha = @Groupon_Entregado_Fecha AND ID_CompraCupon = @Id_Compra;
 		IF(@Id_Canje IS NULL)
 		BEGIN
-			PRINT 'Vamos a ingresar el canje de un cupon ' + @Groupon_Descripcion
+			--PRINT 'Vamos a ingresar el canje de un cupon ' + @Groupon_Descripcion
 			INSERT INTO GRUPO_N.CanjeCupon(Fecha, ID_CompraCupon) 
 									VALUES (@Groupon_Entregado_Fecha, @Id_Compra);
 

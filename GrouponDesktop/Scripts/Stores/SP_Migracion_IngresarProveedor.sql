@@ -15,7 +15,13 @@ CREATE PROCEDURE [GRUPO_N].[Migracion_Ingresar_Proveedor]
 		@Provee_Ciudad nvarchar(255) ,
 		@Provee_Telefono numeric(18,0),
 		@Provee_CUIT nvarchar(20),
-		@Provee_Rubro nvarchar(100)
+		@Provee_Rubro nvarchar(100),
+		@Groupon_Fecha_Compra datetime ,
+		@Groupon_Codigo nvarchar(50) ,
+		@Groupon_Devolucion_Fecha datetime, 
+		@Groupon_Entregado_Fecha datetime ,
+		@Factura_Nro numeric(18,0),
+		@Factura_Fecha datetime 		
 AS
 BEGIN
 	DECLARE
@@ -25,14 +31,14 @@ BEGIN
 		@Id_Usuario int,
 		@Id_Ciudad int,
 		@Id_Rubro int
-IF (@Provee_RS IS NOT NULL)
+IF (@Provee_RS IS NOT NULL AND @Groupon_Devolucion_Fecha IS NULL AND @Groupon_Entregado_Fecha IS NULL AND @Factura_Fecha IS NULL)
 	BEGIN
 		SELECT @Id_Proveedor=ID FROM GRUPO_N.Proveedor WHERE RazonSocial = @Provee_RS;
 		
 		IF (@Id_Proveedor IS NULL)
 			BEGIN
 				--Ingreso el usuario
-				PRINT 'Se va a crear el Proveedor ' + @Provee_RS
+				--PRINT 'Se va a crear el Proveedor ' + @Provee_RS
 				SET @Id_Rol_Proveedor = GRUPO_N.GetIdRolByName('Proveedor');	
 				INSERT INTO GRUPO_N.Usuario (Nombre,Password,ID_Rol) VALUES (@Provee_RS,'E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7',@Id_Rol_Proveedor);
 				SELECT @Id_Usuario=ID FROM GRUPO_N.Usuario WHERE Nombre=@Provee_RS;
@@ -42,7 +48,7 @@ IF (@Provee_RS IS NOT NULL)
 				SELECT  @Id_Ciudad = ID FROM GRUPO_N.Ciudad WHERE Descripcion = @Provee_Ciudad;
 				IF (@Id_Ciudad IS NULL)
 				BEGIN
-					PRINT 'La Ciudad a ingresar es ' + @Provee_Ciudad
+					--PRINT 'La Ciudad a ingresar es ' + @Provee_Ciudad
 					INSERT INTO Ciudad (Descripcion) VALUES (@Provee_Ciudad);
 					SELECT  @Id_Ciudad = ID FROM GRUPO_N.Ciudad WHERE Descripcion = @Provee_Ciudad;	
 				END
@@ -50,7 +56,7 @@ IF (@Provee_RS IS NOT NULL)
 				SELECT  @Id_Rubro = ID FROM GRUPO_N.Rubro WHERE Descripcion = @Provee_Rubro;
 				IF (@Id_Rubro IS NULL)
 				BEGIN
-					PRINT 'El Rubro a ingresar es ' + @Provee_Rubro
+					--PRINT 'El Rubro a ingresar es ' + @Provee_Rubro
 					INSERT INTO Rubro (Descripcion) VALUES (@Provee_Rubro);
 					SELECT  @Id_Rubro = ID FROM GRUPO_N.Rubro WHERE Descripcion = @Provee_Rubro;	
 				END				

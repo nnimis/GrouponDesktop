@@ -40,7 +40,7 @@ BEGIN
 		SELECT @Id_Compra = ID FROM GRUPO_N.CompraCupon WHERE Codigo = @Groupon_Codigo AND Fecha = @Groupon_Fecha_Compra AND ID_Cliente = @Id_Cliente AND ID_Cupon = @Id_Cupon;
 		IF(@Id_Compra IS NULL)
 		BEGIN
-			PRINT 'Vamos a ingresar la compra de un cupon ' + @Groupon_Descripcion
+			--PRINT 'Vamos a ingresar la compra de un cupon ' + @Groupon_Descripcion
 			INSERT INTO GRUPO_N.CompraCupon (ID_Cliente, ID_Cupon, Codigo, Fecha) 
 									VALUES (@Id_Cliente, @Id_Cupon, @Groupon_Codigo, @Groupon_Fecha_Compra);
 

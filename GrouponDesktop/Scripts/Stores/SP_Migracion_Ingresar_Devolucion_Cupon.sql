@@ -36,13 +36,12 @@ BEGIN
 	BEGIN
 		
 		SET @Id_Cliente = GRUPO_N.GetIdClienteByTelefono(@Cli_Telefono);
-		--PRINT 'Se va a ingresar compra con ID_Cliente: ' + CAST(@Id_Cliente AS NVARCHAR(20))
 		SET @Id_Cupon = GRUPO_N.GetIdCuponByAllKeys(@Provee_RS,@Groupon_Precio,@Groupon_Precio_Ficticio,@Groupon_Fecha,@Groupon_Fecha_Venc,@Groupon_Cantidad,@Groupon_Descripcion);
 		SELECT @Id_Compra = ID FROM GRUPO_N.CompraCupon WHERE Codigo = @Groupon_Codigo AND Fecha = @Groupon_Fecha_Compra AND ID_Cliente = @Id_Cliente AND ID_Cupon = @Id_Cupon;
 		SELECT @Id_Devolucion = ID FROM GRUPO_N.Devolucion WHERE ID_Cupon = @Id_Cupon AND ID_Cliente = @Id_Cliente AND Fecha = @Groupon_Devolucion_Fecha;
 		IF(@Id_Devolucion IS NULL)
 		BEGIN
-			PRINT 'Vamos a ingresar la devolucion de un cupon ' + @Groupon_Descripcion
+			--PRINT 'Vamos a ingresar la devolucion de un cupon ' + @Groupon_Descripcion
 			INSERT INTO GRUPO_N.Devolucion(ID_Cupon, ID_Cliente, Fecha, Motivo) 
 									VALUES (@Id_Cupon, @Id_Cliente, @Groupon_Devolucion_Fecha, 'Devolucion en sistema previo');
 

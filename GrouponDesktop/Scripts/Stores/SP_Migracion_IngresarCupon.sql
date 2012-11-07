@@ -36,7 +36,7 @@ BEGIN
 
 		IF(@Id_Cupon IS NULL)
 		BEGIN
-			PRINT 'Vamos a ingresar un cupon ' + @Groupon_Descripcion
+			--PRINT 'Vamos a ingresar un cupon ' + @Groupon_Descripcion
 			INSERT INTO Cupon (Precio, PrecioOriginal, FechaPublicacion,FechaVigencia,FechaVencimmiento,Stock,Descripcion,ID_Proveedor,CantidadPorUsuario,Publicado) VALUES
 							(@Groupon_Precio_Ficticio,@Groupon_Precio,@Groupon_Fecha,@Groupon_Fecha_Venc, DATEADD(MONTH,2,@Groupon_Fecha_Venc),@Groupon_Cantidad,@Groupon_Descripcion,@Id_Proveedor,@Groupon_Cantidad,1);
 

@@ -18,7 +18,7 @@ BEGIN
 	SET NOCOUNT ON;
     
 	SELECT c.ID, c.Nombre, c.Apellido, c.DNI, d.Email FROM GRUPO_N.Cliente c
-	INNER JOIN GRUPO_N.DetalleEntidad d ON c.ID_Detalle = d.ID
+	INNER JOIN GRUPO_N.DetalleEntidad d ON d.ID_Usuario = c.ID
 END
 
 GO

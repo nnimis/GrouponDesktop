@@ -17,6 +17,8 @@ namespace GrouponDesktop.Business
     /// </summary>
     public class ClienteManager
     {
+        private UsersManager _usersManager = new UsersManager();
+
         /// <summary>
         /// Obtiene el listado de clientes del sistema
         /// </summary>
@@ -69,10 +71,7 @@ namespace GrouponDesktop.Business
 
         public void Delete(Cliente cliente)
         {
-            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                "GRUPO_N.DeleteUser", SqlDataAccessArgs
-                .CreateWith("@User_ID", cliente.UserID)
-            .Arguments);
+            _usersManager.DeleteAccount(cliente as User);
         }
     }
 }

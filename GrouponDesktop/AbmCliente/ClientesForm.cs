@@ -52,5 +52,20 @@ namespace GrouponDesktop.AbmCliente
                 }
             }
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            //if (rolesDataGridView.SelectedRows == null || rolesDataGridView.SelectedRows.Count == 0) return;
+            //var row = rolesDataGridView.SelectedRows[0];
+            //var rol = row.DataBoundItem as Rol;
+            //if (rol.ID == Session.DefaultRoleID)
+            //{
+            //    MessageBox.Show("Rol no editable");
+            //    return;
+            //}
+            //var addEditForm = new AddEditRoleForm(rol);
+            //addEditForm.OnRoleUpdated += new EventHandler<RoleUpdatedEventArgs>(addEditForm_OnRoleUpdated);
+            //ViewsManager.LoadModal(addEditForm);
+        }
     }
 }

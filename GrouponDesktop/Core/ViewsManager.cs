@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GrouponDesktop.Login;
+using GrouponDesktop.CargaCredito;
 
 namespace GrouponDesktop.Core
 {
@@ -68,7 +69,8 @@ namespace GrouponDesktop.Core
                 .Where(x => x.IsSubclassOf(typeof(Form))
                     && x != typeof(MainView)
                     && x != typeof(RegistroForm)
-                    && x != typeof(LoginForm));
+                    && x != typeof(LoginForm)
+                    && x != typeof(NuevoPago));
 
             foreach (var formType in formTypes)
             {

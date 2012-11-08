@@ -48,6 +48,7 @@
     <Compile Include="City.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="DetalleEntidad.cs" />
+    <Compile Include="Pago.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="Rubro.cs" />
     <Compile Include="Exceptions\ClienteDuplicadoException.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rol.cs" />
+    <Compile Include="TipoPago.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

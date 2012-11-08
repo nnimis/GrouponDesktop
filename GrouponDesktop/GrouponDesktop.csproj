@@ -85,6 +85,13 @@
     <Compile Include="CargaCredito\CargarCreditoForm.Designer.cs">
       <DependentUpon>CargarCreditoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CargaCredito\NuevoPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CargaCredito\NuevoPago.Designer.cs">
+      <DependentUpon>NuevoPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CargaCredito\PagoAddedEventArgs.cs" />
     <Compile Include="ComprarCupon\ComprarCuponForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CargaCredito\CargarCreditoForm.resx">
       <DependentUpon>CargarCreditoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CargaCredito\NuevoPago.resx">
+      <DependentUpon>NuevoPago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ComprarCupon\ComprarCuponForm.resx">
       <DependentUpon>ComprarCuponForm.cs</DependentUpon>
@@ -319,7 +329,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\INSERT_TipoPago.sql" />
+    <None Include="Scripts\Stores\SP_InsertPago.sql" />
     <None Include="Scripts\Stores\SP_UpdateProveedor.sql" />
+    <None Include="Scripts\Tablas\TB_PagosTarjetas.sql" />
+    <None Include="Scripts\Triggers\CompraCuponInserted.sql" />
     <None Include="Scripts\Triggers\GiftCardInserted.sql" />
     <None Include="Scripts\Triggers\PagoInserted.sql" />
   </ItemGroup>

@@ -318,7 +318,10 @@
     <None Include="Scripts\Tablas\ALTER_Direccion.sql" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Scripts\INSERT_TipoPago.sql" />
     <None Include="Scripts\Stores\SP_UpdateProveedor.sql" />
+    <None Include="Scripts\Triggers\GiftCardInserted.sql" />
+    <None Include="Scripts\Triggers\PagoInserted.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

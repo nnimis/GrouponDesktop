@@ -11,21 +11,25 @@ GO
 
 CREATE PROCEDURE [GRUPO_N].[Migracion_Ingresar_Cupon]
 		@Provee_RS nvarchar(100),
+		@Cli_Telefono numeric(18,0),
 		@Groupon_Precio numeric(18,2),
-		@Groupon_Precio_Ficticio numeric(18,2),
+		@Groupon_Precio_Ficticio numeric(18,2),		
 		@Groupon_Fecha datetime ,
 		@Groupon_Fecha_Venc datetime ,
 		@Groupon_Cantidad numeric(18,0),
 		@Groupon_Descripcion nvarchar(255),
+		@Groupon_Fecha_Compra datetime ,
 		@Groupon_Codigo nvarchar(50),
 		@Groupon_Devolucion_Fecha datetime, 
 		@Groupon_Entregado_Fecha datetime ,
-		@Factura_Nro numeric(18,0)		
+		@Factura_Nro numeric(18,0),
+		@Factura_Fecha datetime			
 AS
 BEGIN
 	DECLARE
 	@Id_Proveedor int,
-	@Id_Cupon int
+	@Id_Cupon int,
+	@Id_Cliente int
 	
 	--IF(@Groupon_Descripcion IS NOT NULL)
 	IF(@Groupon_Codigo IS NOT NULL AND @Factura_Nro IS NULL AND @Groupon_Devolucion_Fecha IS NULL AND @Groupon_Entregado_Fecha IS NULL)
@@ -40,8 +44,14 @@ BEGIN
 			INSERT INTO Cupon (Precio, PrecioOriginal, FechaPublicacion,FechaVigencia,FechaVencimmiento,Stock,Descripcion,ID_Proveedor,CantidadPorUsuario,Publicado) VALUES
 							(@Groupon_Precio_Ficticio,@Groupon_Precio,@Groupon_Fecha,@Groupon_Fecha_Venc, DATEADD(MONTH,2,@Groupon_Fecha_Venc),@Groupon_Cantidad,@Groupon_Descripcion,@Id_Proveedor,@Groupon_Cantidad,1);
 
-			SELECT @Id_Cupon = ID FROM Cupon WHERE FechaPublicacion = @Groupon_Fecha AND ID_Proveedor = @Id_Proveedor AND Descripcion = @Groupon_Descripcion AND Stock=@Groupon_Cantidad AND FechaVigencia = @Groupon_Fecha_Venc;
+			SELECT @Id_Cupon = ID FROM Cupon WHERE FechaPublicacion = @Groupon_Fecha AND ID_Proveedor = @Id_Proveedor AND Descripcion = @Groupon_Descripcion AND Stock=@Groupon_Cantidad AND FechaVigencia = @Groupon_Fecha_Venc AND Precio = @Groupon_Precio_Ficticio AND PrecioOriginal = @Groupon_Precio;
 			INSERT INTO CuponCiudad (ID_Cupon,ID_Ciudad) VALUES (@Id_Cupon, GRUPO_N.GetIdCiudadByProveedor(@Provee_RS));
 		END
+
+		SET @Id_Cliente = GRUPO_N.GetIdClienteByTelefono(@Cli_Telefono);
+		INSERT INTO GRUPO_N.CompraCupon (ID_Cliente, ID_Cupon, Codigo, Fecha) 
+								VALUES (@Id_Cliente, @Id_Cupon, @Groupon_Codigo, @Groupon_Fecha_Compra);
+		--PRINT 'Inserto la compra del cupon ' + @Groupon_Descripcion + ' con ID_cupon ' + CAST(@Id_Cupon AS NVARCHAR(10)) + ' e id_cliente' + CAST(@Id_Cliente AS NVARCHAR(10))		
+
 	END
 END

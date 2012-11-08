@@ -71,6 +71,11 @@ BEGIN
 				SELECT @Id_Detalle=ID FROM DetalleEntidad WHERE Telefono=@Cli_Telefono AND Email=@Cli_Mail;
 				INSERT INTO GRUPO_N.Cliente (DNI, Nombre, Apellido,FechaNacimiento,ID_Detalle) VALUES (@Cli_DNI, @Cli_Nombre, @Cli_Apellido, @Cli_Fecha_Nacimiento, @Id_Detalle);
 			END
+		IF (@Cli_Dest_Apellido IS NOT NULL)
+		BEGIN
+			EXECUTE GRUPO_N.Migracion_Ingresar_Cliente  @Cli_Destino_Nombre, @Cli_Dest_Apellido,@Cli_Dest_DNI, @Cli_Dest_Direccion, @Cli_Dest_Telefono,
+							@Cli_Dest_Mail, @Cli_Dest_Fecha_Nac, @Cli_Dest_Ciudad, NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL;
+		END
 	END
 END
 GO

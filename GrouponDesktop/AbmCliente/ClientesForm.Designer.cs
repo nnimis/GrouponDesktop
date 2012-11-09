@@ -58,6 +58,7 @@
             // 
             // buttonsPanel
             // 
+            this.buttonsPanel.BackColor = System.Drawing.SystemColors.ControlDark;
             this.buttonsPanel.Controls.Add(this.btnEliminar);
             this.buttonsPanel.Controls.Add(this.btnModificar);
             this.buttonsPanel.Controls.Add(this.btnAgregar);

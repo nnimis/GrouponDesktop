@@ -9,9 +9,11 @@ using System.Windows.Forms;
 using GrouponDesktop.Business;
 using GrouponDesktop.Common;
 using GrouponDesktop.AbmRol;
+using GrouponDesktop.Core;
 
 namespace GrouponDesktop
 {
+    [NonNavigable]
     public partial class AddEditRoleForm : Form
     {
         public AddEditRoleForm() : this(new Rol()) { }

@@ -67,12 +67,7 @@ namespace GrouponDesktop.Core
         public static void LoadMenu()
         {
             var formTypes = typeof(MainView).Assembly.GetTypes()
-                .Where(x => x.IsSubclassOf(typeof(Form))
-                    && x != typeof(MainView)
-                    && x != typeof(RegistroForm)
-                    && x != typeof(LoginForm)
-                    && x != typeof(NuevoPago)
-                    && x != typeof(NuevaGiftCard));
+                .Where(x => x.IsSubclassOf(typeof(Form)));
 
             foreach (var formType in formTypes)
             {
@@ -164,6 +159,9 @@ namespace GrouponDesktop.Core
         /// <returns>Retorna true si el usuario tiene acceso al formulario, de otra forma retorna false</returns>
         private static bool IsAccesibleForm(Type formType)
         {
+            var nonNavigableAttribute = (NonNavigableAttribute)Attribute.GetCustomAttribute(formType, typeof(NonNavigableAttribute));
+            if (nonNavigableAttribute != null) return false;
+
             var permissionAttribute = (PermissionRequiredAttribute)Attribute.GetCustomAttribute(formType, typeof(PermissionRequiredAttribute));
             if (permissionAttribute == null) return true;
 

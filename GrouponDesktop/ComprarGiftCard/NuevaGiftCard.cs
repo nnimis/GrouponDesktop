@@ -15,6 +15,7 @@ using System.Configuration;
 
 namespace GrouponDesktop.ComprarGiftCard
 {
+    [NonNavigable]
     public partial class NuevaGiftCard : Form
     {
         private User _user;

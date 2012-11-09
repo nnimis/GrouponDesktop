@@ -14,6 +14,7 @@ using GrouponDesktop.Core;
 
 namespace GrouponDesktop
 {
+    [NonNavigable]
     public partial class MainView : Form
     {
         public MainView()

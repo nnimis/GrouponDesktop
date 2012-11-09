@@ -9,9 +9,11 @@ using System.Windows.Forms;
 using GrouponDesktop.Business;
 using GrouponDesktop.Common;
 using System.Configuration;
+using GrouponDesktop.Core;
 
 namespace GrouponDesktop.CargaCredito
 {
+    [NonNavigable]
     public partial class NuevoPago : Form
     {
         private PagosManager _manager = new PagosManager();

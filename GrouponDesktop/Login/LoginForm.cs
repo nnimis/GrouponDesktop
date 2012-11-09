@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 
 namespace GrouponDesktop.Login
 {
+    [NonNavigable]
     public partial class LoginForm : Form
     {
         public LoginForm()

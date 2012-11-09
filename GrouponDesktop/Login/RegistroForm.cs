@@ -9,9 +9,11 @@ using System.Windows.Forms;
 using GrouponDesktop.Business;
 using GrouponDesktop.Common;
 using GrouponDesktop.Login;
+using GrouponDesktop.Core;
 
 namespace GrouponDesktop
 {
+    [NonNavigable]
     public partial class RegistroForm : Form
     {
         public event EventHandler<UserSavedEventArgs> OnUserSaved;

@@ -132,6 +132,7 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel2.Controls.Add(this.btnEliminarCuenta);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -141,8 +142,7 @@
             // 
             // btnEliminarCuenta
             // 
-            this.btnEliminarCuenta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEliminarCuenta.Location = new System.Drawing.Point(379, 12);
+            this.btnEliminarCuenta.Location = new System.Drawing.Point(12, 12);
             this.btnEliminarCuenta.Name = "btnEliminarCuenta";
             this.btnEliminarCuenta.Size = new System.Drawing.Size(94, 23);
             this.btnEliminarCuenta.TabIndex = 8;

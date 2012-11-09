@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Credito = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClienteDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -57,25 +57,6 @@
             this.dataGridView.Size = new System.Drawing.Size(1054, 510);
             this.dataGridView.TabIndex = 4;
             // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Location = new System.Drawing.Point(12, 10);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(119, 23);
-            this.btnAgregar.TabIndex = 0;
-            this.btnAgregar.Text = "Comprar GiftCard";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnAgregar);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1054, 39);
-            this.panel1.TabIndex = 5;
-            // 
             // Fecha
             // 
             this.Fecha.DataPropertyName = "Fecha";
@@ -97,6 +78,26 @@
             this.ClienteDestino.HeaderText = "Cliente Destino";
             this.ClienteDestino.Name = "ClienteDestino";
             this.ClienteDestino.ReadOnly = true;
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Location = new System.Drawing.Point(12, 10);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(119, 23);
+            this.btnAgregar.TabIndex = 0;
+            this.btnAgregar.Text = "Comprar GiftCard";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.btnAgregar);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1054, 39);
+            this.panel1.TabIndex = 5;
             // 
             // ComprarGiftCardForm
             // 

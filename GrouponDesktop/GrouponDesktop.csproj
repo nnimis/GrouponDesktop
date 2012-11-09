@@ -113,6 +113,7 @@
       <DependentUpon>NuevaGiftCard.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\AppExceptionHandler.cs" />
+    <Compile Include="Core\NonNavigableAttribute.cs" />
     <Compile Include="Core\PermissionRequiredAttribute.cs" />
     <Compile Include="Core\Session.cs" />
     <Compile Include="Core\ViewsManager.cs" />

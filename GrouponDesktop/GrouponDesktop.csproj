@@ -116,6 +116,7 @@
     <Compile Include="Core\NonNavigableAttribute.cs" />
     <Compile Include="Core\PermissionRequiredAttribute.cs" />
     <Compile Include="Core\Session.cs" />
+    <Compile Include="Core\SqlExceptionHandler.cs" />
     <Compile Include="Core\ViewsManager.cs" />
     <Compile Include="Cuenta\CuentaForm.cs">
       <SubType>Form</SubType>
@@ -346,6 +347,7 @@
     <None Include="Scripts\Stores\SP_InsertGiftCard.sql" />
     <None Include="Scripts\Stores\SP_InsertPago.sql" />
     <None Include="Scripts\Stores\SP_UpdateProveedor.sql" />
+    <None Include="Scripts\Tablas\ALTER_DetalleEntidad.sql" />
     <None Include="Scripts\Tablas\TB_PagosTarjetas.sql" />
     <None Include="Scripts\Triggers\CompraCuponInserted.sql" />
     <None Include="Scripts\Triggers\GiftCardInserted.sql" />

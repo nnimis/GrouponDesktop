@@ -87,35 +87,28 @@ namespace GrouponDesktop
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+            User user = null;
+            if (Profile == Profile.Cliente)
             {
-                User user = null;
-                if (Profile == Profile.Cliente)
-                {
-                    _cliente = ((ClienteUserControl)clienteUserControl).GetCliente();
-                    _cliente.UserName = txtUsername.Text;
-                    var manager = new ClienteManager();
-                    manager.GuardarCliente(_cliente, txtPassword.Text);
-                    user = _cliente;
-                }
-                else
-                {
-                    _proveedor = ((ProveedorUserControl)proveedorUserControl).GetProveedor();
-                    _proveedor.UserName = txtUsername.Text;
-                    var manager = new ProveedorManager();
-                    manager.GuardarProveedor(_proveedor, txtPassword.Text);
-                    user = _proveedor; 
-                }
-
-                if (OnUserSaved != null)
-                {
-                    OnUserSaved(this, new UserSavedEventArgs() { Username = this.txtUsername.Text, Password = this.txtPassword.Text, User = user });
-                    this.Close();
-                }
+                _cliente = ((ClienteUserControl)clienteUserControl).GetCliente();
+                _cliente.UserName = txtUsername.Text;
+                var manager = new ClienteManager();
+                manager.GuardarCliente(_cliente, txtPassword.Text);
+                user = _cliente;
             }
-            catch
+            else
             {
-                MessageBox.Show("Por favor, verifique los datos ingresados");
+                _proveedor = ((ProveedorUserControl)proveedorUserControl).GetProveedor();
+                _proveedor.UserName = txtUsername.Text;
+                var manager = new ProveedorManager();
+                manager.GuardarProveedor(_proveedor, txtPassword.Text);
+                user = _proveedor; 
+            }
+
+            if (OnUserSaved != null)
+            {
+                OnUserSaved(this, new UserSavedEventArgs() { Username = this.txtUsername.Text, Password = this.txtPassword.Text, User = user });
+                this.Close();
             }
         }
 

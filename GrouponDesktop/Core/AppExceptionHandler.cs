@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Data.SqlClient;
 
 namespace GrouponDesktop.Core
 {
@@ -18,7 +19,14 @@ namespace GrouponDesktop.Core
         /// <param name="e">Argumentos de la excepcion</param>
         public static void Invoke(object sender, ThreadExceptionEventArgs e)
         {
-            ViewsManager.Alert(e.Exception.Message);
+            if (e.Exception is SqlException)
+            {
+                SqlExceptionHandler.Handle(e.Exception as SqlException);
+            }
+            else
+            {
+                ViewsManager.Alert(e.Exception.Message);
+            }
         }
     }
 }

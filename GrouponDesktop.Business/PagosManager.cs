@@ -48,8 +48,8 @@ namespace GrouponDesktop.Business
                 "GRUPO_N.InsertPago", SqlDataAccessArgs
                 .CreateWith("@ID_Cliente", user.UserID)
                 .And("@Credito", pago.Credito)
-                .And("@Fecha", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
-                .And("@ID_TipoPago", pago.TipoPago)
+                .And("@Fecha", pago.Fecha)
+                .And("@ID_TipoPago", (int)pago.TipoPago)
                 .And("@Tarjeta", pago.Tarjeta)
                 .And("@Banco", pago.Banco)
             .Arguments);

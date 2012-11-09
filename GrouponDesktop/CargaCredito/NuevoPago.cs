@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using GrouponDesktop.Business;
 using GrouponDesktop.Common;
+using System.Configuration;
 
 namespace GrouponDesktop.CargaCredito
 {
@@ -74,7 +75,8 @@ namespace GrouponDesktop.CargaCredito
                         Banco = txtBanco.Text,
                         Credito = monto,
                         Tarjeta = txtTarjeta.Text,
-                        TipoPago = tipoPago
+                        TipoPago = tipoPago,
+                        Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"])
                     }
                 });
             }

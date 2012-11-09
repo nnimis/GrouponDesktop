@@ -37,5 +37,21 @@ namespace GrouponDesktop.Common
             Permissions = new List<Functionalities>();
             DetalleEntidad = new DetalleEntidad();
         }
+
+        public override string ToString()
+        {
+            return UserName;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj.GetType().IsSubclassOf(typeof(User)))) return false;
+            return ((User)obj).UserID == UserID;
+        }
+
+        public override int GetHashCode()
+        {
+            return UserID.GetHashCode();
+        }
     }
 }

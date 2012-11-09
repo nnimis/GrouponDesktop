@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using GrouponDesktop.Login;
 using GrouponDesktop.CargaCredito;
+using GrouponDesktop.ComprarGiftCard;
 
 namespace GrouponDesktop.Core
 {
@@ -70,7 +71,8 @@ namespace GrouponDesktop.Core
                     && x != typeof(MainView)
                     && x != typeof(RegistroForm)
                     && x != typeof(LoginForm)
-                    && x != typeof(NuevoPago));
+                    && x != typeof(NuevoPago)
+                    && x != typeof(NuevaGiftCard));
 
             foreach (var formType in formTypes)
             {

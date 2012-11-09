@@ -16,19 +16,45 @@ namespace GrouponDesktop.AbmCliente
     [PermissionRequired(Functionalities.AdministrarClientes)]
     public partial class ClientesForm : Form
     {
-        private ClienteManager clienteManager = new ClienteManager();
+        private ClienteManager _clienteManager = new ClienteManager();
+        private bool _isSearchMode = false;
+        public event EventHandler<UserSelectedEventArgs> OnUserSelected;
 
         public ClientesForm()
         {
             InitializeComponent();
         }
 
+        public void SetSearchMode()
+        {
+            buttonsPanel.Visible = false;
+            _isSearchMode = true;
+        }
+
         private void ClientesForm_Load(object sender, EventArgs e)
         {
-            var bindingSource = new BindingSource();
-            var clientesTable = clienteManager.GetAll();
+            var dataSource = _clienteManager.GetAll();
+            if (_isSearchMode)
+            {
+                dataSource.Remove(new Cliente() { UserID = Session.User.UserID });
+            }
+            dgvClientes.DataSource = dataSource;
             dgvClientes.AutoGenerateColumns = false;
-            dgvClientes.DataSource = clientesTable;
+            dgvClientes.DoubleClick += new EventHandler(dgvClientes_DoubleClick);
+        }
+
+        void dgvClientes_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgvClientes.SelectedRows == null || dgvClientes.SelectedRows.Count == 0) return;
+            var row = dgvClientes.SelectedRows[0];
+            var cliente = row.DataBoundItem as Cliente;
+            if (OnUserSelected != null)
+            {
+                OnUserSelected(this, new UserSelectedEventArgs()
+                {
+                    User = cliente as User
+                });
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -41,7 +67,7 @@ namespace GrouponDesktop.AbmCliente
             {
                 try
                 {
-                    clienteManager.Delete(cliente);
+                    _clienteManager.Delete(cliente);
                     var dataSource = dgvClientes.DataSource as BindingList<Cliente>;
                     dataSource.Remove(cliente);
                     dgvClientes.Refresh();
@@ -68,12 +94,12 @@ namespace GrouponDesktop.AbmCliente
 
         void regForm_OnUserSaved(object sender, UserSavedEventArgs e)
         {
-            MessageBox.Show("Se han guardado los datos del cliente " + e.Username);
             var dataSource = dgvClientes.DataSource as BindingList<Cliente>;
             var cliente = e.User as Cliente;
             if (dataSource.Contains(cliente)) dataSource.Remove(cliente);
             dataSource.Add(cliente);
             dgvClientes.Refresh();
+            MessageBox.Show("Se han guardado los datos del cliente " + e.Username);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -82,6 +108,64 @@ namespace GrouponDesktop.AbmCliente
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
             regForm.Profile = Profile.Cliente;
             ViewsManager.LoadModal(regForm);
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtApellido.Text = string.Empty;
+            txtNombre.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtDNI.Text = string.Empty;
+            dgvClientes.DataSource = _clienteManager.GetAll();
+            dgvClientes.Refresh();
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            long dni = 0;
+            bool filterChanged = false;
+            if (!string.IsNullOrEmpty(txtDNI.Text) && !long.TryParse(txtDNI.Text, out dni))
+            {
+                MessageBox.Show("El DNI debe ser numérico");
+                return;
+            }
+            var apellidoFiltered = _clienteManager.GetAll();
+            var nombreFiltered = _clienteManager.GetAll();
+            var emailFiltered = _clienteManager.GetAll();
+            var dniFiltered = _clienteManager.GetAll();
+            BindingList<Cliente> dataSource;
+            if (!string.IsNullOrEmpty(txtApellido.Text))
+            {
+                apellidoFiltered = new BindingList<Cliente>(_clienteManager.GetAll().Where(x => x.Apellido.ToLowerInvariant().Contains(txtApellido.Text.ToLowerInvariant())).ToList());
+                filterChanged = true;
+            }
+            if (!string.IsNullOrEmpty(txtNombre.Text))
+            {
+                nombreFiltered = new BindingList<Cliente>(_clienteManager.GetAll().Where(x => x.Nombre.ToLowerInvariant().Contains(txtNombre.Text.ToLowerInvariant())).ToList());
+                filterChanged = true;
+            }
+            if (!string.IsNullOrEmpty(txtEmail.Text))
+            {
+                emailFiltered = new BindingList<Cliente>(_clienteManager.GetAll().Where(x => x.DetalleEntidad.Email.ToLowerInvariant().Contains(txtEmail.Text.ToLowerInvariant())).ToList());
+                filterChanged = true;
+            }
+            if (!string.IsNullOrEmpty(txtDNI.Text))
+            {
+                dniFiltered = new BindingList<Cliente>(_clienteManager.GetAll().Where(x => x.DNI == dni).ToList());
+                filterChanged = true;
+            }
+            if (filterChanged)
+            {
+                dataSource = new BindingList<Cliente>(apellidoFiltered.Intersect(nombreFiltered).Intersect(emailFiltered).Intersect(dniFiltered).ToList());
+            }
+            else
+            {
+                dataSource = _clienteManager.GetAll();
+            }
+            dataSource.Remove(new Cliente() { UserID = Session.User.UserID });
+            dgvClientes.DataSource = dataSource;
+
+            dgvClientes.Refresh();
         }
     }
 }

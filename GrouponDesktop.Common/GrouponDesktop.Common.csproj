@@ -35,6 +35,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -48,6 +49,8 @@
     <Compile Include="City.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="DetalleEntidad.cs" />
+    <Compile Include="FilterableBindingList.cs" />
+    <Compile Include="GiftCard.cs" />
     <Compile Include="Pago.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="Rubro.cs" />

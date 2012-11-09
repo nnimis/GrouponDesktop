@@ -25,6 +25,10 @@ namespace GrouponDesktop.Business
         /// <returns>Listado de clientes</returns>
         public BindingList<Cliente> GetAll()
         {
+            if (SessionData.Contains("Clients"))
+            {
+                return SessionData.Get<BindingList<Cliente>>("Clients");
+            }
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
                 "GRUPO_N.GetClientes");
             var clientes = new BindingList<Cliente>();
@@ -56,7 +60,7 @@ namespace GrouponDesktop.Business
                     });
                 }
             }
-
+            SessionData.Set("Clients", clientes);
             return clientes;
         }
 

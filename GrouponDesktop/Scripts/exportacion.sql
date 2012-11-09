@@ -61,29 +61,48 @@ INNER JOIN GRUPO_N.Cupon c ON c.Precio = m.Groupon_Precio_Ficticio and c.PrecioO
 										 c.FechaPublicacion = m.Groupon_Fecha AND c.FechaVigencia = m.Groupon_Fecha_Venc AND
 										 c.Stock = m.Groupon_Cantidad AND c.Descripcion = m.Groupon_Descripcion 
 INNER JOIN GRUPO_N.Proveedor p ON c.ID_Proveedor= p.ID
-WHERE Groupon_Fecha_Compra IS NOT NULL AND u.ID_Rol =@Id_Rol_Cliente AND m.Provee_RS = p.RazonSocial
+WHERE Groupon_Fecha_Compra IS NOT NULL AND Groupon_Fecha_Compra IS NOT NULL AND Groupon_Devolucion_Fecha IS NULL
+  AND Groupon_Entregado_Fecha IS NULL AND Factura_Fecha IS NULL AND u.ID_Rol =@Id_Rol_Cliente AND m.Provee_RS = p.RazonSocial
 
 --Ingreso la devolucion de los cupones
 INSERT INTO GRUPO_N.Devolucion(ID_CompraCupon, ID_Cliente, Fecha, Motivo)
-SELECT c.ID, u.ID, Groupon_Codigo,Groupon_Devolucion_Fecha, 'Devolucion en sistema previo' FROM gd_esquema.Maestra m 
-INNER JOIN GRUPO_N.Usuario u ON u.Nombre = m.Cli_Telefono
+SELECT cc.ID, u.ID_Usuario,Groupon_Devolucion_Fecha, 'Devolucion en sistema previo' FROM gd_esquema.Maestra m 
+INNER JOIN GRUPO_N.DetalleEntidad u ON u.Telefono = m.Cli_Telefono
+INNER JOIN GRUPO_N.Proveedor p ON p.RazonSocial=m.Provee_RS
 INNER JOIN GRUPO_N.Cupon c ON c.Precio = m.Groupon_Precio_Ficticio and c.PrecioOriginal=m.Groupon_Precio AND
 										 c.FechaPublicacion = m.Groupon_Fecha AND c.FechaVigencia = m.Groupon_Fecha_Venc AND
-										 c.Stock = m.Groupon_Cantidad AND c.Descripcion = m.Groupon_Descripcion 
-INNER JOIN GRUPO_N.Proveedor p ON c.ID_Proveedor= p.ID
-WHERE Groupon_Devolucion_Fecha IS NOT NULL AND u.ID_Rol =@Id_Rol_Cliente AND m.Provee_RS = p.RazonSocial
+										 c.Stock = m.Groupon_Cantidad AND c.Descripcion = m.Groupon_Descripcion
+										 AND c.ID_Proveedor = p.ID
+INNER JOIN GRUPO_N.CompraCupon cc ON cc.ID_Cupon=c.ID AND cc.ID_Cliente=u.ID_Usuario AND cc.Codigo = m.Groupon_Codigo and cc.Fecha=m.Groupon_Fecha_Compra 								 										 
+WHERE Groupon_Devolucion_Fecha IS NOT NULL
   
 --Ingreso el retiro de cupones
 INSERT INTO GRUPO_N.CanjeCupon(Fecha, ID_CompraCupon)
-SELECT Groupon_Entregado_Fecha, c.ID FROM gd_esquema.Maestra m 
+SELECT Groupon_Entregado_Fecha, cc.ID FROM gd_esquema.Maestra m 
+INNER JOIN GRUPO_N.DetalleEntidad u ON u.Telefono = m.Cli_Telefono
+INNER JOIN GRUPO_N.Proveedor p ON p.RazonSocial=m.Provee_RS
 INNER JOIN GRUPO_N.Cupon c ON c.Precio = m.Groupon_Precio_Ficticio and c.PrecioOriginal=m.Groupon_Precio AND
 										 c.FechaPublicacion = m.Groupon_Fecha AND c.FechaVigencia = m.Groupon_Fecha_Venc AND
 										 c.Stock = m.Groupon_Cantidad AND c.Descripcion = m.Groupon_Descripcion 
-INNER JOIN GRUPO_N.Proveedor p ON c.ID_Proveedor= p.ID
-WHERE Groupon_Entregado_Fecha IS NOT NULL AND m.Provee_RS = p.RazonSocial
+										 AND  m.Provee_RS = p.RazonSocial
+INNER JOIN GRUPO_N.CompraCupon cc ON cc.ID_Cupon=c.ID AND cc.ID_Cliente=u.ID_Usuario AND cc.Codigo = m.Groupon_Codigo and cc.Fecha=m.Groupon_Fecha_Compra 										 
+
+WHERE Groupon_Entregado_Fecha IS NOT NULL
 
 --Ingreso la facturacion de los cupones
 INSERT INTO GRUPO_N.Factura(Numero, Fecha)
 SELECT Factura_Nro,Factura_Fecha FROM gd_esquema.Maestra WHERE Factura_Fecha IS NOT NULL
 
+-- OJO QUE NO FUNCA BIEN 
 INSERT INTO GRUPO_N.FacturasCanjesCupones (ID_Factura, ID_CanjeCupon)
+SELECT f.ID, canje.ID FROM gd_esquema.Maestra m 
+INNER JOIN GRUPO_N.DetalleEntidad u ON u.Telefono = m.Cli_Telefono
+INNER JOIN GRUPO_N.Proveedor p ON p.RazonSocial=m.Provee_RS
+INNER JOIN GRUPO_N.Cupon c ON c.Precio = m.Groupon_Precio_Ficticio and c.PrecioOriginal=m.Groupon_Precio AND
+										 c.FechaPublicacion = m.Groupon_Fecha AND c.FechaVigencia = m.Groupon_Fecha_Venc AND
+										 c.Stock = m.Groupon_Cantidad AND c.Descripcion = m.Groupon_Descripcion 
+										 AND  m.Provee_RS = p.RazonSocial
+INNER JOIN GRUPO_N.CompraCupon cc ON cc.ID_Cupon=c.ID AND cc.ID_Cliente=u.ID_Usuario AND cc.Codigo = m.Groupon_Codigo and cc.Fecha=m.Groupon_Fecha_Compra
+INNER JOIN GRUPO_N.CanjeCupon canje ON canje.ID_CompraCupon= cc.ID
+INNER JOIN GRUPO_N.Factura f ON f.Fecha=m.Factura_Fecha AND f.Numero=m.Factura_Nro
+WHERE Factura_Fecha IS NOT NULL 

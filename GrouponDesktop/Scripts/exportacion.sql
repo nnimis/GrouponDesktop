@@ -1,97 +1,89 @@
--- Declaracion de variables para el cursor
-DECLARE @Cli_Nombre nvarchar(255),
-		@Cli_Apellido nvarchar(255),
-		@Cli_DNI numeric(18,0),
-		@Cli_Direccion nvarchar(255),
-		@Cli_Telefono numeric(18,0),
-		@Cli_Mail nvarchar(255),
-		@Cli_Fecha_Nacimiento datetime, 
-		@Cli_Ciudad nvarchar(255),
-		@Credito_Monto numeric(18,2),
-		@Credito_Fecha_Carga datetime,
-		@Credito_Tipo_Pago nvarchar(100),
-		@Cli_Destino_Nombre nvarchar(255),
-		@Cli_Dest_Apellido nvarchar(255),
-		@Cli_Dest_Dni numeric(18,0),
-		@Cli_Dest_Direccion nvarchar(255),
-		@Cli_Dest_Telefono numeric(18,0),
-		@Cli_Dest_Mail nvarchar(255),
-		@Cli_Dest_Fecha_Nac datetime,
-		@Cli_Dest_Ciudad nvarchar(255),
-		@GiftCard_Fecha datetime,
-		@GiftCard_Monto numeric(18,2),
-		@Provee_RS nvarchar(100),
-		@Provee_Dom nvarchar(100),
-		@Provee_Ciudad nvarchar(255) ,
-		@Provee_Telefono numeric(18,0),
-		@Provee_CUIT nvarchar(20),
-		@Provee_Rubro nvarchar(100),
-		@Groupon_Precio numeric(18,2),
-		@Groupon_Precio_Ficticio numeric(18,2),
-		@Groupon_Fecha datetime ,
-		@Groupon_Fecha_Venc datetime ,
-		@Groupon_Cantidad numeric(18,0),
-		@Groupon_Descripcion nvarchar(255) ,
-		@Groupon_Fecha_Compra datetime ,
-		@Groupon_Codigo nvarchar(50) ,
-		@Groupon_Devolucion_Fecha datetime, 
-		@Groupon_Entregado_Fecha datetime ,
-		@Factura_Nro numeric(18,0),
-		@Factura_Fecha datetime 
+USE [GD2C2012]
+GO
 
--- Declaración del cursor
-DECLARE cTablaMaestra CURSOR FOR
-SELECT  [Cli_Nombre] ,[Cli_Apellido], [Cli_Dni], [Cli_Direccion], [Cli_Telefono], [Cli_Mail]
-      ,[Cli_Fecha_Nac], [Cli_Ciudad], [Carga_Credito], [Carga_Fecha], [Tipo_Pago_Desc], [Cli_Dest_Nombre]
-      ,[Cli_Dest_Apellido], [Cli_Dest_Dni], [Cli_Dest_Direccion], [Cli_Dest_Telefono], [Cli_Dest_Mail]
-      ,[Cli_Dest_Fecha_Nac], [Cli_Dest_Ciudad], [GiftCard_Fecha], [GiftCard_Monto], [Provee_RS]
-      ,[Provee_Dom], [Provee_Ciudad], [Provee_Telefono], [Provee_CUIT], [Provee_Rubro], [Groupon_Precio]
-      ,[Groupon_Precio_Ficticio], [Groupon_Fecha], [Groupon_Fecha_Venc], [Groupon_Cantidad], [Groupon_Descripcion]
-      ,[Groupon_Fecha_Compra], [Groupon_Codigo], [Groupon_Devolucion_Fecha], [Groupon_Entregado_Fecha]
-      ,[Factura_Nro],[Factura_Fecha]
-FROM gd_esquema.Maestra WHERE 1=1
+DECLARE
+@Id_Rol_Cliente int,
+@Id_Rol_Proveedor int
 
--- Apertura del cursor
-PRINT 'Abriendo cursor con tabla maestra...'
-OPEN cTablaMaestra
-PRINT 'Cursor Abierto. Procesando los Datos...'
--- Lectura de la primera fila del cursor
-FETCH cTablaMaestra INTO @Cli_Nombre, @Cli_Apellido, @Cli_DNI, @Cli_Direccion, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nacimiento, @Cli_Ciudad, @Credito_Monto, @Credito_Fecha_Carga,
-		@Credito_Tipo_Pago, @Cli_Destino_Nombre, @Cli_Dest_Apellido, @Cli_Dest_Dni, @Cli_Dest_Direccion, @Cli_Dest_Telefono, @Cli_Dest_Mail, @Cli_Dest_Fecha_Nac,
-		@Cli_Dest_Ciudad, @GiftCard_Fecha, @GiftCard_Monto, @Provee_RS, @Provee_Dom, @Provee_Ciudad, @Provee_Telefono, @Provee_CUIT, @Provee_Rubro, @Groupon_Precio,
-		@Groupon_Precio_Ficticio, @Groupon_Fecha, @Groupon_Fecha_Venc, @Groupon_Cantidad, @Groupon_Descripcion, @Groupon_Fecha_Compra, @Groupon_Codigo,	@Groupon_Devolucion_Fecha, 
-		@Groupon_Entregado_Fecha, @Factura_Nro, @Factura_Fecha 
+-- Ingreso los clientes.
 
+SET @Id_Rol_Cliente = GRUPO_N.GetIdRolByName('Cliente');
 
-WHILE (@@FETCH_STATUS = 0 )
-BEGIN
-	-- Cargo el cliente 
-	EXECUTE GRUPO_N.Migracion_Ingresar_Cliente @Cli_Nombre, @Cli_Apellido, @Cli_DNI, @Cli_Direccion, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nacimiento, @Cli_Ciudad;
-	
-	--Cargo Proveedores, ciudades y rubros de los mismos
-	EXECUTE GRUPO_N.Migracion_Ingresar_Proveedor @Provee_RS, @Provee_Dom, @Provee_Ciudad, @Provee_Telefono, @Provee_CUIT, @Provee_Rubro;
+INSERT INTO GRUPO_N.Usuario (Activo,ID_Rol,Intentos,Nombre,Password)
+SELECT DISTINCT 1,@Id_Rol_Cliente,0,Cli_telefono,'E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7' 
+FROM gd_esquema.Maestra WHERE 1=1;
 
-	--Cargo los cupones
-	EXECUTE GRUPO_N.Migracion_Ingresar_Cupon @Provee_RS,@Groupon_Precio, @Groupon_Precio_Ficticio, @Groupon_Fecha, @Groupon_Fecha_Venc, @Groupon_Cantidad, @Groupon_Descripcion;
-	
-	--Cargo la compra del cupón
-	
-	--PRINT @Cli_Nombre + ' ' + @Cli_Apellido --+ ' DNI:' + @Cli_DNI
-	-- Lectura de la siguiente fila del cursor
-	FETCH cTablaMaestra INTO @Cli_Nombre, @Cli_Apellido, @Cli_DNI, @Cli_Direccion, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nacimiento, @Cli_Ciudad, @Credito_Monto, @Credito_Fecha_Carga,
-			@Credito_Tipo_Pago, @Cli_Destino_Nombre, @Cli_Dest_Apellido, @Cli_Dest_Dni, @Cli_Dest_Direccion, @Cli_Dest_Telefono, @Cli_Dest_Mail, @Cli_Dest_Fecha_Nac,
-			@Cli_Dest_Ciudad, @GiftCard_Fecha, @GiftCard_Monto, @Provee_RS, @Provee_Dom, @Provee_Ciudad, @Provee_Telefono, @Provee_CUIT, @Provee_Rubro, @Groupon_Precio,
-			@Groupon_Precio_Ficticio, @Groupon_Fecha, @Groupon_Fecha_Venc, @Groupon_Cantidad, @Groupon_Descripcion, @Groupon_Fecha_Compra, @Groupon_Codigo,	@Groupon_Devolucion_Fecha, 
-			@Groupon_Entregado_Fecha, @Factura_Nro, @Factura_Fecha 
-END
+INSERT INTO GRUPO_N.DetalleEntidad (Email,ID_Usuario,Telefono) 
+SELECT distinct m.Cli_Mail, u.ID, m.Cli_Telefono FROM gd_esquema.Maestra m INNER JOIN GRUPO_N.Usuario u ON CAST(m.Cli_Telefono AS NVARCHAR(255))=u.Nombre 
+WHERE m.Groupon_Devolucion_Fecha IS NULL AND m.Groupon_Entregado_Fecha IS NULL AND m.Factura_Fecha IS NULL
 
- 
-PRINT 'Proceso Finalizado con éxito.'
--- Cierre del cursor
-CLOSE cTablaMaestra
+INSERT INTO GRUPO_N.Cliente (Apellido,DNI,FechaNacimiento,ID,Nombre,saldo)
+SELECT DISTINCT m.Cli_Apellido, m.Cli_Dni, m.Cli_Fecha_Nac, u.ID, m.Cli_Nombre, 0 FROM GRUPO_N.Usuario u 
+INNER JOIN gd_esquema.Maestra m ON u.Nombre = CAST(m.Cli_Telefono AS NVARCHAR(255))
+WHERE u.ID_Rol = @Id_Rol_Cliente;
 
--- Liberar los recursos
-DEALLOCATE cTablaMaestra
-	
-	
-	
+--Ingreso las ciudades de lso diferentes proveedores 
+INSERT INTO GRUPO_N.Ciudad (Descripcion) 
+SELECT DISTINCT Provee_Ciudad FROM gd_esquema.Maestra WHERE Provee_Ciudad IS NOT NULL;
+
+--Ingreso los rubros de los proveedores
+INSERT INTO GRUPO_N.Rubro (Descripcion) 
+SELECT DISTINCT Provee_Rubro FROM gd_esquema.Maestra WHERE Provee_Rubro IS NOT NULL;
+
+--Ingreso los proveedores
+SET @Id_Rol_Proveedor = GRUPO_N.GetIdRolByName('Proveedor');
+
+INSERT INTO GRUPO_N.Usuario (Activo,ID_Rol,Intentos,Nombre,Password)
+SELECT DISTINCT 1,@Id_Rol_Proveedor,0,Provee_RS,'E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7' 
+FROM gd_esquema.Maestra WHERE Provee_RS IS NOT NULL;
+
+INSERT INTO GRUPO_N.DetalleEntidad (Email,ID_Usuario,Telefono) 
+SELECT distinct NULL, u.ID, m.Provee_Telefono FROM gd_esquema.Maestra m INNER JOIN GRUPO_N.Usuario u ON CAST(m.Provee_RS AS NVARCHAR(255))=u.Nombre 
+WHERE m.Groupon_Devolucion_Fecha IS NULL AND m.Groupon_Entregado_Fecha IS NULL AND m.Factura_Fecha IS NULL
+
+INSERT INTO GRUPO_N.Proveedor (Contacto,CUIT,ID,ID_Rubro,RazonSocial)
+SELECT DISTINCT NULL,M.Provee_CUIT, u.ID ,r.ID,M.Provee_RS
+FROM gd_esquema.Maestra m
+INNER JOIN GRUPO_N.Usuario u ON u.Nombre=m.Provee_RS
+INNER JOIN GRUPO_N.Rubro r ON r.Descripcion=m.Provee_Rubro
+
+--Ingreso los cupones
+INSERT INTO GRUPO_N.Cupon (Precio, PrecioOriginal, FechaPublicacion,FechaVigencia,FechaVencimmiento,Stock,Descripcion,ID_Proveedor,CantidadPorUsuario,Publicado) --,Codigo)
+SELECT distinct [Groupon_Precio_Ficticio], [Groupon_Precio] ,[Groupon_Fecha] ,[Groupon_Fecha_Venc], DATEADD(MONTH,2,[Groupon_Fecha_Venc]) ,[Groupon_Cantidad] ,[Groupon_Descripcion],p.ID,[Groupon_Cantidad], 1 --, GRUPO_N.RemoveNonAlphaCharacters(m.Groupon_Codigo)
+  FROM [GD2C2012].[gd_esquema].[Maestra] m
+  INNER JOIN GRUPO_N.Proveedor p ON m.Provee_RS=p.RazonSocial WHERE Provee_RS IS NOT NULL 
+  
+--Ingreso la compra de los cupones
+INSERT INTO GRUPO_N.CompraCupon (ID_Cliente, ID_Cupon, Codigo, Fecha) 
+SELECT u.ID, c.ID, Groupon_Codigo,Groupon_Fecha_Compra FROM gd_esquema.Maestra m 
+INNER JOIN GRUPO_N.Usuario u ON u.Nombre = m.Cli_Telefono
+INNER JOIN GRUPO_N.Cupon c ON c.Precio = m.Groupon_Precio_Ficticio and c.PrecioOriginal=m.Groupon_Precio AND
+										 c.FechaPublicacion = m.Groupon_Fecha AND c.FechaVigencia = m.Groupon_Fecha_Venc AND
+										 c.Stock = m.Groupon_Cantidad AND c.Descripcion = m.Groupon_Descripcion 
+INNER JOIN GRUPO_N.Proveedor p ON c.ID_Proveedor= p.ID
+WHERE Groupon_Fecha_Compra IS NOT NULL AND u.ID_Rol =@Id_Rol_Cliente AND m.Provee_RS = p.RazonSocial
+
+--Ingreso la devolucion de los cupones
+INSERT INTO GRUPO_N.Devolucion(ID_CompraCupon, ID_Cliente, Fecha, Motivo)
+SELECT c.ID, u.ID, Groupon_Codigo,Groupon_Devolucion_Fecha, 'Devolucion en sistema previo' FROM gd_esquema.Maestra m 
+INNER JOIN GRUPO_N.Usuario u ON u.Nombre = m.Cli_Telefono
+INNER JOIN GRUPO_N.Cupon c ON c.Precio = m.Groupon_Precio_Ficticio and c.PrecioOriginal=m.Groupon_Precio AND
+										 c.FechaPublicacion = m.Groupon_Fecha AND c.FechaVigencia = m.Groupon_Fecha_Venc AND
+										 c.Stock = m.Groupon_Cantidad AND c.Descripcion = m.Groupon_Descripcion 
+INNER JOIN GRUPO_N.Proveedor p ON c.ID_Proveedor= p.ID
+WHERE Groupon_Devolucion_Fecha IS NOT NULL AND u.ID_Rol =@Id_Rol_Cliente AND m.Provee_RS = p.RazonSocial
+  
+--Ingreso el retiro de cupones
+INSERT INTO GRUPO_N.CanjeCupon(Fecha, ID_CompraCupon)
+SELECT Groupon_Entregado_Fecha, c.ID FROM gd_esquema.Maestra m 
+INNER JOIN GRUPO_N.Cupon c ON c.Precio = m.Groupon_Precio_Ficticio and c.PrecioOriginal=m.Groupon_Precio AND
+										 c.FechaPublicacion = m.Groupon_Fecha AND c.FechaVigencia = m.Groupon_Fecha_Venc AND
+										 c.Stock = m.Groupon_Cantidad AND c.Descripcion = m.Groupon_Descripcion 
+INNER JOIN GRUPO_N.Proveedor p ON c.ID_Proveedor= p.ID
+WHERE Groupon_Entregado_Fecha IS NOT NULL AND m.Provee_RS = p.RazonSocial
+
+--Ingreso la facturacion de los cupones
+INSERT INTO GRUPO_N.Factura(Numero, Fecha)
+SELECT Factura_Nro,Factura_Fecha FROM gd_esquema.Maestra WHERE Factura_Fecha IS NOT NULL
+
+INSERT INTO GRUPO_N.FacturasCanjesCupones (ID_Factura, ID_CanjeCupon)

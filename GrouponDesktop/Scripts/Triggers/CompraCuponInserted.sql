@@ -14,5 +14,11 @@ BEGIN
 	INNER JOIN (SELECT i.ID_Cliente, c.Precio Credito FROM Inserted i
 				INNER JOIN Cupon c ON c.ID = i.ID_Cupon) AS T
 	ON c.ID = T.ID_Cliente
+	
+	UPDATE GRUPO_N.Cupon SET
+	Stock = Stock - 1
+	FROM GRUPO_N.Cupon c
+	INNER JOIN (SELECT ID_Cupon FROM Inserted) AS T
+	ON c.ID = T.ID_Cupon
 END
 GO

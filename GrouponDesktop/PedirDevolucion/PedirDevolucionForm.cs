@@ -12,6 +12,7 @@ using GrouponDesktop.Common;
 namespace GrouponDesktop.PedirDevolucion
 {
     [PermissionRequired(Functionalities.PedirDevoluciones)]
+    [NonNavigable]
     public partial class PedirDevolucionForm : Form
     {
         public PedirDevolucionForm()

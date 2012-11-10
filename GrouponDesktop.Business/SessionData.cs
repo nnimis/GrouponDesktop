@@ -11,6 +11,7 @@ namespace GrouponDesktop.Business
 
         public static void Set(string key, object value)
         {
+            Remove(key);
             _data.Add(key, value);
         }
 
@@ -22,6 +23,12 @@ namespace GrouponDesktop.Business
         public static bool Contains(string key)
         {
             return _data.Keys.Contains(key);
+        }
+
+        public static void Remove(string key)
+        {
+            if (_data.Keys.Contains(key))
+                _data.Remove(key);
         }
     }
 }

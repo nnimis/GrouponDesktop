@@ -16,7 +16,7 @@ namespace GrouponDesktop.AbmProveedor
     [PermissionRequired(Functionalities.AdministrarProveedores)]
     public partial class ProveedoresForm : Form
     {
-        private ProveedorManager manager = new ProveedorManager();
+        private ProveedorManager _manager = new ProveedorManager();
 
         public ProveedoresForm()
         {
@@ -26,7 +26,7 @@ namespace GrouponDesktop.AbmProveedor
         private void ProveedoresForm_Load(object sender, EventArgs e)
         {
             var bindingSource = new BindingSource();
-            var table = manager.GetAll();
+            var table = _manager.GetAll();
             proveedoresGrid.AutoGenerateColumns = false;
             proveedoresGrid.DataSource = table;
         }
@@ -41,7 +41,7 @@ namespace GrouponDesktop.AbmProveedor
             {
                 try
                 {
-                    manager.Delete(proveedor);
+                    _manager.Delete(proveedor);
                     var dataSource = proveedoresGrid.DataSource as BindingList<Proveedor>;
                     dataSource.Remove(proveedor);
                     proveedoresGrid.Refresh();
@@ -82,6 +82,34 @@ namespace GrouponDesktop.AbmProveedor
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
             regForm.Profile = Profile.Proveedor;
             ViewsManager.LoadModal(regForm);
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtRazonSocial.Text = string.Empty;
+            txtCUIT.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            proveedoresGrid.DataSource = _manager.GetAll();
+            proveedoresGrid.Refresh();
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            var proveedores = _manager.GetAll();
+            if (!string.IsNullOrEmpty(txtRazonSocial.Text))
+            {
+                proveedores = new BindingList<Proveedor>(proveedores.Where(x => x.RazonSocial.ToLowerInvariant().Contains(txtRazonSocial.Text.ToLowerInvariant())).ToList());
+            }
+            if (!string.IsNullOrEmpty(txtEmail.Text))
+            {
+                proveedores = new BindingList<Proveedor>(proveedores.Where(x => x.DetalleEntidad.Email.ToLowerInvariant().Contains(txtEmail.Text.ToLowerInvariant())).ToList());
+            }
+            if (!string.IsNullOrEmpty(txtCUIT.Text))
+            {
+                proveedores = new BindingList<Proveedor>(proveedores.Where(x => x.CUIT.ToLowerInvariant().Equals(txtCUIT.Text.ToLowerInvariant())).ToList());
+            }
+            proveedoresGrid.DataSource = proveedores;
+            proveedoresGrid.Refresh();
         }
     }
 }

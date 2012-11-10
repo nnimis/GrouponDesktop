@@ -97,6 +97,7 @@ namespace GrouponDesktop.Business
                 .Arguments);
             }
             AddCiudades(cliente);
+            SessionData.Remove("Clients");
         }
 
         private void AddCiudades(Cliente cliente)
@@ -138,6 +139,7 @@ namespace GrouponDesktop.Business
         public void Delete(Cliente cliente)
         {
             _usersManager.DeleteAccount(cliente as User);
+            SessionData.Remove("Clients");
         }
     }
 }

@@ -123,48 +123,30 @@ namespace GrouponDesktop.AbmCliente
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             long dni = 0;
-            bool filterChanged = false;
             if (!string.IsNullOrEmpty(txtDNI.Text) && !long.TryParse(txtDNI.Text, out dni))
             {
                 MessageBox.Show("El DNI debe ser numérico");
                 return;
             }
-            var apellidoFiltered = _clienteManager.GetAll();
-            var nombreFiltered = _clienteManager.GetAll();
-            var emailFiltered = _clienteManager.GetAll();
-            var dniFiltered = _clienteManager.GetAll();
-            BindingList<Cliente> dataSource;
+            var clientes = _clienteManager.GetAll();
             if (!string.IsNullOrEmpty(txtApellido.Text))
             {
-                apellidoFiltered = new BindingList<Cliente>(_clienteManager.GetAll().Where(x => x.Apellido.ToLowerInvariant().Contains(txtApellido.Text.ToLowerInvariant())).ToList());
-                filterChanged = true;
+                clientes = new BindingList<Cliente>(clientes.Where(x => x.Apellido.ToLowerInvariant().Contains(txtApellido.Text.ToLowerInvariant())).ToList());
             }
             if (!string.IsNullOrEmpty(txtNombre.Text))
             {
-                nombreFiltered = new BindingList<Cliente>(_clienteManager.GetAll().Where(x => x.Nombre.ToLowerInvariant().Contains(txtNombre.Text.ToLowerInvariant())).ToList());
-                filterChanged = true;
+                clientes = new BindingList<Cliente>(clientes.Where(x => x.Nombre.ToLowerInvariant().Contains(txtNombre.Text.ToLowerInvariant())).ToList());
             }
             if (!string.IsNullOrEmpty(txtEmail.Text))
             {
-                emailFiltered = new BindingList<Cliente>(_clienteManager.GetAll().Where(x => x.DetalleEntidad.Email.ToLowerInvariant().Contains(txtEmail.Text.ToLowerInvariant())).ToList());
-                filterChanged = true;
+                clientes = new BindingList<Cliente>(clientes.Where(x => x.DetalleEntidad.Email.ToLowerInvariant().Contains(txtEmail.Text.ToLowerInvariant())).ToList());
             }
             if (!string.IsNullOrEmpty(txtDNI.Text))
             {
-                dniFiltered = new BindingList<Cliente>(_clienteManager.GetAll().Where(x => x.DNI == dni).ToList());
-                filterChanged = true;
+                clientes = new BindingList<Cliente>(clientes.Where(x => x.DNI == dni).ToList());
             }
-            if (filterChanged)
-            {
-                dataSource = new BindingList<Cliente>(apellidoFiltered.Intersect(nombreFiltered).Intersect(emailFiltered).Intersect(dniFiltered).ToList());
-            }
-            else
-            {
-                dataSource = _clienteManager.GetAll();
-            }
-            dataSource.Remove(new Cliente() { UserID = Session.User.UserID });
-            dgvClientes.DataSource = dataSource;
-
+            clientes.Remove(new Cliente() { UserID = Session.User.UserID });
+            dgvClientes.DataSource = clientes;
             dgvClientes.Refresh();
         }
     }

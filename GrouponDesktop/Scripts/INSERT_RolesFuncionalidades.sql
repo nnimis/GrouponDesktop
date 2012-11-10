@@ -11,6 +11,8 @@ INSERT INTO GRUPO_N.RolesFuncionalidades (ID_Rol, ID_Funcionalidad)
 VALUES (GRUPO_N.GetIdRolByName('Cliente'), 7)
 INSERT INTO GRUPO_N.RolesFuncionalidades (ID_Rol, ID_Funcionalidad)
 VALUES (GRUPO_N.GetIdRolByName('Cliente'), 11)
+INSERT INTO GRUPO_N.RolesFuncionalidades (ID_Rol, ID_Funcionalidad)
+VALUES (GRUPO_N.GetIdRolByName('Cliente'), 9)
 
 INSERT INTO GRUPO_N.RolesFuncionalidades (ID_Rol, ID_Funcionalidad)
 VALUES (GRUPO_N.GetIdRolByName('Proveedor'), 5)

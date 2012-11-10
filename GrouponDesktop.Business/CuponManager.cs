@@ -44,6 +44,39 @@ namespace GrouponDesktop.Business
             return data;
         }
 
+        public BindingList<Cupon> GetAll(Cliente cliente)
+        {
+            var date = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.GetCuponesCliente", SqlDataAccessArgs
+                .CreateWith("@ID_Cliente", cliente.UserID)
+                .And("@Fecha_Publicacion", new DateTime(date.Year, date.Month, date.Day, 23, 59, 59))
+                .Arguments);
+            var data = new BindingList<Cupon>();
+            if (result != null && result.Rows != null)
+            {
+                foreach (DataRow row in result.Rows)
+                {
+                    if (int.Parse(row["Stock"].ToString()) == 0) continue;
+                    data.Add(new Cupon()
+                    {
+                        ID = int.Parse(row["ID"].ToString()),
+                        Precio = double.Parse(row["Precio"].ToString()),
+                        PrecioOriginal = double.Parse(row["PrecioOriginal"].ToString()),
+                        FechaPublicacion = Convert.ToDateTime(row["FechaPublicacion"]),
+                        FechaVencimientoConsumo = Convert.ToDateTime(row["FechaVencimiento"]),
+                        FechaVencimientoOferta = Convert.ToDateTime(row["FechaVigencia"]),
+                        Cantidad = int.Parse(row["Stock"].ToString()),
+                        CantidadPorUsuario = int.Parse(row["CantidadPorUsuario"].ToString()),
+                        Descripcion = row["Descripcion"].ToString(),
+                        Codigo = row["Codigo"].ToString()
+                    });
+                }
+            }
+
+            return data;
+        }
+
         public BindingList<Cupon> GetAllToPublish()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
@@ -131,6 +164,21 @@ namespace GrouponDesktop.Business
             }
             while (exists);
             return codigo;
+        }
+
+        public int ComprarCupon(Cupon cupon, Cliente cliente)
+        {
+            var id = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.ComprarCuponCliente", SqlDataAccessArgs
+                .CreateWith("@ID_Cupon", cupon.ID)
+                .And("@ID_Cliente", cliente.UserID)
+                .And("@Fecha", DateTime.Now)
+                .Arguments);
+
+            if (id == null)
+                throw new Exception("Ha superado la cantidad de cupones permitidos por persona");
+
+            return int.Parse(id.ToString());
         }
 
         #region  Private Methods

@@ -19,19 +19,10 @@ CREATE PROCEDURE [GRUPO_N].[InsertGiftCard]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	DECLARE @CreditoActual numeric(18,2)
-	SELECT @CreditoActual = Saldo FROM GRUPO_N.Cliente
-	WHERE ID = @ID_ClienteOrigen
+	INSERT INTO GRUPO_N.GiftCard (Credito, Fecha, ID_Cliente_Origen, ID_Cliente_Destino)
+	VALUES (@Credito, @Fecha, @ID_ClienteOrigen, @ID_ClienteDestino)
 	
-	IF @CreditoActual - @Credito < 0
-		SELECT 0
-	ELSE
-	BEGIN
-		INSERT INTO GRUPO_N.GiftCard (Credito, Fecha, ID_Cliente_Origen, ID_Cliente_Destino)
-		VALUES (@Credito, @Fecha, @ID_ClienteOrigen, @ID_ClienteDestino)
-		
-		SELECT @@IDENTITY
-	END
+	SELECT @@IDENTITY
 END
 
 GO

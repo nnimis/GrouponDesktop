@@ -20,6 +20,7 @@ namespace GrouponDesktop.ComprarGiftCard
         public ComprarGiftCardForm()
         {
             InitializeComponent();
+            dataGridView.AutoGenerateColumns = false;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)

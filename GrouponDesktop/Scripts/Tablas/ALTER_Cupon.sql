@@ -22,6 +22,11 @@ CREATE NONCLUSTERED INDEX IX_Cupon_FechaPublicacion ON GRUPO_N.Cupon
 	FechaPublicacion
 	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
+CREATE NONCLUSTERED INDEX IX_Cupon_FechaVigencia ON GRUPO_N.Cupon
+	(
+	FechaVigencia
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
 EXECUTE sp_rename N'GRUPO_N.Cupon.FechaVencimmiento', N'Tmp_FechaVencimiento', 'COLUMN' 
 GO
 EXECUTE sp_rename N'GRUPO_N.Cupon.Tmp_FechaVencimiento', N'FechaVencimiento', 'COLUMN' 

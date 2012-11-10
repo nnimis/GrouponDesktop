@@ -354,6 +354,8 @@
   <ItemGroup>
     <None Include="Scripts\INSERT_RolesFuncionalidades.sql" />
     <None Include="Scripts\INSERT_TipoPago.sql" />
+    <None Include="Scripts\Stores\SP_ComprarCuponCliente.sql" />
+    <None Include="Scripts\Stores\SP_GetCuponesCliente.sql" />
     <None Include="Scripts\Stores\SP_GetCuponesParaPublicar.sql" />
     <None Include="Scripts\Stores\SP_GetCiudadesCupon.sql" />
     <None Include="Scripts\Stores\SP_GetCodigoCuponExists.sql" />

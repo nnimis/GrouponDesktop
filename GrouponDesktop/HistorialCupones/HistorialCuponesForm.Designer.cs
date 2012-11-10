@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Name = "HistorialCuponesForm";
-            this.Text = "Historial";
+            this.Text = "Historial de Cupones";
             this.ResumeLayout(false);
 
         }

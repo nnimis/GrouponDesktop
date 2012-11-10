@@ -32,17 +32,6 @@ ALTER TABLE GRUPO_N.[Devolucion]
 	DROP CONSTRAINT [FK_Cliente_Devolucion]
 GO
 
-ALTER TABLE GRUPO_N.CompraCupon ADD CONSTRAINT
-	FK_CompraCupon_Cliente FOREIGN KEY
-	(
-	ID_Cliente
-	) REFERENCES GRUPO_N.Cliente
-	(
-	ID
-	) ON UPDATE  NO ACTION 
-	ON DELETE  NO ACTION 
-	
-GO
 /****** Object:  Table [GRUPO_N].[Cliente]    Script Date: 11/06/2012 12:38:02 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GRUPO_N].[Cliente]') AND type in (N'U'))
 DROP TABLE [GRUPO_N].[Cliente]
@@ -70,6 +59,21 @@ GO
 
 ALTER TABLE [GRUPO_N].[Cliente]  WITH CHECK ADD  CONSTRAINT [FK_Cliente_Usuario] FOREIGN KEY([ID])
 REFERENCES [GRUPO_N].[Usuario] ([ID])
+GO
+
+ALTER TABLE GRUPO_N.CompraCupon ADD CONSTRAINT
+	FK_CompraCupon_Cliente FOREIGN KEY
+	(
+	ID_Cliente
+	) REFERENCES GRUPO_N.Cliente
+	(
+	ID
+	) ON UPDATE  NO ACTION 
+	ON DELETE  NO ACTION 
+GO
+
+ALTER TABLE GRUPO_N.Cliente ADD CONSTRAINT
+	CK_Cliente_Saldo CHECK (Saldo >= 0)
 GO
 
 ALTER TABLE [GRUPO_N].[Cliente] CHECK CONSTRAINT [FK_Cliente_Usuario]

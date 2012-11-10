@@ -51,10 +51,6 @@ namespace GrouponDesktop.Business
                 .And("@Fecha", giftCard.Fecha)
                 .Arguments);
 
-            if (result == 0)
-            {
-                throw new Exception("No tiene saldo suficiente para la GiftCard");
-            }
             return result;
         }
 

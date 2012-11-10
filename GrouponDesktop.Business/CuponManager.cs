@@ -1,0 +1,128 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ComponentModel;
+using GrouponDesktop.Common;
+using Data;
+using System.Configuration;
+using System.Data;
+
+namespace GrouponDesktop.Business
+{
+    public class CuponManager
+    {
+        public BindingList<Cupon> GetAll(Proveedor proveedor)
+        {
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.GetCuponesProveedor", SqlDataAccessArgs
+                .CreateWith("@ID_Proveedor", proveedor.UserID).Arguments);
+            var data = new BindingList<Cupon>();
+            if (result != null && result.Rows != null)
+            {
+                foreach (DataRow row in result.Rows)
+                {
+                    data.Add(new Cupon()
+                    {
+                        ID = int.Parse(row["ID"].ToString()),
+                        Precio = double.Parse(row["Precio"].ToString()),
+                        PrecioOriginal = double.Parse(row["PrecioOriginal"].ToString()),
+                        FechaPublicacion = Convert.ToDateTime(row["FechaPublicacion"]),
+                        FechaVencimientoConsumo = Convert.ToDateTime(row["FechaVencimiento"]),
+                        FechaVencimientoOferta = Convert.ToDateTime(row["FechaVigencia"]),
+                        Cantidad = int.Parse(row["Stock"].ToString()),
+                        CantidadPorUsuario = int.Parse(row["CantidadPorUsuario"].ToString()),
+                        Descripcion = row["Descripcion"].ToString(),
+                        Codigo = row["Codigo"].ToString(),
+                        Proveedor = proveedor,
+                        Ciudades = GetCiudades(int.Parse(row["ID"].ToString())),
+                        Publicado = Convert.ToBoolean(row["Publicado"])
+                    });
+                }
+            }
+
+            return data;
+        }
+
+        public int Add(Cupon cupon)
+        {
+            var id = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.InsertCupon", SqlDataAccessArgs
+                .CreateWith("@Precio", cupon.Precio)
+                .And("@PrecioOriginal", cupon.PrecioOriginal)
+                .And("@FechaPublicacion", cupon.FechaPublicacion)
+                .And("@FechaVigencia", cupon.FechaVencimientoOferta)
+                .And("@FechaVencimiento", cupon.FechaVencimientoConsumo)
+                .And("@Stock", cupon.Cantidad)
+                .And("@Descripcion", cupon.Descripcion)
+                .And("@ID_Proveedor", cupon.Proveedor.UserID)
+                .And("@CantidadPorUsuario", cupon.CantidadPorUsuario)
+                .And("@Publicado", 1)
+                .And("@Codigo", cupon.Codigo)
+            .Arguments);
+
+            foreach (var city in cupon.Ciudades)
+            {
+                SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                    "GRUPO_N.InsertCuponCiudad", SqlDataAccessArgs
+                    .CreateWith("@ID_Cupon", id)
+                    .And("@ID_Ciudad", city.ID)
+                    .Arguments);
+            }
+
+            return id;
+        }
+
+        public static string GetCodigo()
+        {
+            string codigo = string.Empty;
+            bool exists;
+            do
+            {
+                const int codeLength = 10;
+                const string allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                char[] chars = new char[codeLength];
+                var rd = new Random();
+
+                for (int i = 0; i < codeLength; i++)
+                {
+                    chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
+                }
+
+                codigo = new string(chars);
+                exists = CodigoExists(codigo);
+            }
+            while (exists);
+            return codigo;
+        }
+
+        private static bool CodigoExists(string codigo)
+        {
+            var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.GetCodigoCuponExists", SqlDataAccessArgs
+                    .CreateWith("@Codigo", codigo).Arguments);
+            return result != null;
+        }
+
+        private List<City> GetCiudades(int id)
+        {
+            var ret = new List<City>();
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.GetCiudadesCupon", SqlDataAccessArgs
+                    .CreateWith("@ID_Cupon", id).Arguments);
+            if (result != null && result.Rows != null)
+            {
+                foreach (DataRow row in result.Rows)
+                {
+                    ret.Add(new City()
+                    {
+                        ID = int.Parse(row["ID"].ToString()),
+                        Name = row["Descripcion"].ToString()
+                    });
+                }
+            }
+
+            return ret;
+        }
+    }
+}

@@ -108,6 +108,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "ComprarGiftCardForm";
             this.Text = "Gift Cards";
+            this.Load += new System.EventHandler(this.ComprarGiftCardForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

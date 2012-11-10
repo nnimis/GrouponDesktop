@@ -35,7 +35,7 @@
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonsPanel = new System.Windows.Forms.Panel();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.searchPanel = new System.Windows.Forms.Panel();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -48,7 +48,7 @@
             this.txtCUIT = new System.Windows.Forms.TextBox();
             this.txtRazonSocial = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.proveedoresGrid)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.buttonsPanel.SuspendLayout();
             this.searchPanel.SuspendLayout();
             this.groupBox.SuspendLayout();
             this.SuspendLayout();
@@ -123,17 +123,17 @@
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // panel1
+            // buttonsPanel
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.btnEliminar);
-            this.panel1.Controls.Add(this.btnModificar);
-            this.panel1.Controls.Add(this.btnAgregar);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(952, 39);
-            this.panel1.TabIndex = 5;
+            this.buttonsPanel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.buttonsPanel.Controls.Add(this.btnEliminar);
+            this.buttonsPanel.Controls.Add(this.btnModificar);
+            this.buttonsPanel.Controls.Add(this.btnAgregar);
+            this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonsPanel.Location = new System.Drawing.Point(0, 0);
+            this.buttonsPanel.Name = "buttonsPanel";
+            this.buttonsPanel.Size = new System.Drawing.Size(952, 39);
+            this.buttonsPanel.TabIndex = 5;
             // 
             // btnAgregar
             // 
@@ -251,12 +251,12 @@
             this.ClientSize = new System.Drawing.Size(952, 552);
             this.Controls.Add(this.proveedoresGrid);
             this.Controls.Add(this.searchPanel);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.buttonsPanel);
             this.Name = "ProveedoresForm";
             this.Text = "Proveedores";
             this.Load += new System.EventHandler(this.ProveedoresForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.proveedoresGrid)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.buttonsPanel.ResumeLayout(false);
             this.searchPanel.ResumeLayout(false);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
@@ -273,7 +273,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel buttonsPanel;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Panel searchPanel;
         private System.Windows.Forms.Button btnLimpiar;

@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="CiudadesManager.cs" />
     <Compile Include="ClienteManager.cs" />
+    <Compile Include="CuponManager.cs" />
     <Compile Include="GiftCardManager.cs" />
     <Compile Include="PagosManager.cs" />
     <Compile Include="ProveedorManager.cs" />

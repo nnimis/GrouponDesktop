@@ -7,7 +7,6 @@ using System.Data;
 using System.Data.SqlClient;
 using Data;
 using System.Configuration;
-using GrouponDesktop.Common.Exceptions;
 using System.ComponentModel;
 
 namespace GrouponDesktop.Business

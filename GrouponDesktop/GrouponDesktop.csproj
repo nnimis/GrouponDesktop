@@ -80,6 +80,13 @@
     <Compile Include="ArmarCupon\ArmarCuponesForm.Designer.cs">
       <DependentUpon>ArmarCuponesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ArmarCupon\CuponSavedEventArgs.cs" />
+    <Compile Include="ArmarCupon\NuevoCupon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArmarCupon\NuevoCupon.Designer.cs">
+      <DependentUpon>NuevoCupon.cs</DependentUpon>
+    </Compile>
     <Compile Include="CargaCredito\CargarCreditoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ArmarCupon\ArmarCuponesForm.resx">
       <DependentUpon>ArmarCuponesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArmarCupon\NuevoCupon.resx">
+      <DependentUpon>NuevoCupon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CargaCredito\CargarCreditoForm.resx">
       <DependentUpon>CargarCreditoForm.cs</DependentUpon>
@@ -343,7 +353,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\INSERT_TipoPago.sql" />
+    <None Include="Scripts\Stores\SP_GetCiudadesCupon.sql" />
+    <None Include="Scripts\Stores\SP_GetCodigoCuponExists.sql" />
+    <None Include="Scripts\Stores\SP_GetCuponesProveedor.sql" />
     <None Include="Scripts\Stores\SP_GetGiftCardCliente.sql" />
+    <None Include="Scripts\Stores\SP_InsertCupon.sql" />
+    <None Include="Scripts\Stores\SP_InsertCuponCiudad.sql" />
     <None Include="Scripts\Stores\SP_InsertGiftCard.sql" />
     <None Include="Scripts\Stores\SP_InsertPago.sql" />
     <None Include="Scripts\Stores\SP_UpdateProveedor.sql" />

@@ -12,6 +12,15 @@ GO
 ALTER TABLE GRUPO_N.Cupon ADD
 	Codigo nvarchar(50) NOT NULL
 GO
+CREATE UNIQUE NONCLUSTERED INDEX IX_Cupon_Codigo ON GRUPO_N.Cupon
+	(
+	Codigo
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+EXECUTE sp_rename N'GRUPO_N.Cupon.FechaVencimmiento', N'Tmp_FechaVencimiento', 'COLUMN' 
+GO
+EXECUTE sp_rename N'GRUPO_N.Cupon.Tmp_FechaVencimiento', N'FechaVencimiento', 'COLUMN' 
+GO
 ALTER TABLE GRUPO_N.Cupon SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT

@@ -20,9 +20,6 @@ namespace GrouponDesktop.ComprarGiftCard
         public ComprarGiftCardForm()
         {
             InitializeComponent();
-            dataGridView.DataSource = _manager.GetAll(new Cliente() { UserID = Session.User.UserID });
-            dataGridView.AutoGenerateColumns = false;
-            dataGridView.Refresh();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -37,6 +34,13 @@ namespace GrouponDesktop.ComprarGiftCard
             _manager.Add(e.GiftCard);
             MessageBox.Show("Se ha comprado la GiftCard");
             ((BindingList<GiftCard>)dataGridView.DataSource).Add(e.GiftCard);
+        }
+
+        private void ComprarGiftCardForm_Load(object sender, EventArgs e)
+        {
+            dataGridView.DataSource = _manager.GetAll(new Cliente() { UserID = Session.User.UserID });
+            dataGridView.AutoGenerateColumns = false;
+            dataGridView.Refresh();
         }
     }
 }

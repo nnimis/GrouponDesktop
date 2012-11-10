@@ -17,10 +17,16 @@ namespace GrouponDesktop.AbmProveedor
     public partial class ProveedoresForm : Form
     {
         private ProveedorManager _manager = new ProveedorManager();
+        public event EventHandler<UserSelectedEventArgs> OnUserSelected;
 
         public ProveedoresForm()
         {
             InitializeComponent();
+        }
+
+        public void SetSearchMode()
+        {
+            buttonsPanel.Visible = false;
         }
 
         private void ProveedoresForm_Load(object sender, EventArgs e)
@@ -29,6 +35,22 @@ namespace GrouponDesktop.AbmProveedor
             var table = _manager.GetAll();
             proveedoresGrid.AutoGenerateColumns = false;
             proveedoresGrid.DataSource = table;
+            proveedoresGrid.DoubleClick += new EventHandler(proveedoresGrid_DoubleClick);
+        }
+
+        void proveedoresGrid_DoubleClick(object sender, EventArgs e)
+        {
+            if (proveedoresGrid.SelectedRows == null || proveedoresGrid.SelectedRows.Count == 0) return;
+            var row = proveedoresGrid.SelectedRows[0];
+            var proveedor = row.DataBoundItem as Proveedor;
+
+            if (OnUserSelected != null)
+            {
+                OnUserSelected(this, new UserSelectedEventArgs()
+                {
+                    User = proveedor as User
+                });
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

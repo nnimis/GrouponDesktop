@@ -48,13 +48,12 @@
   <ItemGroup>
     <Compile Include="City.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="Cupon.cs" />
     <Compile Include="DetalleEntidad.cs" />
-    <Compile Include="FilterableBindingList.cs" />
     <Compile Include="GiftCard.cs" />
     <Compile Include="Pago.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="Rubro.cs" />
-    <Compile Include="Exceptions\ClienteDuplicadoException.cs" />
     <Compile Include="Functionalities.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

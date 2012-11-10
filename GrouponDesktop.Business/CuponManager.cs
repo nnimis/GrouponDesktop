@@ -44,6 +44,35 @@ namespace GrouponDesktop.Business
             return data;
         }
 
+        public BindingList<Cupon> GetAllToPublish()
+        {
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.GetCuponesParaPublicar", SqlDataAccessArgs
+                .CreateWith("@Fecha_Publicacion", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
+                .Arguments);
+            var data = new BindingList<Cupon>();
+            if (result != null && result.Rows != null)
+            {
+                foreach (DataRow row in result.Rows)
+                {
+                    data.Add(new Cupon()
+                    {
+                        ID = int.Parse(row["ID"].ToString()),
+                        FechaVencimientoOferta = Convert.ToDateTime(row["FechaVigencia"]),
+                        Descripcion = row["Descripcion"].ToString(),
+                        Codigo = row["Codigo"].ToString(),
+                        Proveedor = new Proveedor()
+                        {
+                            UserID = int.Parse(row["ID_Proveedor"].ToString()),
+                            RazonSocial = row["RazonSocial"].ToString()
+                        },
+                    });
+                }
+            }
+
+            return data;
+        }
+
         public int Add(Cupon cupon)
         {
             var id = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
@@ -57,7 +86,7 @@ namespace GrouponDesktop.Business
                 .And("@Descripcion", cupon.Descripcion)
                 .And("@ID_Proveedor", cupon.Proveedor.UserID)
                 .And("@CantidadPorUsuario", cupon.CantidadPorUsuario)
-                .And("@Publicado", 1)
+                .And("@Publicado", 0)
                 .And("@Codigo", cupon.Codigo)
             .Arguments);
 
@@ -71,6 +100,14 @@ namespace GrouponDesktop.Business
             }
 
             return id;
+        }
+
+        public void Publish(Cupon cupon)
+        {
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.PublicarCupon", SqlDataAccessArgs
+                .CreateWith("@ID", cupon.ID)
+                .Arguments);
         }
 
         public static string GetCodigo()
@@ -95,6 +132,8 @@ namespace GrouponDesktop.Business
             while (exists);
             return codigo;
         }
+
+        #region  Private Methods
 
         private static bool CodigoExists(string codigo)
         {
@@ -124,5 +163,7 @@ namespace GrouponDesktop.Business
 
             return ret;
         }
+
+        #endregion
     }
 }

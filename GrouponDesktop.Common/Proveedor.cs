@@ -13,5 +13,10 @@ namespace GrouponDesktop.Common
         public string CUIT { get; set; }
         public string NombreContacto { get; set; }
         public Rubro Rubro { get; set; }
+
+        public override string ToString()
+        {
+            return RazonSocial;
+        }
     }
 }

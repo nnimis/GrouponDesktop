@@ -353,6 +353,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\INSERT_TipoPago.sql" />
+    <None Include="Scripts\Stores\SP_GetCuponesParaPublicar.sql" />
     <None Include="Scripts\Stores\SP_GetCiudadesCupon.sql" />
     <None Include="Scripts\Stores\SP_GetCodigoCuponExists.sql" />
     <None Include="Scripts\Stores\SP_GetCuponesProveedor.sql" />
@@ -361,6 +362,7 @@
     <None Include="Scripts\Stores\SP_InsertCuponCiudad.sql" />
     <None Include="Scripts\Stores\SP_InsertGiftCard.sql" />
     <None Include="Scripts\Stores\SP_InsertPago.sql" />
+    <None Include="Scripts\Stores\SP_PublicarCupon.sql" />
     <None Include="Scripts\Stores\SP_UpdateProveedor.sql" />
     <None Include="Scripts\Tablas\ALTER_DetalleEntidad.sql" />
     <None Include="Scripts\Tablas\TB_PagosTarjetas.sql" />

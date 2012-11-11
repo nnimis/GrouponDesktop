@@ -27,4 +27,4 @@ INSERT INTO GRUPO_N.Usuario (Nombre, Password, ID_Rol)
 VALUES ('Admin', 'E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7', 1)
 
 INSERT INTO GRUPO_N.TipoPago (Descripcion) VALUES ('Efectivo');
-INSERT INTO GRUPO_N.TipoPago (Descripcion) VALUES ('Credito');
+INSERT INTO GRUPO_N.TipoPago (Descripcion) VALUES ('Crédito');

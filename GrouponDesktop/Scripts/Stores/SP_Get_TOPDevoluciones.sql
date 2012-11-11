@@ -14,20 +14,26 @@ CREATE PROCEDURE [GRUPO_N].[Get_TOPDevoluciones]
 @fecha_fin AS NVARCHAR(50)
 AS
 BEGIN
-SELECT TOP 5 *,100*CONVERT(FLOAT,ca.devoluciones)/CONVERT(FLOAT,ca.compras) AS porcentaje FROM
+SELECT TOP 5 cmp.RazonSocial, cmp.compras, dev.devoluciones, 100*CONVERT(FLOAT,dev.devoluciones)/CONVERT(FLOAT,cmp.compras) AS porcentaje
+FROM 
 (
-SELECT	m.Provee_RS, 
-		COUNT(*) AS devoluciones,
-		(SELECT COUNT(*)FROM gd_esquema.Maestra c
-			WHERE
-			c.Groupon_Fecha_Compra IS NOT NULL AND c.Groupon_Fecha_Compra BETWEEN @fecha_inicio AND @fecha_fin
-			AND c.Provee_RS=m.Provee_RS 
-		) AS compras
-FROM gd_esquema.Maestra m
-WHERE
-m.Groupon_Devolucion_Fecha IS NOT NULL AND m.Groupon_Devolucion_Fecha BETWEEN @fecha_inicio AND @fecha_fin
-GROUP BY m.Provee_RS
-) ca
-ORDER BY porcentaje DESC
+	SELECT p1.RazonSocial, COUNT(*) AS compras
+	FROM GRUPO_N.Proveedor p1
+	INNER JOIN GRUPO_N.Cupon cu1 ON cu1.ID_Proveedor=p1.ID
+	INNER JOIN GRUPO_N.CompraCupon cc1 ON cc1.ID_Cupon=cu1.ID
+	WHERE (cc1.Fecha BETWEEN @fecha_inicio AND @fecha_fin)
+	GROUP BY p1.RazonSocial
+) cmp
+INNER JOIN
+(
+	SELECT p2.RazonSocial, COUNT(*) AS devoluciones
+	FROM GRUPO_N.Proveedor p2
+	INNER JOIN GRUPO_N.Cupon cu2 ON cu2.ID_Proveedor=p2.ID
+	INNER JOIN GRUPO_N.CompraCupon cc2 ON cc2.ID_Cupon=cu2.ID
+	INNER JOIN GRUPO_N.Devolucion dv2 ON dv2.ID_CompraCupon=cc2.ID
+	WHERE (cc2.Fecha BETWEEN @fecha_inicio AND @fecha_fin) AND (dv2.Fecha BETWEEN @fecha_inicio AND @fecha_fin)
+	GROUP BY p2.RazonSocial
+)dev ON dev.RazonSocial=cmp.RazonSocial
+ORDER BY 4 DESC
 END
 GO

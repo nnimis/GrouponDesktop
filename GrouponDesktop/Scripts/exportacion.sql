@@ -22,6 +22,8 @@ SELECT DISTINCT m.Cli_Apellido, m.Cli_Dni, m.Cli_Fecha_Nac, u.ID, m.Cli_Nombre, 
 INNER JOIN gd_esquema.Maestra m ON u.Nombre = CAST(m.Cli_Telefono AS NVARCHAR(255))
 WHERE u.ID_Rol = @Id_Rol_Cliente;
 
+--Ingreso las ciudades de lso diferentes proveedores 
+PRINT 'Ingreso las ciudades de los diferentes proveedores y clientes...'
 INSERT INTO GRUPO_N.Ciudad (Descripcion)
 SELECT DISTINCT nombreCiudad FROM (SELECT distinct cli_ciudad as nombreCiudad FROM gd_esquema.Maestra WHERE Provee_RS IS NULL
 UNION SELECT DISTINCT Provee_Ciudad as nombreCiudad FROM gd_esquema.Maestra WHERE Provee_RS IS NOT NULL) m
@@ -31,17 +33,12 @@ SELECT ciu.ID as ID_CIUDAD, U.ID AS ID_USUARIO  FROM (SELECT DISTINCT Cli_Telefo
 	INNER JOIN GRUPO_N.Usuario u ON u.Nombre=CAST( m.Cli_Telefono AS NVARCHAR(255))
 	INNER JOIN GRUPO_N.Ciudad ciu ON ciu.Descripcion = m.Cli_Ciudad
 
---INSERT INTO GRUPO_N.Direccion (CP,Descripcion,ID_Ciudad,ID_Detalle)
---SELECT NULL AS CP, m.Cli_Direccion, ciu.ID as ID_CIUDAD, de.ID as ID_Detalle 
---FROM (SELECT DISTINCT Cli_Telefono, Cli_Ciudad, Cli_Direccion FROM gd_esquema.Maestra WHERE Provee_RS IS NULL) m 
---	INNER JOIN GRUPO_N.Usuario u ON u.Nombre=CAST( m.Cli_Telefono AS NVARCHAR(255))
---	INNER JOIN GRUPO_N.DetalleEntidad de ON de.ID_Usuario= u.ID
---	INNER JOIN GRUPO_N.Ciudad ciu ON ciu.Descripcion = m.Cli_Ciudad
+INSERT INTO GRUPO_N.Direccion (CP,Descripcion,ID_Ciudad,ID_Detalle)
+SELECT NULL AS CP, m.Cli_Direccion, ciu.ID, de.ID as ID_Detalle 
+FROM (SELECT DISTINCT Cli_Telefono, Cli_Ciudad, Cli_Direccion FROM gd_esquema.Maestra WHERE Provee_RS IS NULL) m 
+	INNER JOIN GRUPO_N.DetalleEntidad de ON de.Telefono = m.Cli_Telefono 
+	INNER JOIN GRUPO_N.Ciudad ciu ON ciu.Descripcion = m.Cli_Ciudad
 
---Ingreso las ciudades de lso diferentes proveedores 
-PRINT 'Ingreso las ciudades de lso diferentes proveedores...'
-INSERT INTO GRUPO_N.Ciudad (Descripcion) 
-SELECT DISTINCT Provee_Ciudad FROM gd_esquema.Maestra WHERE Provee_Ciudad IS NOT NULL;
 
 --Ingreso los rubros de los proveedores
 PRINT 'Ingreso los rubros de los proveedores...'
@@ -65,6 +62,13 @@ SELECT DISTINCT NULL,M.Provee_CUIT, u.ID ,r.ID,M.Provee_RS
 FROM gd_esquema.Maestra m
 INNER JOIN GRUPO_N.Usuario u ON u.Nombre=m.Provee_RS
 INNER JOIN GRUPO_N.Rubro r ON r.Descripcion=m.Provee_Rubro
+
+INSERT INTO GRUPO_N.Direccion (CP,Descripcion,ID_Ciudad,ID_Detalle)
+SELECT NULL AS CP, m.Provee_Dom, ciu.ID, de.ID as ID_Detalle 
+FROM (SELECT DISTINCT Provee_RS, Provee_Ciudad, Provee_Dom FROM gd_esquema.Maestra WHERE Provee_RS IS NOT NULL) m 
+	INNER JOIN GRUPO_N.Proveedor p ON p.RazonSocial = m.Provee_RS
+	INNER JOIN GRUPO_N.DetalleEntidad de ON de.ID_Usuario = p.ID 
+	INNER JOIN GRUPO_N.Ciudad ciu ON ciu.Descripcion = m.Provee_Ciudad
 
 --Ingreso los cupones
 PRINT 'Ingreso los cupones...'

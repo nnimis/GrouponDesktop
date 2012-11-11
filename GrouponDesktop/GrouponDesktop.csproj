@@ -357,6 +357,7 @@
     <None Include="Scripts\INSERT_TipoPago.sql" />
     <None Include="Scripts\Stores\SP_ComprarCuponCliente.sql" />
     <None Include="Scripts\Stores\SP_GetComprasCliente.sql" />
+    <None Include="Scripts\Stores\SP_GetComprasParaFacturar.sql" />
     <None Include="Scripts\Stores\SP_GetComprasProveedor.sql" />
     <None Include="Scripts\Stores\SP_GetCuponesCliente.sql" />
     <None Include="Scripts\Stores\SP_GetCuponesParaPublicar.sql" />
@@ -368,6 +369,8 @@
     <None Include="Scripts\Stores\SP_InsertCupon.sql" />
     <None Include="Scripts\Stores\SP_InsertCuponCiudad.sql" />
     <None Include="Scripts\Stores\SP_InsertDevolucion.sql" />
+    <None Include="Scripts\Stores\SP_InsertFactura.sql" />
+    <None Include="Scripts\Stores\SP_InsertFacturaCanjeCupon.sql" />
     <None Include="Scripts\Stores\SP_InsertGiftCard.sql" />
     <None Include="Scripts\Stores\SP_InsertPago.sql" />
     <None Include="Scripts\Stores\SP_PublicarCupon.sql" />

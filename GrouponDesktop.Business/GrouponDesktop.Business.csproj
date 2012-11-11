@@ -51,6 +51,7 @@
     <Compile Include="ClienteManager.cs" />
     <Compile Include="CompraCuponManager.cs" />
     <Compile Include="CuponManager.cs" />
+    <Compile Include="FacturaManager.cs" />
     <Compile Include="GiftCardManager.cs" />
     <Compile Include="PagosManager.cs" />
     <Compile Include="ProveedorManager.cs" />

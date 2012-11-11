@@ -43,6 +43,7 @@ namespace GrouponDesktop.CargaCredito
             dataSource.Add(e.Pago);
             dataGridView.Refresh();
             MessageBox.Show("El pago ha sido acreditado");
+            ((NuevoPago)sender).Close();
         }
     }
 }

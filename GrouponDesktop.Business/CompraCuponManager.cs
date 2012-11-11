@@ -43,6 +43,36 @@ namespace GrouponDesktop.Business
             return data;
         }
 
+        public BindingList<CompraCupon> GetParaFacturar(Proveedor proveedor, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            var desde = new DateTime(fechaDesde.Year, fechaDesde.Month, fechaDesde.Day, 0, 0, 0);
+            var hasta = new DateTime(fechaHasta.Year, fechaHasta.Month, fechaHasta.Day, 23, 59, 59);
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.GetComprasParaFacturar", SqlDataAccessArgs
+                .CreateWith("@ID_Proveedor", proveedor.UserID)
+                .And("@FechaDesde", desde)
+                .And("@FechaHasta", hasta)
+                .Arguments);
+            var data = new BindingList<CompraCupon>();
+            if (result != null && result.Rows != null)
+            {
+                foreach (DataRow row in result.Rows)
+                {
+                    data.Add(new CompraCupon()
+                    {
+                        ID = int.Parse(row["ID_Canje"].ToString()),
+                        Precio = double.Parse(row["Precio"].ToString()),
+                        Fecha = Convert.ToDateTime(row["Fecha"]),
+                        Descripcion = row["Descripcion"].ToString(),
+                        Codigo = row["Codigo"].ToString(),
+                        Cliente = row["Cliente"].ToString(),
+                    });
+                }
+            }
+
+            return data;
+        }
+
         public BindingList<CompraCupon> GetAll(Proveedor proveedor)
         {
             var fechaVencimiento = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);

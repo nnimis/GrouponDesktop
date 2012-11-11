@@ -22,6 +22,22 @@ SELECT DISTINCT m.Cli_Apellido, m.Cli_Dni, m.Cli_Fecha_Nac, u.ID, m.Cli_Nombre, 
 INNER JOIN gd_esquema.Maestra m ON u.Nombre = CAST(m.Cli_Telefono AS NVARCHAR(255))
 WHERE u.ID_Rol = @Id_Rol_Cliente;
 
+INSERT INTO GRUPO_N.Ciudad (Descripcion)
+SELECT DISTINCT nombreCiudad FROM (SELECT distinct cli_ciudad as nombreCiudad FROM gd_esquema.Maestra WHERE Provee_RS IS NULL
+UNION SELECT DISTINCT Provee_Ciudad as nombreCiudad FROM gd_esquema.Maestra WHERE Provee_RS IS NOT NULL) m
+
+INSERT INTO GRUPO_N.ClienteCiudad (ID_Ciudad,ID_Cliente)
+SELECT ciu.ID as ID_CIUDAD, U.ID AS ID_USUARIO  FROM (SELECT DISTINCT Cli_Telefono, Cli_Ciudad FROM gd_esquema.Maestra WHERE Provee_RS IS NULL) m 
+	INNER JOIN GRUPO_N.Usuario u ON u.Nombre=CAST( m.Cli_Telefono AS NVARCHAR(255))
+	INNER JOIN GRUPO_N.Ciudad ciu ON ciu.Descripcion = m.Cli_Ciudad
+
+--INSERT INTO GRUPO_N.Direccion (CP,Descripcion,ID_Ciudad,ID_Detalle)
+--SELECT NULL AS CP, m.Cli_Direccion, ciu.ID as ID_CIUDAD, de.ID as ID_Detalle 
+--FROM (SELECT DISTINCT Cli_Telefono, Cli_Ciudad, Cli_Direccion FROM gd_esquema.Maestra WHERE Provee_RS IS NULL) m 
+--	INNER JOIN GRUPO_N.Usuario u ON u.Nombre=CAST( m.Cli_Telefono AS NVARCHAR(255))
+--	INNER JOIN GRUPO_N.DetalleEntidad de ON de.ID_Usuario= u.ID
+--	INNER JOIN GRUPO_N.Ciudad ciu ON ciu.Descripcion = m.Cli_Ciudad
+
 --Ingreso las ciudades de lso diferentes proveedores 
 PRINT 'Ingreso las ciudades de lso diferentes proveedores...'
 INSERT INTO GRUPO_N.Ciudad (Descripcion) 

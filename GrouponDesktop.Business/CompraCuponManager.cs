@@ -35,7 +35,7 @@ namespace GrouponDesktop.Business
                         FechaVencimiento = Convert.ToDateTime(row["FechaVencimiento"]),
                         Descripcion = row["Descripcion"].ToString(),
                         Codigo = row["Codigo"].ToString(),
-                        Estado = GetEstado(row["ID_Devolucion"])
+                        Estado = GetEstado(row["ID_Devolucion"], row["ID_Canje"])
                     });
                 }
             }
@@ -43,11 +43,41 @@ namespace GrouponDesktop.Business
             return data;
         }
 
-        private string GetEstado(object value)
+        public BindingList<CompraCupon> GetAll(Proveedor proveedor)
         {
-            if (value == null || value is DBNull)
-                return "Comprado";
-            return "Devuelto";
+            var fechaVencimiento = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.GetComprasProveedor", SqlDataAccessArgs
+                .CreateWith("@ID_Proveedor", proveedor.UserID)
+                .And("@FechaVencimiento", fechaVencimiento)
+                .Arguments);
+            var data = new BindingList<CompraCupon>();
+            if (result != null && result.Rows != null)
+            {
+                foreach (DataRow row in result.Rows)
+                {
+                    data.Add(new CompraCupon()
+                    {
+                        ID = int.Parse(row["ID"].ToString()),
+                        Precio = double.Parse(row["Precio"].ToString()),
+                        Fecha = Convert.ToDateTime(row["Fecha"]),
+                        Descripcion = row["Descripcion"].ToString(),
+                        Codigo = row["Codigo"].ToString(),
+                        Cliente = row["Cliente"].ToString(),
+                    });
+                }
+            }
+
+            return data;
+        }
+
+        private string GetEstado(object idDevolucion, object idCanje)
+        {
+            if (idDevolucion != null && !(idDevolucion is DBNull))
+                return "Devuelto";
+            if (idCanje != null && !(idCanje is DBNull))
+                return "Consumido";
+            return "Comprado";
         }
 
         public void DevolverCompra(Cliente cliente, CompraCupon compraCupon, string motivo)
@@ -58,6 +88,15 @@ namespace GrouponDesktop.Business
                 .And("@ID_CompraCupon", compraCupon.ID)
                 .And("@Fecha", DateTime.Now)
                 .And("@Motivo", motivo)
+                .Arguments);
+        }
+
+        public void ConsumirCompra(CompraCupon compraCupon)
+        {
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.InsertCanjeCupon", SqlDataAccessArgs
+                .CreateWith("@ID_CompraCupon", compraCupon.ID)
+                .And("@Fecha", DateTime.Now)
                 .Arguments);
         }
     }

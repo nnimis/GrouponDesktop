@@ -80,10 +80,11 @@ GO
 --Ingreso los cupones
 PRINT 'Ingreso los cupones...'
 GO
-INSERT INTO GRUPO_N.Cupon (Precio, PrecioOriginal, FechaPublicacion,FechaVigencia,FechaVencimiento,Stock,Descripcion,ID_Proveedor,CantidadPorUsuario,Publicado) --,Codigo)
-SELECT distinct [Groupon_Precio_Ficticio], [Groupon_Precio] ,[Groupon_Fecha] ,[Groupon_Fecha_Venc], DATEADD(MONTH,2,[Groupon_Fecha_Venc]) ,[Groupon_Cantidad] ,[Groupon_Descripcion],p.ID,[Groupon_Cantidad], 1 --, GRUPO_N.RemoveNonAlphaCharacters(m.Groupon_Codigo)
+INSERT INTO GRUPO_N.Cupon (Precio, PrecioOriginal, FechaPublicacion,FechaVigencia,FechaVencimiento,Stock,Descripcion,ID_Proveedor,CantidadPorUsuario,Publicado ,Codigo)
+SELECT distinct [Groupon_Precio_Ficticio], [Groupon_Precio] ,[Groupon_Fecha] ,[Groupon_Fecha_Venc], DATEADD(MONTH,2,[Groupon_Fecha_Venc]) ,[Groupon_Cantidad] ,[Groupon_Descripcion],p.ID,[Groupon_Cantidad], 1 , MAX(m.Groupon_Codigo)
   FROM [GD2C2012].[gd_esquema].[Maestra] m
   INNER JOIN GRUPO_N.Proveedor p ON m.Provee_RS=p.RazonSocial WHERE Provee_RS IS NOT NULL 
+  GROUP BY [Groupon_Precio_Ficticio], [Groupon_Precio] ,[Groupon_Fecha] ,[Groupon_Fecha_Venc],[Groupon_Cantidad] ,[Groupon_Descripcion],p.ID,[Groupon_Cantidad]
 GO  
 --Ingreso la compra de los cupones
 PRINT 'Ingreso la compra de los cupones...'
@@ -151,13 +152,13 @@ INNER JOIN GRUPO_N.CanjeCupon canje ON canje.ID_CompraCupon= cc.ID
 WHERE Factura_Fecha IS NOT NULL
 
 --Ingresar los tipos de Pagos 
-PRINT 'Ingresar los tipos de Pagos...'
-GO
-INSERT INTO GRUPO_N.TipoPago (Descripcion) 
-SELECT DISTINCT
-      [Tipo_Pago_Desc]
-  FROM [GD2C2012].[gd_esquema].[Maestra]
-  WHERE Tipo_Pago_Desc IS NOT NULL
+--PRINT 'Ingresar los tipos de Pagos...'
+--GO
+--INSERT INTO GRUPO_N.TipoPago (Descripcion) 
+--SELECT DISTINCT
+--      [Tipo_Pago_Desc]
+--  FROM [GD2C2012].[gd_esquema].[Maestra]
+--  WHERE Tipo_Pago_Desc IS NOT NULL
 GO  
 --Ingresar las cargas de crédito
 PRINT 'Ingresar las cargas de crédito...'

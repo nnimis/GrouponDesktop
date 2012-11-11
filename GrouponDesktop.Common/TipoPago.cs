@@ -7,7 +7,7 @@ namespace GrouponDesktop.Common
 {
     public enum TipoPago
     {
-        Efectivo = 1,
+        Credito = 1,
         Tarjeta = 2
     }
 }

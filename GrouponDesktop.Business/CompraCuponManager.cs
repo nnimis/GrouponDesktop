@@ -32,6 +32,7 @@ namespace GrouponDesktop.Business
                         ID = int.Parse(row["ID"].ToString()),
                         Precio = double.Parse(row["Precio"].ToString()),
                         Fecha = Convert.ToDateTime(row["Fecha"]),
+                        FechaVencimiento = Convert.ToDateTime(row["FechaVencimiento"]),
                         Descripcion = row["Descripcion"].ToString(),
                         Codigo = row["Codigo"].ToString(),
                         Estado = GetEstado(row["ID_Devolucion"])
@@ -47,6 +48,17 @@ namespace GrouponDesktop.Business
             if (value == null || value is DBNull)
                 return "Comprado";
             return "Devuelto";
+        }
+
+        public void DevolverCompra(Cliente cliente, CompraCupon compraCupon, string motivo)
+        {
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "GRUPO_N.InsertDevolucionCompra", SqlDataAccessArgs
+                .CreateWith("@ID_Cliente", cliente.UserID)
+                .And("@ID_CompraCupon", compraCupon.ID)
+                .And("@Fecha", DateTime.Now)
+                .And("@Motivo", motivo)
+                .Arguments);
         }
     }
 }

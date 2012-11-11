@@ -181,6 +181,7 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="PedirDevolucion\CuponDevueltoEventArgs.cs" />
     <Compile Include="PedirDevolucion\PedirDevolucionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -364,6 +365,7 @@
     <None Include="Scripts\Stores\SP_GetGiftCardCliente.sql" />
     <None Include="Scripts\Stores\SP_InsertCupon.sql" />
     <None Include="Scripts\Stores\SP_InsertCuponCiudad.sql" />
+    <None Include="Scripts\Stores\SP_InsertDevolucion.sql" />
     <None Include="Scripts\Stores\SP_InsertGiftCard.sql" />
     <None Include="Scripts\Stores\SP_InsertPago.sql" />
     <None Include="Scripts\Stores\SP_PublicarCupon.sql" />
@@ -371,6 +373,7 @@
     <None Include="Scripts\Tablas\ALTER_DetalleEntidad.sql" />
     <None Include="Scripts\Tablas\TB_PagosTarjetas.sql" />
     <None Include="Scripts\Triggers\CompraCuponInserted.sql" />
+    <None Include="Scripts\Triggers\DevolucionInserted.sql" />
     <None Include="Scripts\Triggers\GiftCardInserted.sql" />
     <None Include="Scripts\Triggers\PagoInserted.sql" />
   </ItemGroup>

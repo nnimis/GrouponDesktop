@@ -15,9 +15,31 @@ namespace GrouponDesktop.PedirDevolucion
     [NonNavigable]
     public partial class PedirDevolucionForm : Form
     {
-        public PedirDevolucionForm()
+        public event EventHandler<CuponDevueltoEventArgs> OnCuponDevuelto;
+        private CompraCupon _compraCupon;
+
+        public PedirDevolucionForm(CompraCupon compraCupon)
         {
             InitializeComponent();
+            _compraCupon = compraCupon;
+            txtCodigo.Text = compraCupon.Codigo;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (OnCuponDevuelto != null)
+            {
+                OnCuponDevuelto(this, new CuponDevueltoEventArgs()
+                {
+                    Mensaje = txtMensaje.Text,
+                    CompraCupon = _compraCupon
+                });
+            }
         }
     }
 }

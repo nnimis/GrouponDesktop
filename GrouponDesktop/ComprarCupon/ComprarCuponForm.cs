@@ -35,7 +35,8 @@ namespace GrouponDesktop.ComprarCupon
             var cupon = row.DataBoundItem as Cupon;
             if(MessageBox.Show(string.Format("Desea comprar la oferta '{0}'?", cupon.Descripcion), "Confirmar compra", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                _manager.ComprarCupon(cupon, new Cliente() { UserID = Session.User.UserID });
+                var nroCupon = _manager.ComprarCupon(cupon, new Cliente() { UserID = Session.User.UserID });
+                MessageBox.Show(string.Format("Ha comprado la oferta! el código es '{0}{1}'", cupon.Codigo, nroCupon));
             }
         }
     }

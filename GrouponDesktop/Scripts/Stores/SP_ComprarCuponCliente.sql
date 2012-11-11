@@ -27,10 +27,11 @@ BEGIN
 	WHERE ID_Cupon = @ID_Cupon 
 	GROUP BY ID_Cupon
 	
-	SELECT @CantidadComprada = COUNT(*) FROM GRUPO_N.CompraCupon
+	SELECT @CantidadComprada = COUNT(ID_Cupon) - COUNT(d.ID_Cliente) FROM GRUPO_N.CompraCupon cc
+	LEFT JOIN GRUPO_N.Devolucion d ON d.ID_CompraCupon = cc.ID
 	WHERE ID_Cupon = @ID_Cupon
-	AND ID_Cliente = @ID_Cliente
-	GROUP BY ID_Cupon, ID_Cliente
+	AND cc.ID_Cliente = @ID_Cliente
+	GROUP BY ID_Cupon, cc.ID_Cliente
 
 	IF @CantidadComprada IS NULL
 		SET @CantidadComprada = 0
@@ -49,7 +50,7 @@ BEGIN
 		INSERT INTO GRUPO_N.CompraCupon (Fecha, ID_Cliente, ID_Cupon, Codigo)
 		VALUES (@Fecha, @ID_Cliente, @ID_Cupon, @CodigoCupon)
 
-		SELECT @@IDENTITY
+		SELECT @NumeroCupon
 	END
 END
 

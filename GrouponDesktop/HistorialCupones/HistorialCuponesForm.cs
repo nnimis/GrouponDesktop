@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GrouponDesktop.Core;
 using GrouponDesktop.Common;
 using GrouponDesktop.Business;
+using GrouponDesktop.PedirDevolucion;
 
 namespace GrouponDesktop.HistorialCupones
 {
@@ -47,8 +48,30 @@ namespace GrouponDesktop.HistorialCupones
 
         private void btnPedirDevolucion_Click(object sender, EventArgs e)
         {
-            var frm = new PedirDevolucion.PedirDevolucionForm();
+            if (dataGridView.SelectedRows == null || dataGridView.SelectedRows.Count == 0) return;
+            var row = dataGridView.SelectedRows[0];
+            var compraCupon = row.DataBoundItem as CompraCupon;
+            var fechaVencimiento = new DateTime(compraCupon.FechaVencimiento.Year, compraCupon.FechaVencimiento.Month, compraCupon.FechaVencimiento.Day, 23, 59, 59);
+            if (fechaVencimiento < DateTime.Now)
+            {
+                MessageBox.Show("La fecha límite de devolución de la compra ha expirado");
+                return;
+            }
+            var frm = new PedirDevolucionForm(compraCupon);
+            frm.OnCuponDevuelto += new EventHandler<CuponDevueltoEventArgs>(frm_OnCuponDevuelto);
             ViewsManager.LoadModal(frm);
+        }
+
+        void frm_OnCuponDevuelto(object sender, CuponDevueltoEventArgs e)
+        {
+            var compraCupon = e.CompraCupon;
+            _manager.DevolverCompra(new Cliente() { UserID = Session.User.UserID }, compraCupon, e.Mensaje);
+            var index = ((BindingList<CompraCupon>)dataGridView.DataSource).IndexOf(compraCupon);
+            compraCupon.Estado = "Devuelto";
+            ((BindingList<CompraCupon>)dataGridView.DataSource)[index] = compraCupon;
+            dataGridView.Refresh();
+            ((PedirDevolucionForm)sender).Close();
+            MessageBox.Show("Se ha devuelto la compra");
         }
     }
 }

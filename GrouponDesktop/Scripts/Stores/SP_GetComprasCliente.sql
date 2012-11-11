@@ -19,7 +19,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	SELECT cc.*, c.Descripcion, c.Precio, d.ID AS ID_Devolucion
+	SELECT cc.*, c.Descripcion, c.Precio, c.FechaVencimiento AS FechaVencimiento, d.ID AS ID_Devolucion
 	FROM GRUPO_N.CompraCupon cc
 	INNER JOIN GRUPO_N.Cupon c ON cc.ID_Cupon = c.ID
 	LEFT JOIN GRUPO_N.Devolucion d ON d.ID_CompraCupon = cc.ID

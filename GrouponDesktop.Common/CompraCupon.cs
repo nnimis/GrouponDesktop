@@ -13,5 +13,6 @@ namespace GrouponDesktop.Common
         public string Estado { get; set; }
         public double Precio { get; set; }
         public DateTime Fecha { get; set; }
+        public DateTime FechaVencimiento { get; set; }
     }
 }

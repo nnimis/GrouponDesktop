@@ -1438,7 +1438,6 @@ CREATE PROCEDURE [GRUPO_N].[GetComprasParaFacturar]
 AS
 BEGIN
 	SET NOCOUNT ON;
-
 	SELECT cc.*, c.Descripcion, c.Precio, cl.Nombre AS Cliente, ca.ID AS ID_Canje
 	FROM GRUPO_N.CompraCupon cc
 		INNER JOIN GRUPO_N.Cupon c ON cc.ID_Cupon = c.ID
@@ -1450,6 +1449,70 @@ BEGIN
 		AND ca.Fecha <= @FechaHasta
 		AND fc.ID_CanjeCupon IS NULL
 	ORDER BY ca.Fecha DESC
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [GRUPO_N].[Get_TOPDevoluciones]
+	@fecha_inicio AS NVARCHAR(50),
+	@fecha_fin AS NVARCHAR(50)
+AS
+BEGIN
+	SELECT TOP 5 cmp.RazonSocial AS [Razón Social], cmp.compras AS Compras, dev.Devoluciones AS Devoluciones, 
+		STR(100*CONVERT(FLOAT,dev.devoluciones)/CONVERT(FLOAT,cmp.compras), 12, 2) + '%' AS Porcentaje
+	FROM 
+	(
+		SELECT p1.RazonSocial, COUNT(*) AS compras
+		FROM GRUPO_N.Proveedor p1
+		INNER JOIN GRUPO_N.Cupon cu1 ON cu1.ID_Proveedor=p1.ID
+		INNER JOIN GRUPO_N.CompraCupon cc1 ON cc1.ID_Cupon=cu1.ID
+		WHERE (cc1.Fecha BETWEEN @fecha_inicio AND @fecha_fin)
+		GROUP BY p1.RazonSocial
+	) cmp
+	INNER JOIN
+	(
+		SELECT p2.RazonSocial, COUNT(*) AS Devoluciones
+		FROM GRUPO_N.Proveedor p2
+		INNER JOIN GRUPO_N.Cupon cu2 ON cu2.ID_Proveedor=p2.ID
+		INNER JOIN GRUPO_N.CompraCupon cc2 ON cc2.ID_Cupon=cu2.ID
+		INNER JOIN GRUPO_N.Devolucion dv2 ON dv2.ID_CompraCupon=cc2.ID
+		WHERE (cc2.Fecha BETWEEN @fecha_inicio AND @fecha_fin) AND (dv2.Fecha BETWEEN @fecha_inicio AND @fecha_fin)
+		GROUP BY p2.RazonSocial
+	)dev ON dev.RazonSocial=cmp.RazonSocial
+	ORDER BY 4 DESC
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [GRUPO_N].[Get_TOPGiftCard]
+	@fecha_inicio AS NVARCHAR(50),
+	@fecha_fin AS NVARCHAR(50)
+AS
+BEGIN
+	SELECT TOP 5 c.Nombre, c.Apellido, crg.credito AS [Crédito], gst.Consumo AS Consumo
+	FROM
+	(
+		SELECT SUM(gf.Credito) AS credito, gf.ID_Cliente_Destino
+		FROM GRUPO_N.GiftCard gf
+		WHERE gf.Fecha BETWEEN @fecha_inicio AND @fecha_fin
+		GROUP BY gf.ID_Cliente_Destino
+	) crg 
+	INNER JOIN
+	(
+		SELECT SUM(c.Precio) AS Consumo, ccp.ID_Cliente
+		FROM GRUPO_N.CanjeCupon cac
+			INNER JOIN GRUPO_N.CompraCupon ccp ON ccp.ID = cac.ID_CompraCupon
+			INNER JOIN GRUPO_N.Cupon c ON c.ID = ccp.ID_Cupon
+		WHERE ccp.Fecha BETWEEN @fecha_inicio AND @fecha_fin
+		GROUP BY ccp.ID_Cliente
+	) gst ON gst.ID_Cliente = crg.ID_Cliente_Destino
+	INNER JOIN GRUPO_N.Cliente c ON c.ID = crg.ID_Cliente_Destino
+	WHERE crg.credito <= gst.consumo
+	ORDER BY crg.credito DESC
 END
 GO
 /****** Object:  Default [DF_Ciente_Saldo]    Script Date: 11/11/2012 16:03:22 ******/

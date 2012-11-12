@@ -46,6 +46,10 @@ namespace GrouponDesktop.FacturarProveedor
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
+            if (dtpDesde.Value > dtpHasta.Value)
+            {
+                MessageBox.Show("La fecha desde debe ser menor o igual que la fecha hasta");
+            }
             var manager = new CompraCuponManager();
             dataGridView.DataSource = manager.GetParaFacturar(_proveedor, dtpDesde.Value, dtpHasta.Value);
             dataGridView.Refresh();
@@ -57,6 +61,10 @@ namespace GrouponDesktop.FacturarProveedor
             {
                 MessageBox.Show("Debe seleccionar un proveedor para poder generar una factura");
                 return;
+            }
+            if (dtpDesde.Value > dtpHasta.Value)
+            {
+                MessageBox.Show("La fecha desde debe ser menor o igual que la fecha hasta");
             }
             var data = (BindingList<CompraCupon>)dataGridView.DataSource;
             if (data == null || data.Count == 0)

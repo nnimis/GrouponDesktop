@@ -54,6 +54,7 @@
     <Compile Include="GiftCard.cs" />
     <Compile Include="Pago.cs" />
     <Compile Include="Proveedor.cs" />
+    <Compile Include="ReportType.cs" />
     <Compile Include="Rubro.cs" />
     <Compile Include="Functionalities.cs" />
     <Compile Include="Profile.cs" />

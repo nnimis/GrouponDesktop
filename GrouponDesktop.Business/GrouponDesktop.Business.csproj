@@ -56,6 +56,7 @@
     <Compile Include="PagosManager.cs" />
     <Compile Include="ProveedorManager.cs" />
     <Compile Include="DetalleEntidadManager.cs" />
+    <Compile Include="ReportManager.cs" />
     <Compile Include="RubrosManager.cs" />
     <Compile Include="FunctionalitiesManager.cs" />
     <Compile Include="LoginService.cs" />

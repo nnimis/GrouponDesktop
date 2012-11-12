@@ -111,6 +111,19 @@ SELECT distinct [Groupon_Precio_Ficticio], [Groupon_Precio] ,[Groupon_Fecha] ,[G
   INNER JOIN GRUPO_N.Proveedor p ON m.Provee_RS=p.RazonSocial WHERE Provee_RS IS NOT NULL 
 GO
 
+--Ingreso las ciudades de los cupones
+PRINT 'Ingreso las ciudades de los cupones...'
+GO
+INSERT INTO GRUPO_N.CuponCiudad (ID_Cupon,ID_Ciudad)
+SELECT c.ID, ciu.ID FROM GRUPO_N.Cupon c
+INNER JOIN GRUPO_N.Proveedor p ON  p.ID=c.ID_Proveedor 
+INNER JOIN 
+(SELECT distinct  Groupon_Codigo, Provee_Ciudad FROM gd_esquema.Maestra m 
+WHERE m.Groupon_Devolucion_Fecha IS NULL AND m.Groupon_Entregado_Fecha IS NULL AND m.Factura_Fecha IS NULL AND m.Provee_RS IS NOT NULL)
+ m ON m.Groupon_Codigo=c.Codigo  
+INNER JOIN GRUPO_N.Ciudad ciu ON  ciu.Descripcion = m.Provee_Ciudad
+GO
+
 --Ingreso la compra de los cupones
 PRINT 'Ingreso la compra de los cupones...'
 GO

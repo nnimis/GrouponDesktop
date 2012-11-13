@@ -47,6 +47,8 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtCUIT = new System.Windows.Forms.TextBox();
             this.txtRazonSocial = new System.Windows.Forms.TextBox();
+            this.lblResults = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.proveedoresGrid)).BeginInit();
             this.buttonsPanel.SuspendLayout();
             this.searchPanel.SuspendLayout();
@@ -126,7 +128,9 @@
             // buttonsPanel
             // 
             this.buttonsPanel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.buttonsPanel.Controls.Add(this.lblResults);
             this.buttonsPanel.Controls.Add(this.btnEliminar);
+            this.buttonsPanel.Controls.Add(this.label5);
             this.buttonsPanel.Controls.Add(this.btnModificar);
             this.buttonsPanel.Controls.Add(this.btnAgregar);
             this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -244,6 +248,30 @@
             this.txtRazonSocial.Size = new System.Drawing.Size(197, 20);
             this.txtRazonSocial.TabIndex = 0;
             // 
+            // lblResults
+            // 
+            this.lblResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblResults.AutoSize = true;
+            this.lblResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResults.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblResults.Location = new System.Drawing.Point(855, 16);
+            this.lblResults.Name = "lblResults";
+            this.lblResults.Size = new System.Drawing.Size(14, 13);
+            this.lblResults.TabIndex = 9;
+            this.lblResults.Text = "0";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label5.Location = new System.Drawing.Point(875, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "resultados";
+            // 
             // ProveedoresForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,6 +285,7 @@
             this.Load += new System.EventHandler(this.ProveedoresForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.proveedoresGrid)).EndInit();
             this.buttonsPanel.ResumeLayout(false);
+            this.buttonsPanel.PerformLayout();
             this.searchPanel.ResumeLayout(false);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
@@ -285,5 +314,7 @@
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtCUIT;
         private System.Windows.Forms.TextBox txtRazonSocial;
+        private System.Windows.Forms.Label lblResults;
+        private System.Windows.Forms.Label label5;
     }
 }

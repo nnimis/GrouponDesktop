@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GrouponDesktop.Core;
 using GrouponDesktop.Common;
 using GrouponDesktop.Business;
+using System.Collections;
 
 namespace GrouponDesktop.RegistroConsumoCupon
 {
@@ -24,8 +25,15 @@ namespace GrouponDesktop.RegistroConsumoCupon
 
         private void RegistroConsumoCuponForm_Load(object sender, EventArgs e)
         {
+            dataGridView.DataSourceChanged += new EventHandler(dataGridView_DataSourceChanged);
             dataGridView.AutoGenerateColumns = false;
             dataGridView.DataSource = _manager.GetAll(new Proveedor() { UserID = Session.User.UserID });
+        }
+
+        void dataGridView_DataSourceChanged(object sender, EventArgs e)
+        {
+            var dataSource = dataGridView.DataSource as IList;
+            lblResults.Text = dataSource.Count.ToString();
         }
 
         private void btnRegistrarConsumo_Click(object sender, EventArgs e)

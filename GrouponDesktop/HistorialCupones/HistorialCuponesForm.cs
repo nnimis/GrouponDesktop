@@ -10,6 +10,7 @@ using GrouponDesktop.Core;
 using GrouponDesktop.Common;
 using GrouponDesktop.Business;
 using GrouponDesktop.PedirDevolucion;
+using System.Collections;
 
 namespace GrouponDesktop.HistorialCupones
 {
@@ -27,8 +28,15 @@ namespace GrouponDesktop.HistorialCupones
         {
             dtpDesde.Value = DateTime.Now.Subtract(TimeSpan.FromDays(7));
             dtpHasta.Value = DateTime.Now;
+            dataGridView.DataSourceChanged += new EventHandler(dataGridView_DataSourceChanged);
             dataGridView.AutoGenerateColumns = false;
             GetList();
+        }
+
+        void dataGridView_DataSourceChanged(object sender, EventArgs e)
+        {
+            var dataSource = dataGridView.DataSource as IList;
+            lblResults.Text = dataSource.Count.ToString();
         }
 
         private void btnRestablecer_Click(object sender, EventArgs e)

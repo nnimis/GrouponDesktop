@@ -1013,6 +1013,7 @@ BEGIN
 	INNER JOIN GRUPO_N.Proveedor p ON c.ID_Proveedor = p.ID
 	WHERE c.FechaPublicacion >= @Fecha_Publicacion
 	AND c.FechaPublicacion < DATEADD(d,1,@Fecha_Publicacion)
+	AND c.Publicado = 0
 END
 GO
 /****** Object:  StoredProcedure [GRUPO_N].[UpdateDetalleEntidad]    Script Date: 11/12/2012 20:20:11 ******/
@@ -1113,6 +1114,7 @@ BEGIN
 	AND cu.ID_Cliente = @ID_Cliente
 	AND c.FechaPublicacion <= @Fecha_Publicacion
 	AND c.FechaVigencia >= @Fecha_Publicacion
+	ORDER BY c.Descripcion
 END
 GO
 /****** Object:  StoredProcedure [GRUPO_N].[GetCiudadesCupon]    Script Date: 11/12/2012 20:20:11 ******/

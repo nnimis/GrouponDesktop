@@ -29,21 +29,23 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.btnPedirDevolucion = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnPedirDevolucion = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.searchPanel = new System.Windows.Forms.Panel();
-            this.btnFiltrar = new System.Windows.Forms.Button();
             this.groupBox = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
-            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
             this.btnRestablecer = new System.Windows.Forms.Button();
+            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
+            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnFiltrar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblResults = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.searchPanel.SuspendLayout();
@@ -70,26 +72,6 @@
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(1018, 384);
             this.dataGridView.TabIndex = 6;
-            // 
-            // btnPedirDevolucion
-            // 
-            this.btnPedirDevolucion.Location = new System.Drawing.Point(12, 10);
-            this.btnPedirDevolucion.Name = "btnPedirDevolucion";
-            this.btnPedirDevolucion.Size = new System.Drawing.Size(106, 23);
-            this.btnPedirDevolucion.TabIndex = 0;
-            this.btnPedirDevolucion.Text = "Pedir Devolución";
-            this.btnPedirDevolucion.UseVisualStyleBackColor = true;
-            this.btnPedirDevolucion.Click += new System.EventHandler(this.btnPedirDevolucion_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.btnPedirDevolucion);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1018, 39);
-            this.panel1.TabIndex = 7;
             // 
             // Fecha
             // 
@@ -126,6 +108,28 @@
             this.Estado.Name = "Estado";
             this.Estado.ReadOnly = true;
             // 
+            // btnPedirDevolucion
+            // 
+            this.btnPedirDevolucion.Location = new System.Drawing.Point(12, 10);
+            this.btnPedirDevolucion.Name = "btnPedirDevolucion";
+            this.btnPedirDevolucion.Size = new System.Drawing.Size(106, 23);
+            this.btnPedirDevolucion.TabIndex = 0;
+            this.btnPedirDevolucion.Text = "Pedir Devolución";
+            this.btnPedirDevolucion.UseVisualStyleBackColor = true;
+            this.btnPedirDevolucion.Click += new System.EventHandler(this.btnPedirDevolucion_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.lblResults);
+            this.panel1.Controls.Add(this.btnPedirDevolucion);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1018, 39);
+            this.panel1.TabIndex = 7;
+            // 
             // searchPanel
             // 
             this.searchPanel.Controls.Add(this.groupBox);
@@ -134,16 +138,6 @@
             this.searchPanel.Name = "searchPanel";
             this.searchPanel.Size = new System.Drawing.Size(1018, 93);
             this.searchPanel.TabIndex = 8;
-            // 
-            // btnFiltrar
-            // 
-            this.btnFiltrar.Location = new System.Drawing.Point(201, 43);
-            this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
-            this.btnFiltrar.TabIndex = 0;
-            this.btnFiltrar.Text = "Filtrar";
-            this.btnFiltrar.UseVisualStyleBackColor = true;
-            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
             // groupBox
             // 
@@ -162,6 +156,32 @@
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Filtro";
             // 
+            // btnRestablecer
+            // 
+            this.btnRestablecer.Location = new System.Drawing.Point(282, 43);
+            this.btnRestablecer.Name = "btnRestablecer";
+            this.btnRestablecer.Size = new System.Drawing.Size(75, 23);
+            this.btnRestablecer.TabIndex = 1;
+            this.btnRestablecer.Text = "Restablecer";
+            this.btnRestablecer.UseVisualStyleBackColor = true;
+            this.btnRestablecer.Click += new System.EventHandler(this.btnRestablecer_Click);
+            // 
+            // dtpHasta
+            // 
+            this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpHasta.Location = new System.Drawing.Point(95, 45);
+            this.dtpHasta.Name = "dtpHasta";
+            this.dtpHasta.Size = new System.Drawing.Size(100, 20);
+            this.dtpHasta.TabIndex = 9;
+            // 
+            // dtpDesde
+            // 
+            this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDesde.Location = new System.Drawing.Point(95, 19);
+            this.dtpDesde.Name = "dtpDesde";
+            this.dtpDesde.Size = new System.Drawing.Size(100, 20);
+            this.dtpDesde.TabIndex = 8;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -170,6 +190,16 @@
             this.label4.Size = new System.Drawing.Size(68, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Fecha Hasta";
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.Location = new System.Drawing.Point(201, 43);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltrar.TabIndex = 0;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
             // label3
             // 
@@ -180,31 +210,29 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Fecha Desde";
             // 
-            // dtpDesde
+            // lblResults
             // 
-            this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDesde.Location = new System.Drawing.Point(95, 19);
-            this.dtpDesde.Name = "dtpDesde";
-            this.dtpDesde.Size = new System.Drawing.Size(100, 20);
-            this.dtpDesde.TabIndex = 8;
+            this.lblResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblResults.AutoSize = true;
+            this.lblResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResults.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblResults.Location = new System.Drawing.Point(921, 15);
+            this.lblResults.Name = "lblResults";
+            this.lblResults.Size = new System.Drawing.Size(14, 13);
+            this.lblResults.TabIndex = 23;
+            this.lblResults.Text = "0";
             // 
-            // dtpHasta
+            // label5
             // 
-            this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpHasta.Location = new System.Drawing.Point(95, 45);
-            this.dtpHasta.Name = "dtpHasta";
-            this.dtpHasta.Size = new System.Drawing.Size(100, 20);
-            this.dtpHasta.TabIndex = 9;
-            // 
-            // btnRestablecer
-            // 
-            this.btnRestablecer.Location = new System.Drawing.Point(282, 43);
-            this.btnRestablecer.Name = "btnRestablecer";
-            this.btnRestablecer.Size = new System.Drawing.Size(75, 23);
-            this.btnRestablecer.TabIndex = 1;
-            this.btnRestablecer.Text = "Restablecer";
-            this.btnRestablecer.UseVisualStyleBackColor = true;
-            this.btnRestablecer.Click += new System.EventHandler(this.btnRestablecer_Click);
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label5.Location = new System.Drawing.Point(941, 15);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "resultados";
             // 
             // HistorialCuponesForm
             // 
@@ -219,6 +247,7 @@
             this.Load += new System.EventHandler(this.HistorialCuponesForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.searchPanel.ResumeLayout(false);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
@@ -244,5 +273,7 @@
         private System.Windows.Forms.Button btnRestablecer;
         private System.Windows.Forms.DateTimePicker dtpHasta;
         private System.Windows.Forms.DateTimePicker dtpDesde;
+        private System.Windows.Forms.Label lblResults;
+        private System.Windows.Forms.Label label5;
     }
 }

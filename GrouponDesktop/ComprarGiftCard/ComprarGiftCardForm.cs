@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GrouponDesktop.Core;
 using GrouponDesktop.Common;
 using GrouponDesktop.Business;
+using System.Collections;
 
 namespace GrouponDesktop.ComprarGiftCard
 {
@@ -39,9 +40,16 @@ namespace GrouponDesktop.ComprarGiftCard
 
         private void ComprarGiftCardForm_Load(object sender, EventArgs e)
         {
-            dataGridView.DataSource = _manager.GetAll(new Cliente() { UserID = Session.User.UserID });
+            dataGridView.DataSourceChanged += new EventHandler(dataGridView_DataSourceChanged);
             dataGridView.AutoGenerateColumns = false;
+            dataGridView.DataSource = _manager.GetAll(new Cliente() { UserID = Session.User.UserID });
             dataGridView.Refresh();
+        }
+
+        void dataGridView_DataSourceChanged(object sender, EventArgs e)
+        {
+            var dataSource = dataGridView.DataSource as IList;
+            lblResults.Text = dataSource.Count.ToString();
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GrouponDesktop.Core;
 using GrouponDesktop.Common;
 using GrouponDesktop.Business;
+using System.Collections;
 
 namespace GrouponDesktop.CargaCredito
 {
@@ -25,8 +26,15 @@ namespace GrouponDesktop.CargaCredito
         private void CargarCreditoForm_Load(object sender, EventArgs e)
         {
             var data = _manager.GetAll(Session.User);
+            dataGridView.DataSourceChanged += new EventHandler(dataGridView_DataSourceChanged);
             dataGridView.DataSource = data;
             dataGridView.Refresh();
+        }
+
+        void dataGridView_DataSourceChanged(object sender, EventArgs e)
+        {
+            var dataSource = dataGridView.DataSource as IList;
+            lblResults.Text = dataSource.Count.ToString();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)

@@ -50,6 +50,8 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblResults = new System.Windows.Forms.Label();
             this.buttonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.searchPanel.SuspendLayout();
@@ -59,6 +61,8 @@
             // buttonsPanel
             // 
             this.buttonsPanel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.buttonsPanel.Controls.Add(this.lblResults);
+            this.buttonsPanel.Controls.Add(this.label5);
             this.buttonsPanel.Controls.Add(this.btnEliminar);
             this.buttonsPanel.Controls.Add(this.btnModificar);
             this.buttonsPanel.Controls.Add(this.btnAgregar);
@@ -275,6 +279,30 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label5.Location = new System.Drawing.Point(520, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "resultados";
+            // 
+            // lblResults
+            // 
+            this.lblResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblResults.AutoSize = true;
+            this.lblResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResults.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblResults.Location = new System.Drawing.Point(500, 20);
+            this.lblResults.Name = "lblResults";
+            this.lblResults.Size = new System.Drawing.Size(14, 13);
+            this.lblResults.TabIndex = 4;
+            this.lblResults.Text = "0";
+            // 
             // ClientesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -287,6 +315,7 @@
             this.Text = "Clientes";
             this.Load += new System.EventHandler(this.ClientesForm_Load);
             this.buttonsPanel.ResumeLayout(false);
+            this.buttonsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.searchPanel.ResumeLayout(false);
             this.groupBox.ResumeLayout(false);
@@ -319,5 +348,7 @@
         private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Label lblResults;
+        private System.Windows.Forms.Label label5;
     }
 }

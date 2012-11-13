@@ -39,8 +39,15 @@ namespace GrouponDesktop.AbmCliente
                 dataSource.Remove(new Cliente() { UserID = Session.User.UserID });
             }
             dgvClientes.AutoGenerateColumns = false;
+            dgvClientes.DataSourceChanged += new EventHandler(dgvClientes_DataSourceChanged);
             dgvClientes.DataSource = dataSource;
             dgvClientes.DoubleClick += new EventHandler(dgvClientes_DoubleClick);
+        }
+
+        void dgvClientes_DataSourceChanged(object sender, EventArgs e)
+        {
+            var dataSource = dgvClientes.DataSource as BindingList<Cliente>;
+            lblResults.Text = dataSource.Count.ToString();
         }
 
         void dgvClientes_DoubleClick(object sender, EventArgs e)

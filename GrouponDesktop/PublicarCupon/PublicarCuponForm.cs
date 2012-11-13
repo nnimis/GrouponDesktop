@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GrouponDesktop.Core;
 using GrouponDesktop.Common;
 using GrouponDesktop.Business;
+using System.Collections;
 
 namespace GrouponDesktop.PublicarCupon
 {
@@ -24,8 +25,14 @@ namespace GrouponDesktop.PublicarCupon
 
         private void PublicarCuponForm_Load(object sender, EventArgs e)
         {
+            dataGridView.DataSourceChanged += new EventHandler(dataGridView_DataSourceChanged);
             dataGridView.AutoGenerateColumns = false;
             dataGridView.DataSource = _manager.GetAllToPublish();
+        }
+
+        void dataGridView_DataSourceChanged(object sender, EventArgs e)
+        {
+            UpdateDataSource();
         }
 
         private void btnPublicar_Click(object sender, EventArgs e)
@@ -46,10 +53,17 @@ namespace GrouponDesktop.PublicarCupon
                             dataSource.Remove(cupon);
                         }
                     }
+                    dataGridView.DataSource = _manager.GetAllToPublish();
                     dataGridView.Refresh();
                     MessageBox.Show("Se han publicado los cupones seleccionados");
                 }
             }
+        }
+
+        private void UpdateDataSource()
+        {
+            var dataSource = dataGridView.DataSource as IList;
+            lblResults.Text = dataSource.Count.ToString();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)

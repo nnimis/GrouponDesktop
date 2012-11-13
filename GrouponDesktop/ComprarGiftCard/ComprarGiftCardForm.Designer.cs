@@ -34,6 +34,8 @@
             this.ClienteDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblResults = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -92,12 +94,38 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.lblResults);
             this.panel1.Controls.Add(this.btnAgregar);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1054, 39);
             this.panel1.TabIndex = 5;
+            // 
+            // lblResults
+            // 
+            this.lblResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblResults.AutoSize = true;
+            this.lblResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResults.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblResults.Location = new System.Drawing.Point(957, 20);
+            this.lblResults.Name = "lblResults";
+            this.lblResults.Size = new System.Drawing.Size(14, 13);
+            this.lblResults.TabIndex = 19;
+            this.lblResults.Text = "0";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label5.Location = new System.Drawing.Point(977, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "resultados";
             // 
             // ComprarGiftCardForm
             // 
@@ -111,6 +139,7 @@
             this.Load += new System.EventHandler(this.ComprarGiftCardForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -123,5 +152,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Credito;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClienteDestino;
+        private System.Windows.Forms.Label lblResults;
+        private System.Windows.Forms.Label label5;
     }
 }

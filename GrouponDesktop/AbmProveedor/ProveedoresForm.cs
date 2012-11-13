@@ -34,8 +34,15 @@ namespace GrouponDesktop.AbmProveedor
             var bindingSource = new BindingSource();
             var table = _manager.GetAll();
             proveedoresGrid.AutoGenerateColumns = false;
+            proveedoresGrid.DataSourceChanged += new EventHandler(proveedoresGrid_DataSourceChanged);
             proveedoresGrid.DataSource = table;
             proveedoresGrid.DoubleClick += new EventHandler(proveedoresGrid_DoubleClick);
+        }
+
+        void proveedoresGrid_DataSourceChanged(object sender, EventArgs e)
+        {
+            var dataSource = proveedoresGrid.DataSource as BindingList<Proveedor>;
+            lblResults.Text = dataSource.Count.ToString();
         }
 
         void proveedoresGrid_DoubleClick(object sender, EventArgs e)

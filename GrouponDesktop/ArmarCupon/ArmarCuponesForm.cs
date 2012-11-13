@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GrouponDesktop.Core;
 using GrouponDesktop.Common;
 using GrouponDesktop.Business;
+using System.Collections;
 
 namespace GrouponDesktop.ArmarCupon
 {
@@ -41,7 +42,14 @@ namespace GrouponDesktop.ArmarCupon
         private void ArmarCuponesForm_Load(object sender, EventArgs e)
         {
             dataGridView.AutoGenerateColumns = false;
+            dataGridView.DataSourceChanged += new EventHandler(dataGridView_DataSourceChanged);
             dataGridView.DataSource = _manager.GetAll(new Proveedor() { UserID = Session.User.UserID });
+        }
+
+        void dataGridView_DataSourceChanged(object sender, EventArgs e)
+        {
+            var dataSource = dataGridView.DataSource as IList;
+            lblResults.Text = dataSource.Count.ToString();
         }
     }
 }

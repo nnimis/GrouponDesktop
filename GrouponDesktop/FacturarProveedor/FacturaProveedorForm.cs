@@ -11,6 +11,7 @@ using GrouponDesktop.Common;
 using GrouponDesktop.Login;
 using GrouponDesktop.AbmProveedor;
 using GrouponDesktop.Business;
+using System.Collections;
 
 namespace GrouponDesktop.FacturarProveedor
 {
@@ -90,6 +91,17 @@ namespace GrouponDesktop.FacturarProveedor
             MessageBox.Show(string.Format("Se ha generado la factura Nro. {1} para el proveedor '{0}' por ${2}", _proveedor.UserName, nroFactura, montoFactura));
             dataGridView.DataSource = null;
             dataGridView.Refresh();
+        }
+
+        private void FacturaProveedorForm_Load(object sender, EventArgs e)
+        {
+            dataGridView.DataSourceChanged += new EventHandler(dataGridView_DataSourceChanged);
+        }
+
+        void dataGridView_DataSourceChanged(object sender, EventArgs e)
+        {
+            var dataSource = dataGridView.DataSource as IList;
+            lblResults.Text = dataSource.Count.ToString();
         }
     }
 }

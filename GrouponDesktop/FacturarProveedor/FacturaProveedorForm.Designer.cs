@@ -38,13 +38,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.btnGenerarFactura = new System.Windows.Forms.Button();
-            this.searchPanel = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnGenerarFactura = new System.Windows.Forms.Button();
+            this.searchPanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblResults = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.searchPanel.SuspendLayout();
@@ -161,35 +163,6 @@
             this.dataGridView.Size = new System.Drawing.Size(963, 347);
             this.dataGridView.TabIndex = 9;
             // 
-            // btnGenerarFactura
-            // 
-            this.btnGenerarFactura.Location = new System.Drawing.Point(12, 10);
-            this.btnGenerarFactura.Name = "btnGenerarFactura";
-            this.btnGenerarFactura.Size = new System.Drawing.Size(106, 23);
-            this.btnGenerarFactura.TabIndex = 0;
-            this.btnGenerarFactura.Text = "Generar Factura";
-            this.btnGenerarFactura.UseVisualStyleBackColor = true;
-            this.btnGenerarFactura.Click += new System.EventHandler(this.btnGenerarFactura_Click);
-            // 
-            // searchPanel
-            // 
-            this.searchPanel.Controls.Add(this.groupBox);
-            this.searchPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchPanel.Location = new System.Drawing.Point(0, 39);
-            this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(963, 115);
-            this.searchPanel.TabIndex = 11;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.btnGenerarFactura);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(963, 39);
-            this.panel1.TabIndex = 10;
-            // 
             // Fecha
             // 
             this.Fecha.DataPropertyName = "Fecha";
@@ -218,6 +191,61 @@
             this.Precio.Name = "Precio";
             this.Precio.ReadOnly = true;
             // 
+            // btnGenerarFactura
+            // 
+            this.btnGenerarFactura.Location = new System.Drawing.Point(12, 10);
+            this.btnGenerarFactura.Name = "btnGenerarFactura";
+            this.btnGenerarFactura.Size = new System.Drawing.Size(106, 23);
+            this.btnGenerarFactura.TabIndex = 0;
+            this.btnGenerarFactura.Text = "Generar Factura";
+            this.btnGenerarFactura.UseVisualStyleBackColor = true;
+            this.btnGenerarFactura.Click += new System.EventHandler(this.btnGenerarFactura_Click);
+            // 
+            // searchPanel
+            // 
+            this.searchPanel.Controls.Add(this.groupBox);
+            this.searchPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchPanel.Location = new System.Drawing.Point(0, 39);
+            this.searchPanel.Name = "searchPanel";
+            this.searchPanel.Size = new System.Drawing.Size(963, 115);
+            this.searchPanel.TabIndex = 11;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.lblResults);
+            this.panel1.Controls.Add(this.btnGenerarFactura);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(963, 39);
+            this.panel1.TabIndex = 10;
+            // 
+            // lblResults
+            // 
+            this.lblResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblResults.AutoSize = true;
+            this.lblResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResults.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblResults.Location = new System.Drawing.Point(866, 15);
+            this.lblResults.Name = "lblResults";
+            this.lblResults.Size = new System.Drawing.Size(14, 13);
+            this.lblResults.TabIndex = 21;
+            this.lblResults.Text = "0";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label5.Location = new System.Drawing.Point(886, 15);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "resultados";
+            // 
             // FacturaProveedorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,11 +256,13 @@
             this.Controls.Add(this.panel1);
             this.Name = "FacturaProveedorForm";
             this.Text = "Facturas";
+            this.Load += new System.EventHandler(this.FacturaProveedorForm_Load);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.searchPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -256,5 +286,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.Label lblResults;
+        private System.Windows.Forms.Label label5;
     }
 }

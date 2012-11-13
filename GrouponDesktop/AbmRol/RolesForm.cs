@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GrouponDesktop.Core;
 using GrouponDesktop.Common;
 using GrouponDesktop.Business;
+using System.Collections;
 
 namespace GrouponDesktop.AbmRol
 {
@@ -26,8 +27,15 @@ namespace GrouponDesktop.AbmRol
         {
             var bindingSource = new BindingSource();
             var rolesTable = rolesManager.GetRoles();
+            rolesDataGridView.DataSourceChanged += new EventHandler(rolesDataGridView_DataSourceChanged);
             rolesDataGridView.AutoGenerateColumns = false;
             rolesDataGridView.DataSource = rolesTable;
+        }
+
+        void rolesDataGridView_DataSourceChanged(object sender, EventArgs e)
+        {
+            var dataSource = rolesDataGridView.DataSource as IList;
+            lblResults.Text = dataSource.Count.ToString();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)

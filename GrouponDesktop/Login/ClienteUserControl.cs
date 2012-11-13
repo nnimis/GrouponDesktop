@@ -17,15 +17,28 @@ namespace GrouponDesktop.Login
 
         public Cliente GetCliente()
         {
+            long telefono = 0;
+            long dni = 0;
+            if (!long.TryParse(txtTelefono.Text.Trim().Replace("-", ""), out telefono))
+                throw new Exception("El teléfono debe ser numérico!");
+            if (!long.TryParse(txtDNI.Text, out dni))
+                throw new Exception("El DNI debe ser numérico!");
+            if (string.IsNullOrEmpty(txtNombre.Text))
+                throw new Exception("El Nombre es obligatorio!");
+            if (string.IsNullOrEmpty(txtApellido.Text))
+                throw new Exception("El Apellido es obligatorio!");
             var ciudades = clbCiudades.CheckedItems.Cast<City>().ToList();
+            if (ciudades.Count == 0)
+                throw new Exception("Debe seleccionar al menos una ciudad!");
+
             _cliente.Apellido = txtApellido.Text;
             _cliente.Nombre = txtNombre.Text;
-            _cliente.DNI = long.Parse(txtDNI.Text);
+            _cliente.DNI = dni;
             _cliente.FechaNacimiento = dtFechaNacimiento.Value;
             _cliente.Ciudades = ciudades;
             _cliente.DetalleEntidad.CP = txtCP.Text;
             _cliente.DetalleEntidad.Direccion = txtDireccion.Text;
-            _cliente.DetalleEntidad.Telefono = long.Parse(txtTelefono.Text.Trim().Replace("-", ""));
+            _cliente.DetalleEntidad.Telefono = telefono;
             _cliente.DetalleEntidad.Email = txtMail.Text;
             _cliente.DetalleEntidad.Ciudad = (City)cbxCiudad.SelectedItem;
 

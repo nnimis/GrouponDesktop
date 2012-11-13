@@ -25,6 +25,8 @@ namespace GrouponDesktop.HistorialCupones
 
         private void HistorialCuponesForm_Load(object sender, EventArgs e)
         {
+            dtpDesde.Value = DateTime.Now.Subtract(TimeSpan.FromDays(7));
+            dtpHasta.Value = DateTime.Now;
             dataGridView.AutoGenerateColumns = false;
             GetList();
         }
@@ -45,6 +47,7 @@ namespace GrouponDesktop.HistorialCupones
             if (dtpDesde.Value > dtpHasta.Value)
             {
                 MessageBox.Show("La fecha desde debe ser menor o igual que la fecha hasta");
+                return;
             }
             dataGridView.DataSource = _manager.GetAll(new Cliente() { UserID = Session.User.UserID }, dtpDesde.Value, dtpHasta.Value);
             dataGridView.Refresh();

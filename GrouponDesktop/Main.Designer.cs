@@ -48,7 +48,6 @@
             this.Controls.Add(this.mainMenu);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mainMenu;
-            this.MaximizeBox = false;
             this.Name = "MainView";
             this.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.ShowIcon = false;

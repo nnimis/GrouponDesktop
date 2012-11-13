@@ -112,13 +112,16 @@ namespace GrouponDesktop.Business
 
         public void DevolverCompra(Cliente cliente, CompraCupon compraCupon, string motivo)
         {
-            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+            var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
                 "GRUPO_N.InsertDevolucionCompra", SqlDataAccessArgs
                 .CreateWith("@ID_Cliente", cliente.UserID)
                 .And("@ID_CompraCupon", compraCupon.ID)
                 .And("@Fecha", DateTime.Now)
                 .And("@Motivo", motivo)
                 .Arguments);
+
+            if (result == null || (int)result == 0)
+                throw new Exception("No se puede devolver una compra ya consumida");
         }
 
         public void ConsumirCompra(CompraCupon compraCupon)

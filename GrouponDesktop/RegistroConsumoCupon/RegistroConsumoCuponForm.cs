@@ -42,5 +42,11 @@ namespace GrouponDesktop.RegistroConsumoCupon
                 dataGridView.Refresh();
             }
         }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            dataGridView.DataSource = _manager.GetAll(new Proveedor() { UserID = Session.User.UserID });
+            dataGridView.Refresh();
+        }
     }
 }

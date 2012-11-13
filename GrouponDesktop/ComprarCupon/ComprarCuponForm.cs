@@ -39,5 +39,11 @@ namespace GrouponDesktop.ComprarCupon
                 MessageBox.Show(string.Format("Ha comprado la oferta! el código es '{0}{1}'", cupon.Codigo, nroCupon));
             }
         }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            dataGridView.DataSource = _manager.GetAll(new Cliente() { UserID = Session.User.UserID });
+            dataGridView.Refresh();
+        }
     }
 }

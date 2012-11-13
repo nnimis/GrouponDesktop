@@ -87,6 +87,13 @@ namespace GrouponDesktop
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtUsername.Text))
+                throw new Exception("El nombre de usuario es obligatorio!");
+            if (string.IsNullOrEmpty(txtPassword.Text))
+                throw new Exception("El password es obligatorio!");
+            if (txtPassword.Text != txtConfirmPassword.Text)
+                throw new Exception("Los passwords no coinciden!");
+
             User user = null;
             if (Profile == Profile.Cliente)
             {

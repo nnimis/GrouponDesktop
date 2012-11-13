@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.btnRegistrarConsumo = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.FechaCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnRegistrarConsumo = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnActualizar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -60,26 +61,6 @@
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(1128, 448);
             this.dataGridView.TabIndex = 9;
-            // 
-            // btnRegistrarConsumo
-            // 
-            this.btnRegistrarConsumo.Location = new System.Drawing.Point(12, 10);
-            this.btnRegistrarConsumo.Name = "btnRegistrarConsumo";
-            this.btnRegistrarConsumo.Size = new System.Drawing.Size(106, 23);
-            this.btnRegistrarConsumo.TabIndex = 0;
-            this.btnRegistrarConsumo.Text = "Registrar Consumo";
-            this.btnRegistrarConsumo.UseVisualStyleBackColor = true;
-            this.btnRegistrarConsumo.Click += new System.EventHandler(this.btnRegistrarConsumo_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.btnRegistrarConsumo);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1128, 39);
-            this.panel1.TabIndex = 10;
             // 
             // FechaCompra
             // 
@@ -116,6 +97,37 @@
             this.Cliente.Name = "Cliente";
             this.Cliente.ReadOnly = true;
             // 
+            // btnRegistrarConsumo
+            // 
+            this.btnRegistrarConsumo.Location = new System.Drawing.Point(12, 10);
+            this.btnRegistrarConsumo.Name = "btnRegistrarConsumo";
+            this.btnRegistrarConsumo.Size = new System.Drawing.Size(106, 23);
+            this.btnRegistrarConsumo.TabIndex = 0;
+            this.btnRegistrarConsumo.Text = "Registrar Consumo";
+            this.btnRegistrarConsumo.UseVisualStyleBackColor = true;
+            this.btnRegistrarConsumo.Click += new System.EventHandler(this.btnRegistrarConsumo_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.btnActualizar);
+            this.panel1.Controls.Add(this.btnRegistrarConsumo);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1128, 39);
+            this.panel1.TabIndex = 10;
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Location = new System.Drawing.Point(124, 10);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(106, 23);
+            this.btnActualizar.TabIndex = 1;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
             // RegistroConsumoCuponForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -142,5 +154,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
+        private System.Windows.Forms.Button btnActualizar;
     }
 }

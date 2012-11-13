@@ -353,7 +353,18 @@
     <None Include="Scripts\Tablas\ALTER_Direccion.sql" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Scripts\CREATE_Default_Values.sql" />
     <None Include="Scripts\CREATE_Triggers.sql" />
+    <None Include="Scripts\exportacion_codigo_por_compra.sql" />
+    <None Include="Scripts\exportacion_codigo_por_cupon.sql" />
+    <None Include="Scripts\FN_GetFunctionalityByName.sql" />
+    <None Include="Scripts\FN_GetIdRolDefault.sql" />
+    <None Include="Scripts\Functions\FN_GetIdCiudadByProveedor.sql" />
+    <None Include="Scripts\Functions\FN_GetIdClienteByTelefono.sql" />
+    <None Include="Scripts\Functions\FN_GetIdCuponByAllKeys.sql" />
+    <None Include="Scripts\Functions\FN_GetIdProveedorByName.sql" />
+    <None Include="Scripts\Indices\ALTER_Cupon_Indice_Migracion.sql" />
+    <None Include="Scripts\INSERT_DefaultRole.sql" />
     <None Include="Scripts\INSERT_RolesFuncionalidades.sql" />
     <None Include="Scripts\INSERT_TipoPago.sql" />
     <None Include="Scripts\Stores\SP_ComprarCuponCliente.sql" />
@@ -366,6 +377,8 @@
     <None Include="Scripts\Stores\SP_GetCodigoCuponExists.sql" />
     <None Include="Scripts\Stores\SP_GetCuponesProveedor.sql" />
     <None Include="Scripts\Stores\SP_GetGiftCardCliente.sql" />
+    <None Include="Scripts\Stores\SP_Get_TOPDevoluciones.sql" />
+    <None Include="Scripts\Stores\SP_Get_TOPGiftCard.sql" />
     <None Include="Scripts\Stores\SP_InsertCanjeCupon.sql" />
     <None Include="Scripts\Stores\SP_InsertCupon.sql" />
     <None Include="Scripts\Stores\SP_InsertCuponCiudad.sql" />
@@ -377,6 +390,10 @@
     <None Include="Scripts\Stores\SP_PublicarCupon.sql" />
     <None Include="Scripts\Stores\SP_UpdateProveedor.sql" />
     <None Include="Scripts\Tablas\ALTER_DetalleEntidad.sql" />
+    <None Include="Scripts\Tablas\ALTER_Devolucion.sql" />
+    <None Include="Scripts\Tablas\ALTER_Factura.sql" />
+    <None Include="Scripts\Tablas\ALTER_Factura_FK.sql" />
+    <None Include="Scripts\Tablas\ALTER_Rubro.sql" />
     <None Include="Scripts\Tablas\TB_PagosTarjetas.sql" />
     <None Include="Scripts\Triggers\CompraCuponInserted.sql" />
     <None Include="Scripts\Triggers\DevolucionInserted.sql" />

@@ -32,6 +32,13 @@ namespace GrouponDesktop.Login
 
         public Proveedor GetProveedor()
         {
+            long telefono = 0;
+            if (!long.TryParse(txtTelefono.Text, out telefono))
+                throw new Exception("El teléfono debe ser numérico!");
+            if (string.IsNullOrEmpty(txtCUIT.Text))
+                throw new Exception("El CUIT es obligatorio!");
+            if (string.IsNullOrEmpty(txtRazonSocial.Text))
+                throw new Exception("La Razón Social es obligatoria!");
             _proveedor.CUIT = txtCUIT.Text;
             _proveedor.NombreContacto = txtContacto.Text;
             _proveedor.RazonSocial = txtRazonSocial.Text;
@@ -42,7 +49,7 @@ namespace GrouponDesktop.Login
                 CP = txtCP.Text,
                 Email = txtMail.Text,
                 Direccion = txtDireccion.Text,
-                Telefono = long.Parse(txtTelefono.Text)
+                Telefono = telefono
             };
 
             return _proveedor;

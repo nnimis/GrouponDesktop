@@ -24,6 +24,8 @@ namespace GrouponDesktop.FacturarProveedor
         {
             InitializeComponent();
             dataGridView.AutoGenerateColumns = false;
+            dtpDesde.Value = DateTime.Now.Subtract(TimeSpan.FromDays(180));
+            dtpHasta.Value = DateTime.Now;
         }
 
         private void btnBuscarProveedor_Click(object sender, EventArgs e)
@@ -46,9 +48,15 @@ namespace GrouponDesktop.FacturarProveedor
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
+            if (_proveedor == null)
+            {
+                MessageBox.Show("Debe seleccionar un proveedor para poder ver los consumos");
+                return;
+            }
             if (dtpDesde.Value > dtpHasta.Value)
             {
                 MessageBox.Show("La fecha desde debe ser menor o igual que la fecha hasta");
+                return;
             }
             var manager = new CompraCuponManager();
             dataGridView.DataSource = manager.GetParaFacturar(_proveedor, dtpDesde.Value, dtpHasta.Value);
@@ -65,6 +73,7 @@ namespace GrouponDesktop.FacturarProveedor
             if (dtpDesde.Value > dtpHasta.Value)
             {
                 MessageBox.Show("La fecha desde debe ser menor o igual que la fecha hasta");
+                return;
             }
             var data = (BindingList<CompraCupon>)dataGridView.DataSource;
             if (data == null || data.Count == 0)

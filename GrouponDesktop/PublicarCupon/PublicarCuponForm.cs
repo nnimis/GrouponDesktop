@@ -51,5 +51,11 @@ namespace GrouponDesktop.PublicarCupon
                 }
             }
         }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            dataGridView.DataSource = _manager.GetAllToPublish();
+            dataGridView.Refresh();
+        }
     }
 }

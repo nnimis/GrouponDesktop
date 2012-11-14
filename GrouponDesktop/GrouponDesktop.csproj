@@ -274,43 +274,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Scripts\Functions\FN_GetIdRoleByProfile.sql" />
-    <None Include="Scripts\Functions\FN_GetIdProfileByName.sql" />
-    <None Include="Scripts\INSERT_Roles.sql" />
-    <None Include="Scripts\Functions\FN_GetIdRolByName.sql" />
-    <None Include="Scripts\INSERT_Perfiles.sql" />
-    <None Include="Scripts\Functions\FN_GetFunctionalityByName.sql" />
-    <None Include="Scripts\Functions\FN_GetIdRolDefault.sql" />
-    <None Include="Scripts\INSERT_Rubros.sql" />
-    <None Include="Scripts\Stores\SP_GetClientes.sql" />
-    <None Include="Scripts\Stores\SP_GetIdRoleByProfile.sql" />
-    <None Include="Scripts\Stores\SP_GetRubros.sql" />
-    <None Include="Scripts\Stores\SP_DeleteUser.sql" />
-    <None Include="Scripts\Stores\SP_GetCiudades.sql" />
-    <None Include="Scripts\Stores\SP_GetUserLoginAttempts.sql" />
-    <None Include="Scripts\Stores\SP_InsertCliente.sql" />
-    <None Include="Scripts\Stores\SP_InsertDetalleEntidad.sql" />
-    <None Include="Scripts\Stores\SP_InsertProfileUser.sql" />
-    <None Include="Scripts\Stores\SP_InsertUser.sql" />
-    <None Include="Scripts\Stores\SP_UpdatePassword.sql" />
-    <None Include="Scripts\Stores\SP_InsertRoleFunctionality.sql" />
-    <None Include="Scripts\Stores\SP_DeleteRoleFunctionalities.sql" />
-    <None Include="Scripts\Stores\SP_UpdateRole.sql" />
-    <None Include="Scripts\Stores\SP_GetIdRolDefault.sql" />
-    <None Include="Scripts\Stores\SP_DeleteRole.sql" />
-    <None Include="Scripts\Stores\SP_GetRoles.sql" />
-    <None Include="Scripts\CREATE_DB.sql" />
-    <None Include="Scripts\Entregable\Script.sql" />
-    <None Include="Scripts\INSERT_Administrador.sql" />
-    <None Include="Scripts\INSERT_Funcionalidades.sql" />
-    <None Include="Scripts\Stores\SP_GetRoleFunctionalities.sql" />
-    <None Include="Scripts\Stores\SP_InsertRole.sql" />
-    <None Include="Scripts\Stores\SP_Login.sql" />
-    <None Include="Scripts\Tablas\ALTER_Cliente.sql" />
-    <None Include="Scripts\Tablas\ALTER_Proveedor.sql" />
-    <None Include="Scripts\Tablas\TB_Perfil.sql" />
-    <None Include="Scripts\Tablas\TB_Roles.sql" />
-    <None Include="Scripts\Tablas\TB_Usuarios.sql" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -338,67 +301,6 @@
       <Project>{4E7562B4-E184-439D-AB83-75F3862E86A3}</Project>
       <Name>GrouponDesktop.Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\Stores\SP_GetClienteCiudades.sql" />
-    <None Include="Scripts\Stores\SP_InsertProveedor.sql" />
-    <None Include="Scripts\Stores\SP_UpdateCliente.sql" />
-    <None Include="Scripts\Stores\SP_UpdateDetalleEntidad.sql" />
-    <None Include="Scripts\Tablas\ALTER_Cupon.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\Stores\SP_DeleteCiudadesCliente.sql" />
-    <None Include="Scripts\Stores\SP_GetProveedores.sql" />
-    <None Include="Scripts\Stores\SP_InsertCiudadCliente.sql" />
-    <None Include="Scripts\Tablas\ALTER_Direccion.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\CREATE_Default_Values.sql" />
-    <None Include="Scripts\CREATE_Triggers.sql" />
-    <None Include="Scripts\exportacion_codigo_por_compra.sql" />
-    <None Include="Scripts\exportacion_codigo_por_cupon.sql" />
-    <None Include="Scripts\FN_GetFunctionalityByName.sql" />
-    <None Include="Scripts\FN_GetIdRolDefault.sql" />
-    <None Include="Scripts\Functions\FN_GetIdCiudadByProveedor.sql" />
-    <None Include="Scripts\Functions\FN_GetIdClienteByTelefono.sql" />
-    <None Include="Scripts\Functions\FN_GetIdCuponByAllKeys.sql" />
-    <None Include="Scripts\Functions\FN_GetIdProveedorByName.sql" />
-    <None Include="Scripts\Indices\ALTER_Cupon_Indice_Migracion.sql" />
-    <None Include="Scripts\INSERT_DefaultRole.sql" />
-    <None Include="Scripts\INSERT_RolesFuncionalidades.sql" />
-    <None Include="Scripts\INSERT_TipoPago.sql" />
-    <None Include="Scripts\Stores\SP_ComprarCuponCliente.sql" />
-    <None Include="Scripts\Stores\SP_GetComprasCliente.sql" />
-    <None Include="Scripts\Stores\SP_GetComprasParaFacturar.sql" />
-    <None Include="Scripts\Stores\SP_GetComprasProveedor.sql" />
-    <None Include="Scripts\Stores\SP_GetCuponesCliente.sql" />
-    <None Include="Scripts\Stores\SP_GetCuponesParaPublicar.sql" />
-    <None Include="Scripts\Stores\SP_GetCiudadesCupon.sql" />
-    <None Include="Scripts\Stores\SP_GetCodigoCuponExists.sql" />
-    <None Include="Scripts\Stores\SP_GetCuponesProveedor.sql" />
-    <None Include="Scripts\Stores\SP_GetGiftCardCliente.sql" />
-    <None Include="Scripts\Stores\SP_Get_TOPDevoluciones.sql" />
-    <None Include="Scripts\Stores\SP_Get_TOPGiftCard.sql" />
-    <None Include="Scripts\Stores\SP_InsertCanjeCupon.sql" />
-    <None Include="Scripts\Stores\SP_InsertCupon.sql" />
-    <None Include="Scripts\Stores\SP_InsertCuponCiudad.sql" />
-    <None Include="Scripts\Stores\SP_InsertDevolucion.sql" />
-    <None Include="Scripts\Stores\SP_InsertFactura.sql" />
-    <None Include="Scripts\Stores\SP_InsertFacturaCanjeCupon.sql" />
-    <None Include="Scripts\Stores\SP_InsertGiftCard.sql" />
-    <None Include="Scripts\Stores\SP_InsertPago.sql" />
-    <None Include="Scripts\Stores\SP_PublicarCupon.sql" />
-    <None Include="Scripts\Stores\SP_UpdateProveedor.sql" />
-    <None Include="Scripts\Tablas\ALTER_DetalleEntidad.sql" />
-    <None Include="Scripts\Tablas\ALTER_Devolucion.sql" />
-    <None Include="Scripts\Tablas\ALTER_Factura.sql" />
-    <None Include="Scripts\Tablas\ALTER_Factura_FK.sql" />
-    <None Include="Scripts\Tablas\ALTER_Rubro.sql" />
-    <None Include="Scripts\Tablas\TB_PagosTarjetas.sql" />
-    <None Include="Scripts\Triggers\CompraCuponInserted.sql" />
-    <None Include="Scripts\Triggers\DevolucionInserted.sql" />
-    <None Include="Scripts\Triggers\GiftCardInserted.sql" />
-    <None Include="Scripts\Triggers\PagoInserted.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

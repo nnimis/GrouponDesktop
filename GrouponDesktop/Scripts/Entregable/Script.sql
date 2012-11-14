@@ -1760,8 +1760,8 @@ GO
 
 PRINT 'INICIO DE MIGRACION DE DATOS'
 
--- Ingreso los clientes.
-PRINT 'Ingreso los clientes...'
+-- Ingresando los clientes.
+PRINT 'Ingresando los clientes...'
 GO
 DECLARE
 @Id_Rol_Cliente int
@@ -1781,8 +1781,8 @@ SELECT DISTINCT m.Cli_Apellido, m.Cli_Dni, m.Cli_Fecha_Nac, u.ID, m.Cli_Nombre, 
 INNER JOIN gd_esquema.Maestra m ON u.Nombre = CAST(m.Cli_Telefono AS NVARCHAR(255))
 WHERE u.ID_Rol = @Id_Rol_Cliente;
 GO
---Ingreso las ciudades de los diferentes proveedores 
-PRINT 'Ingreso las ciudades de los diferentes proveedores y clientes...'
+--Ingresando las ciudades de los diferentes proveedores 
+PRINT 'Ingresando las ciudades de los diferentes proveedores y clientes...'
 INSERT INTO GRUPO_N.Ciudad (Descripcion)
 SELECT DISTINCT nombreCiudad FROM (SELECT distinct cli_ciudad as nombreCiudad FROM gd_esquema.Maestra WHERE Provee_RS IS NULL
 UNION SELECT DISTINCT Provee_Ciudad as nombreCiudad FROM gd_esquema.Maestra WHERE Provee_RS IS NOT NULL) m
@@ -1825,16 +1825,16 @@ INNER JOIN GRUPO_N.TipoPago tp ON tp.ID=p.ID_TipoPago
 INNER JOIN GRUPO_N.Tarjeta t ON t.ID_Cliente=p.ID_Cliente
 WHERE tp.Descripcion='Crédito'
 GO
---Ingreso los rubros de los proveedores
-PRINT 'Ingreso los rubros de los proveedores...'
+--Ingresando los rubros de los proveedores
+PRINT 'Ingresando los rubros de los proveedores...'
 GO
 
 INSERT INTO GRUPO_N.Rubro (Descripcion) 
 SELECT DISTINCT Provee_Rubro FROM gd_esquema.Maestra WHERE Provee_Rubro IS NOT NULL;
 
 GO
---Ingreso los proveedores
-PRINT 'Ingreso los proveedores...'
+--Ingresando los proveedores
+PRINT 'Ingresando los proveedores...'
 GO
 DECLARE 
 @Id_Rol_Proveedor int
@@ -1861,8 +1861,8 @@ FROM (SELECT DISTINCT Provee_RS, Provee_Ciudad, Provee_Dom FROM gd_esquema.Maest
 	INNER JOIN GRUPO_N.DetalleEntidad de ON de.ID_Usuario = p.ID 
 	INNER JOIN GRUPO_N.Ciudad ciu ON ciu.Descripcion = m.Provee_Ciudad
 GO
---Ingreso los cupones
-PRINT 'Ingreso los cupones...'
+--Ingresando los cupones
+PRINT 'Ingresando los cupones...'
 GO
 INSERT INTO GRUPO_N.Cupon (Precio, PrecioOriginal, FechaPublicacion,FechaVigencia,FechaVencimiento,Stock,Descripcion,ID_Proveedor,CantidadPorUsuario,Publicado ,Codigo)
 SELECT distinct [Groupon_Precio_Ficticio], [Groupon_Precio] ,[Groupon_Fecha] ,[Groupon_Fecha_Venc], DATEADD(MONTH,2,[Groupon_Fecha_Venc]) ,[Groupon_Cantidad] ,[Groupon_Descripcion],p.ID,[Groupon_Cantidad], 1 , substring(m.Groupon_Codigo,1,10)
@@ -1870,8 +1870,8 @@ SELECT distinct [Groupon_Precio_Ficticio], [Groupon_Precio] ,[Groupon_Fecha] ,[G
   INNER JOIN GRUPO_N.Proveedor p ON m.Provee_RS=p.RazonSocial WHERE Provee_RS IS NOT NULL 
 GO
 
---Ingreso las ciudades de los cupones
-PRINT 'Ingreso las ciudades de los cupones...'
+--Ingresando las ciudades de los cupones
+PRINT 'Ingresando las ciudades de los cupones...'
 GO
 INSERT INTO GRUPO_N.CuponCiudad (ID_Cupon,ID_Ciudad)
 SELECT c.ID, ciu.ID FROM GRUPO_N.Cupon c
@@ -1883,8 +1883,8 @@ WHERE m.Groupon_Devolucion_Fecha IS NULL AND m.Groupon_Entregado_Fecha IS NULL A
 INNER JOIN GRUPO_N.Ciudad ciu ON  ciu.Descripcion = m.Provee_Ciudad
 GO
 
---Ingreso la compra de los cupones
-PRINT 'Ingreso la compra de los cupones...'
+--Ingresando la compra de los cupones
+PRINT 'Ingresando la compra de los cupones...'
 GO
 DECLARE
 @Id_Rol_Cliente int
@@ -1900,8 +1900,8 @@ SELECT u.ID, c.ID, Groupon_Codigo,Groupon_Fecha_Compra
 	WHERE Groupon_Fecha_Compra IS NOT NULL AND Groupon_Devolucion_Fecha IS NULL
 	  AND Groupon_Entregado_Fecha IS NULL AND Factura_Fecha IS NULL AND u.ID_Rol =@Id_Rol_Cliente AND m.Provee_RS = p.RazonSocial
 GO
---Ingreso la devolucion de los cupones
-PRINT 'Ingreso la devolucion de los cupones...'
+--Ingresando la devolucion de los cupones
+PRINT 'Ingresando la devolucion de los cupones...'
 GO
 INSERT INTO GRUPO_N.Devolucion(ID_CompraCupon, ID_Cliente, Fecha, Motivo)
 SELECT cc.ID, u.ID_Usuario,Groupon_Devolucion_Fecha, 'Devolucion en sistema previo' FROM gd_esquema.Maestra m 
@@ -1910,8 +1910,8 @@ INNER JOIN GRUPO_N.Proveedor p ON p.RazonSocial=m.Provee_RS
 INNER JOIN GRUPO_N.CompraCupon cc ON cc.ID_Cliente=u.ID_Usuario AND cc.Codigo = m.Groupon_Codigo and cc.Fecha=m.Groupon_Fecha_Compra 								 										 
 WHERE Groupon_Devolucion_Fecha IS NOT NULL
 GO  
---Ingreso el retiro de cupones
-PRINT 'Ingreso el retiro de cupones...'
+--Ingresando el retiro de cupones
+PRINT 'Ingresando el retiro de cupones...'
 GO
 INSERT INTO GRUPO_N.CanjeCupon(Fecha,ID_CompraCupon)
 SELECT Groupon_Entregado_Fecha, cc.ID FROM gd_esquema.Maestra m 
@@ -1920,8 +1920,8 @@ INNER JOIN GRUPO_N.Proveedor p ON p.RazonSocial=m.Provee_RS
 INNER JOIN GRUPO_N.CompraCupon cc ON cc.ID_Cliente=u.ID_Usuario AND cc.Codigo = m.Groupon_Codigo and cc.Fecha=m.Groupon_Fecha_Compra 										 
 WHERE Groupon_Entregado_Fecha IS NOT NULL
 GO
---Ingreso la facturacion de los cupones
-PRINT 'Ingreso la facturacion de los cupones...'
+--Ingresando la facturacion de los cupones
+PRINT 'Ingresando la facturacion de los cupones...'
 GO
 INSERT INTO GRUPO_N.Factura(Numero, Fecha, ID_Proveedor)
 SELECT DISTINCT m.Factura_Nro,m.Factura_Fecha, p.ID FROM gd_esquema.Maestra m 
@@ -1947,8 +1947,8 @@ WHERE Factura_Fecha IS NOT NULL
 --  FROM [GD2C2012].[gd_esquema].[Maestra]
 --  WHERE Tipo_Pago_Desc IS NOT NULL
 GO  
---Ingreso de las GiftCards
-PRINT 'Ingreso de las GiftCards...'
+--Ingresando de las GiftCards
+PRINT 'Ingresando de las GiftCards...'
 GO
 INSERT INTO GRUPO_N.GiftCard (ID_Cliente_Origen,ID_Cliente_Destino,Fecha,Credito)
 SELECT u.ID, ud.ID, m.GiftCard_Fecha, m.GiftCard_Monto FROM gd_esquema.Maestra m

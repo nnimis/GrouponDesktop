@@ -1892,7 +1892,7 @@ GO
 PRINT 'Ingreso los cupones...'
 GO
 INSERT INTO GRUPO_N.Cupon (Precio, PrecioOriginal, FechaPublicacion,FechaVigencia,FechaVencimiento,Stock,Descripcion,ID_Proveedor,CantidadPorUsuario,Publicado ,Codigo)
-SELECT distinct [Groupon_Precio_Ficticio], [Groupon_Precio] ,[Groupon_Fecha] ,[Groupon_Fecha_Venc], DATEADD(MONTH,2,[Groupon_Fecha_Venc]) ,[Groupon_Cantidad] ,[Groupon_Descripcion],p.ID,[Groupon_Cantidad], 1 , m.Groupon_Codigo
+SELECT distinct [Groupon_Precio_Ficticio], [Groupon_Precio] ,[Groupon_Fecha] ,[Groupon_Fecha_Venc], DATEADD(MONTH,2,[Groupon_Fecha_Venc]) ,[Groupon_Cantidad] ,[Groupon_Descripcion],p.ID,[Groupon_Cantidad], 1 , substring(m.Groupon_Codigo,1,10)
   FROM [GD2C2012].[gd_esquema].[Maestra] m
   INNER JOIN GRUPO_N.Proveedor p ON m.Provee_RS=p.RazonSocial WHERE Provee_RS IS NOT NULL 
 GO
@@ -1904,9 +1904,9 @@ INSERT INTO GRUPO_N.CuponCiudad (ID_Cupon,ID_Ciudad)
 SELECT c.ID, ciu.ID FROM GRUPO_N.Cupon c
 INNER JOIN GRUPO_N.Proveedor p ON  p.ID=c.ID_Proveedor 
 INNER JOIN 
-(SELECT distinct  Groupon_Codigo, Provee_Ciudad FROM gd_esquema.Maestra m 
+(SELECT distinct  substring(m.Groupon_Codigo,1,10) as codigo, Provee_Ciudad FROM gd_esquema.Maestra m 
 WHERE m.Groupon_Devolucion_Fecha IS NULL AND m.Groupon_Entregado_Fecha IS NULL AND m.Factura_Fecha IS NULL AND m.Provee_RS IS NOT NULL)
- m ON m.Groupon_Codigo=c.Codigo  
+ m ON m.codigo = c.Codigo  
 INNER JOIN GRUPO_N.Ciudad ciu ON  ciu.Descripcion = m.Provee_Ciudad
 GO
 
@@ -1922,7 +1922,7 @@ INSERT INTO GRUPO_N.CompraCupon (ID_Cliente, ID_Cupon, Codigo, Fecha)
 SELECT u.ID, c.ID, Groupon_Codigo,Groupon_Fecha_Compra 
 	FROM gd_esquema.Maestra m 
 	INNER JOIN GRUPO_N.Usuario u ON u.Nombre = m.Cli_Telefono
-	INNER JOIN GRUPO_N.Cupon c ON c.Codigo=m.Groupon_Codigo 
+	INNER JOIN GRUPO_N.Cupon c ON c.Codigo=substring(m.Groupon_Codigo,1,10) 
 	INNER JOIN GRUPO_N.Proveedor p ON c.ID_Proveedor= p.ID
 	WHERE Groupon_Fecha_Compra IS NOT NULL AND Groupon_Devolucion_Fecha IS NULL
 	  AND Groupon_Entregado_Fecha IS NULL AND Factura_Fecha IS NULL AND u.ID_Rol =@Id_Rol_Cliente AND m.Provee_RS = p.RazonSocial

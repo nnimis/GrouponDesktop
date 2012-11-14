@@ -1465,33 +1465,6 @@ BEGIN
 	ORDER BY cc.Fecha DESC
 END
 GO
-/****** Object:  StoredProcedure [GRUPO_N].[ResetDatabase]    Script Date: 11/12/2012 20:20:11 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [GRUPO_N].[ResetDatabase]
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-BEGIN TRANSACTION
-	DELETE FROM GRUPO_N.Devolucion
-	DELETE FROM GRUPO_N.CompraCupon
-	DELETE FROM GRUPO_N.GiftCard
-	DELETE FROM GRUPO_N.Pago
-	DELETE FROM GRUPO_N.Cupon
-	DELETE FROM GRUPO_N.Direccion
-	DELETE FROM GRUPO_N.DetalleEntidad
-	DELETE FROM GRUPO_N.ClienteCiudad
-	DELETE FROM GRUPO_N.Cliente
-	DELETE FROM GRUPO_N.Proveedor
-	DELETE FROM GRUPO_N.Usuario WHERE ID > 5
-COMMIT
-END
-GO
 /****** Object:  StoredProcedure [GRUPO_N].[InsertFacturaCanjeCupon]    Script Date: 11/12/2012 20:20:11 ******/
 SET ANSI_NULLS ON
 GO

@@ -59,17 +59,32 @@ namespace GrouponDesktop.Business
             var entityDetailManager = new DetalleEntidadManager();
             if (proveedor.UserID == 0)
             {
-                proveedor.UserID = usersManager.CreateProfileAccount(proveedor as User, Proveedor.Profile, password);
-                var detalleID = entityDetailManager.AddDetalleEntidad(proveedor as User);
+                var transaction = SqlDataAccess.OpenTransaction(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString());
+                try
+                {
+                    SessionData.Set("Transaction", transaction);
+                    proveedor.UserID = usersManager.CreateProfileAccount(proveedor as User, Proveedor.Profile, password);
+                    var detalleID = entityDetailManager.AddDetalleEntidad(proveedor as User);
 
-                SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                    "GRUPO_N.InsertProveedor", SqlDataAccessArgs
-                    .CreateWith("@RazonSocial", proveedor.RazonSocial)
-                    .And("@ID", proveedor.UserID)
-                    .And("@ID_Rubro", proveedor.Rubro.ID)
-                    .And("@CUIT", proveedor.CUIT)
-                    .And("@Contacto", proveedor.NombreContacto)
-                .Arguments);
+                    SqlDataAccess.ExecuteNonQuery(
+                        "GRUPO_N.InsertProveedor", SqlDataAccessArgs
+                        .CreateWith("@RazonSocial", proveedor.RazonSocial)
+                        .And("@ID", proveedor.UserID)
+                        .And("@ID_Rubro", proveedor.Rubro.ID)
+                        .And("@CUIT", proveedor.CUIT)
+                        .And("@Contacto", proveedor.NombreContacto)
+                        .Arguments,
+                    transaction);
+
+                    SessionData.Remove("Transaction");
+                    SqlDataAccess.Commit(transaction);
+                }
+                catch
+                {
+                    SqlDataAccess.Rollback(transaction);
+                    proveedor.UserID = 0;
+                    throw;
+                }
             }
             else
             {

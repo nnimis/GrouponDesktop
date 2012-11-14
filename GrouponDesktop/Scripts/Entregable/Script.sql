@@ -135,6 +135,11 @@ CREATE TABLE [GRUPO_N].[Usuario](
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+CREATE UNIQUE NONCLUSTERED INDEX IX_Usuario ON GRUPO_N.Usuario
+	(
+	Nombre
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
 /****** Object:  StoredProcedure [GRUPO_N].[GetCiudades]    Script Date: 11/12/2012 20:20:11 ******/
 SET ANSI_NULLS ON
 GO
@@ -452,6 +457,16 @@ CREATE TABLE [GRUPO_N].[Proveedor](
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+CREATE UNIQUE NONCLUSTERED INDEX IX_Proveedor_CUIT ON GRUPO_N.Proveedor
+	(
+	CUIT
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+CREATE UNIQUE NONCLUSTERED INDEX IX_Proveedor_RSocial ON GRUPO_N.Proveedor
+	(
+	RazonSocial
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
 /****** Object:  StoredProcedure [GRUPO_N].[Login]    Script Date: 11/12/2012 20:20:11 ******/
 SET ANSI_NULLS ON
 GO
@@ -712,6 +727,21 @@ CREATE TABLE [GRUPO_N].[Cupon](
 	[ID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+CREATE UNIQUE NONCLUSTERED INDEX IX_Cupon_Codigo ON GRUPO_N.Cupon
+	(
+	Codigo
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX IX_Cupon_FechaPublicacion ON GRUPO_N.Cupon
+	(
+	FechaPublicacion
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX IX_Cupon_FechaVigencia ON GRUPO_N.Cupon
+	(
+	FechaVigencia
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 /****** Object:  Table [GRUPO_N].[Factura]    Script Date: 11/12/2012 20:20:14 ******/
 SET ANSI_NULLS ON
@@ -1867,9 +1897,9 @@ GO
 PRINT 'Ingresando los cupones...'
 GO
 INSERT INTO GRUPO_N.Cupon (Precio, PrecioOriginal, FechaPublicacion,FechaVigencia,FechaVencimiento,Stock,Descripcion,ID_Proveedor,CantidadPorUsuario,Publicado ,Codigo)
-SELECT distinct [Groupon_Precio_Ficticio], [Groupon_Precio] ,[Groupon_Fecha] ,[Groupon_Fecha_Venc], DATEADD(MONTH,2,[Groupon_Fecha_Venc]) ,[Groupon_Cantidad] ,[Groupon_Descripcion],p.ID,[Groupon_Cantidad], 1 , substring(m.Groupon_Codigo,1,10)
+SELECT distinct [Groupon_Precio] ,[Groupon_Precio_Ficticio], [Groupon_Fecha] ,[Groupon_Fecha_Venc], DATEADD(MONTH,2,[Groupon_Fecha_Venc]) ,[Groupon_Cantidad] ,[Groupon_Descripcion],p.ID,[Groupon_Cantidad], 1 , substring(m.Groupon_Codigo,1,10)
   FROM [GD2C2012].[gd_esquema].[Maestra] m
-  INNER JOIN GRUPO_N.Proveedor p ON m.Provee_RS=p.RazonSocial WHERE Provee_RS IS NOT NULL 
+  INNER JOIN GRUPO_N.Proveedor p ON m.Provee_RS = p.RazonSocial WHERE Provee_RS IS NOT NULL 
 GO
 
 --Ingresando las ciudades de los cupones

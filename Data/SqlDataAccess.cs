@@ -15,6 +15,44 @@ namespace Data
     /// </summary>
     public sealed class SqlDataAccess
     {
+        private static SqlConnection _connection;
+
+        /// <summary>
+        /// Opens a connection and instantiates a transaction for the specified connection string
+        /// </summary>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>The transaction oppened.</returns>
+        public static SqlTransaction OpenTransaction(string connectionString)
+        {
+            _connection = new SqlConnection(connectionString);
+            _connection.Open();
+            return _connection.BeginTransaction();
+        }
+
+        /// <summary>
+        /// Executes the commit for a specified transaction and closes Session's connection
+        /// </summary>
+        /// <param name="transaction">The transaction to be commited.</param>
+        public static void Commit(SqlTransaction transaction)
+        {
+            transaction.Commit();
+            _connection.Close();
+            _connection.Dispose();
+            _connection = null;
+        }
+
+        /// <summary>
+        /// Rollback a specified transaction and closes Session's connection
+        /// </summary>
+        /// <param name="transaction">The transaction to be rolled back.</param>
+        public static void Rollback(SqlTransaction transaction)
+        {
+            transaction.Rollback();
+            _connection.Close();
+            _connection.Dispose();
+            _connection = null;
+        }
+
         /// <summary>
         /// Executes a Transact-SQL statement against the connection and returns the number of rows affected.
         /// </summary>
@@ -86,6 +124,55 @@ namespace Data
                         }
                         catch { }
                     }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Executes a Transact-SQL statement against the connection and returns the number of rows affected.
+        /// </summary>
+        /// <example>This sample shows how to call the ExecuteNonQuery method.
+        /// <code escaped="true" lang="C#">
+        ///   class MyClass 
+        ///   {
+        ///      public static int Main() 
+        ///      {
+        ///         SqlDataAccess.ExecuteNonQuery("connectionstring_db1", "UpdatePerson",
+        ///             SqlDataAccessArgs.CreateWith("@FirstName", "Pablo")
+        ///                 .And("@LastName", "Kerestezachi").Arguments);
+        ///      }
+        ///   }
+        /// </code>
+        /// </example>
+        /// <param name="text">The store procedure name to be executed.</param>
+        /// <param name="args">The arguments passed to execute the sentence.</param>
+        /// <param name="transaction">The transaction which holds the statement to be executed.</param>
+        /// <returns>The number of rows affected.</returns>
+        public static int ExecuteNonQuery(string text, IDictionary<string, object> args, SqlTransaction transaction)
+        {
+            int result = -1;
+
+            using (SqlCommand com = new SqlCommand(text, _connection, transaction))
+            {
+                com.CommandType = CommandType.StoredProcedure;
+                if (args != null && args.Count > 0)
+                    foreach (string key in args.Keys)
+                    {
+                        com.Parameters.AddWithValue(key, args[key] == null ? DBNull.Value : args[key]);
+                    }
+                try
+                {
+                    result = com.ExecuteNonQuery();
+                }
+                finally
+                {
+                    try
+                    {
+                        com.Dispose();
+                    }
+                    catch { }
                 }
             }
 
@@ -212,6 +299,35 @@ namespace Data
             }
 
             return result;
+        }
+
+        public static T ExecuteScalarQuery<T>(string text, IDictionary<string, object> args, SqlTransaction transaction)
+        {
+            object result = null;
+            
+            using (SqlCommand com = new SqlCommand(text, _connection, transaction))
+            {
+                com.CommandType = CommandType.StoredProcedure;
+                if (args != null && args.Count > 0)
+                    foreach (string key in args.Keys)
+                    {
+                        com.Parameters.AddWithValue(key, args[key] == null ? DBNull.Value : args[key]);
+                    }
+                try
+                {
+                    result = com.ExecuteScalar();
+                }
+                finally
+                {
+                    try
+                    {
+                        com.Dispose();
+                    }
+                    catch { }
+                }
+            }
+
+            return (T)Convert.ChangeType(result, typeof(T));
         }
 
         /// <summary>

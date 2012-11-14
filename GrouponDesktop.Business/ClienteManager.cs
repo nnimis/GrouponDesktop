@@ -72,16 +72,31 @@ namespace GrouponDesktop.Business
             var entityDetailManager = new DetalleEntidadManager();
             if (cliente.UserID == 0)
             {
-                cliente.UserID = usersManager.CreateProfileAccount(cliente as User, Cliente.Profile, password);
-                var detalleID = entityDetailManager.AddDetalleEntidad(cliente as User);
-                SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                    "GRUPO_N.InsertCliente", SqlDataAccessArgs
-                    .CreateWith("@DNI", cliente.DNI)
-                    .And("@ID", cliente.UserID)
-                    .And("@Nombre", cliente.Nombre)
-                    .And("@Apellido", cliente.Apellido)
-                    .And("@FechaNacimiento", cliente.FechaNacimiento)
-                .Arguments);
+                var transaction = SqlDataAccess.OpenTransaction(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString());
+                try
+                {
+                    SessionData.Set("Transaction", transaction);
+                    cliente.UserID = usersManager.CreateProfileAccount(cliente as User, Cliente.Profile, password);
+                    var detalleID = entityDetailManager.AddDetalleEntidad(cliente as User);
+                    SqlDataAccess.ExecuteNonQuery(
+                        "GRUPO_N.InsertCliente", SqlDataAccessArgs
+                        .CreateWith("@DNI", cliente.DNI)
+                        .And("@ID", cliente.UserID)
+                        .And("@Nombre", cliente.Nombre)
+                        .And("@Apellido", cliente.Apellido)
+                        .And("@FechaNacimiento", cliente.FechaNacimiento)
+                        .Arguments,
+                        transaction);
+
+                    SessionData.Remove("Transaction");
+                    SqlDataAccess.Commit(transaction);
+                }
+                catch
+                {
+                    SqlDataAccess.Rollback(transaction);
+                    cliente.UserID = 0;
+                    throw;
+                }
             }
             else
             {

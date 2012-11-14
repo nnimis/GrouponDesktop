@@ -169,7 +169,7 @@
             this.clbCiudades.FormattingEnabled = true;
             this.clbCiudades.Location = new System.Drawing.Point(102, 246);
             this.clbCiudades.Name = "clbCiudades";
-            this.clbCiudades.Size = new System.Drawing.Size(200, 139);
+            this.clbCiudades.Size = new System.Drawing.Size(200, 109);
             this.clbCiudades.TabIndex = 14;
             // 
             // cities

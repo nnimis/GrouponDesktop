@@ -22,6 +22,7 @@ namespace GrouponDesktop
         private ProveedorUserControl proveedorUserControl = new ProveedorUserControl();
         private Proveedor _proveedor = new Proveedor();
         private Cliente _cliente = new Cliente();
+        private bool _updatingData = false;
         public Profile Profile
         {
             get
@@ -48,6 +49,7 @@ namespace GrouponDesktop
 
         public void SetUser(User user)
         {
+            _updatingData = true;
             txtUsername.Text = user.UserName;
             txtUsername.Enabled = false;
             txtPassword.Enabled = false;
@@ -87,12 +89,15 @@ namespace GrouponDesktop
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtUsername.Text))
-                throw new Exception("El nombre de usuario es obligatorio!");
-            if (string.IsNullOrEmpty(txtPassword.Text))
-                throw new Exception("El password es obligatorio!");
-            if (txtPassword.Text != txtConfirmPassword.Text)
-                throw new Exception("Los passwords no coinciden!");
+            if (!_updatingData)
+            {
+                if (string.IsNullOrEmpty(txtUsername.Text))
+                    throw new Exception("El nombre de usuario es obligatorio!");
+                if (string.IsNullOrEmpty(txtPassword.Text))
+                    throw new Exception("El password es obligatorio!");
+                if (txtPassword.Text != txtConfirmPassword.Text)
+                    throw new Exception("Los passwords no coinciden!");
+            }
 
             User user = null;
             if (Profile == Profile.Cliente)

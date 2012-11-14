@@ -74,6 +74,9 @@ namespace GrouponDesktop.Core
                 if(IsAccesibleForm(formType))
                     AddMenuItemForView(formType);
             }
+
+            var menuItem = new ToolStripMenuItem("Salir", null, new EventHandler(Logoff));
+            _mainWindow.MainMenuStrip.Items.Add(menuItem);
         }
 
         /// <summary>
@@ -149,6 +152,14 @@ namespace GrouponDesktop.Core
                 var viewInstance = Activator.CreateInstance(formType) as Form;
                 _Views.Add(formType, viewInstance);
                 LoadView(viewInstance);
+            }
+        }
+
+        private static void Logoff(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Confirma que desea salir del sistema?", "Salir", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                Session.Close();
             }
         }
 

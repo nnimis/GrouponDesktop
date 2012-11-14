@@ -23,23 +23,23 @@ namespace GrouponDesktop.Login
                 throw new Exception("El teléfono debe ser numérico!");
             if (!long.TryParse(txtDNI.Text, out dni))
                 throw new Exception("El DNI debe ser numérico!");
-            if (string.IsNullOrEmpty(txtNombre.Text))
+            if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
                 throw new Exception("El Nombre es obligatorio!");
-            if (string.IsNullOrEmpty(txtApellido.Text))
+            if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
                 throw new Exception("El Apellido es obligatorio!");
             var ciudades = clbCiudades.CheckedItems.Cast<City>().ToList();
             if (ciudades.Count == 0)
                 throw new Exception("Debe seleccionar al menos una ciudad!");
 
-            _cliente.Apellido = txtApellido.Text;
-            _cliente.Nombre = txtNombre.Text;
+            _cliente.Apellido = txtApellido.Text.Trim();
+            _cliente.Nombre = txtNombre.Text.Trim();
             _cliente.DNI = dni;
             _cliente.FechaNacimiento = dtFechaNacimiento.Value;
             _cliente.Ciudades = ciudades;
-            _cliente.DetalleEntidad.CP = txtCP.Text;
-            _cliente.DetalleEntidad.Direccion = txtDireccion.Text;
+            _cliente.DetalleEntidad.CP = txtCP.Text.Trim();
+            _cliente.DetalleEntidad.Direccion = txtDireccion.Text.Trim();
             _cliente.DetalleEntidad.Telefono = telefono;
-            _cliente.DetalleEntidad.Email = txtMail.Text;
+            _cliente.DetalleEntidad.Email = txtMail.Text.Trim();
             _cliente.DetalleEntidad.Ciudad = (City)cbxCiudad.SelectedItem;
 
             return _cliente;
@@ -48,14 +48,14 @@ namespace GrouponDesktop.Login
         public void SetUser(Cliente cliente)
         {
             _cliente = cliente;
-            txtApellido.Text = cliente.Apellido;
-            txtNombre.Text = cliente.Nombre;
+            txtApellido.Text = cliente.Apellido.Trim();
+            txtNombre.Text = cliente.Nombre.Trim();
             txtDNI.Text = cliente.DNI.ToString();
             dtFechaNacimiento.Value = cliente.FechaNacimiento;
-            txtCP.Text = cliente.DetalleEntidad.CP;
-            txtDireccion.Text = cliente.DetalleEntidad.Direccion;
+            txtCP.Text = cliente.DetalleEntidad.CP.Trim();
+            txtDireccion.Text = cliente.DetalleEntidad.Direccion.Trim();
             txtTelefono.Text = cliente.DetalleEntidad.Telefono.ToString();
-            txtMail.Text = cliente.DetalleEntidad.Email;
+            txtMail.Text = cliente.DetalleEntidad.Email.Trim();
             cbxCiudad.SelectedItem = cliente.DetalleEntidad.Ciudad;
             foreach (var ciudad in cliente.Ciudades)
             {

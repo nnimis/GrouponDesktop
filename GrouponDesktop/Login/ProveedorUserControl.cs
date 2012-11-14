@@ -35,20 +35,20 @@ namespace GrouponDesktop.Login
             long telefono = 0;
             if (!long.TryParse(txtTelefono.Text, out telefono))
                 throw new Exception("El teléfono debe ser numérico!");
-            if (string.IsNullOrEmpty(txtCUIT.Text))
+            if (string.IsNullOrEmpty(txtCUIT.Text.Trim()))
                 throw new Exception("El CUIT es obligatorio!");
-            if (string.IsNullOrEmpty(txtRazonSocial.Text))
+            if (string.IsNullOrEmpty(txtRazonSocial.Text.Trim()))
                 throw new Exception("La Razón Social es obligatoria!");
-            _proveedor.CUIT = txtCUIT.Text;
-            _proveedor.NombreContacto = txtContacto.Text;
-            _proveedor.RazonSocial = txtRazonSocial.Text;
+            _proveedor.CUIT = txtCUIT.Text.Trim();
+            _proveedor.NombreContacto = txtContacto.Text.Trim();
+            _proveedor.RazonSocial = txtRazonSocial.Text.Trim();
             _proveedor.Rubro = (Rubro)cbxRubro.SelectedItem;
             _proveedor.DetalleEntidad = new DetalleEntidad()
             {
                 Ciudad = (City)cbxCiudad.SelectedItem,
-                CP = txtCP.Text,
-                Email = txtMail.Text,
-                Direccion = txtDireccion.Text,
+                CP = txtCP.Text.Trim(),
+                Email = txtMail.Text.Trim(),
+                Direccion = txtDireccion.Text.Trim(),
                 Telefono = telefono
             };
 
@@ -58,13 +58,13 @@ namespace GrouponDesktop.Login
         public void SetUser(Proveedor proveedor)
         {
             _proveedor = proveedor;
-            txtContacto.Text = proveedor.NombreContacto;
-            txtCUIT.Text = proveedor.CUIT;
-            txtRazonSocial.Text = proveedor.RazonSocial;
-            txtCP.Text = proveedor.DetalleEntidad.CP;
-            txtDireccion.Text = proveedor.DetalleEntidad.Direccion;
+            txtContacto.Text = proveedor.NombreContacto.Trim();
+            txtCUIT.Text = proveedor.CUIT.Trim();
+            txtRazonSocial.Text = proveedor.RazonSocial.Trim();
+            txtCP.Text = proveedor.DetalleEntidad.CP.Trim();
+            txtDireccion.Text = proveedor.DetalleEntidad.Direccion.Trim();
             txtTelefono.Text = proveedor.DetalleEntidad.Telefono.ToString();
-            txtMail.Text = proveedor.DetalleEntidad.Email;
+            txtMail.Text = proveedor.DetalleEntidad.Email.Trim();
             cbxCiudad.SelectedItem = proveedor.DetalleEntidad.Ciudad;
             cbxRubro.SelectedItem = proveedor.Rubro;
         }

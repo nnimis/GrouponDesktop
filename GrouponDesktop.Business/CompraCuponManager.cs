@@ -104,10 +104,10 @@ namespace GrouponDesktop.Business
         private string GetEstado(object idDevolucion, object idCanje)
         {
             if (idDevolucion != null && !(idDevolucion is DBNull))
-                return "Devuelto";
+                return ESTADO_DEVUELTO;
             if (idCanje != null && !(idCanje is DBNull))
-                return "Consumido";
-            return "Comprado";
+                return ESTADO_CONSUMIDO;
+            return ESTADO_COMPRADO;
         }
 
         public void DevolverCompra(Cliente cliente, CompraCupon compraCupon, string motivo)
@@ -120,7 +120,8 @@ namespace GrouponDesktop.Business
                 .And("@Motivo", motivo)
                 .Arguments);
 
-            if (result == null || (int)result == 0)
+            int intResult = 0;
+            if (result == null || !int.TryParse(result.ToString(), out intResult) || intResult == 0)
                 throw new Exception("No se puede devolver una compra ya consumida");
         }
 
@@ -132,5 +133,9 @@ namespace GrouponDesktop.Business
                 .And("@Fecha", DateTime.Now)
                 .Arguments);
         }
+
+        public const string ESTADO_CONSUMIDO = "Consumido";
+        public const string ESTADO_DEVUELTO = "Devuelto";
+        public const string ESTADO_COMPRADO = "Comprado";
     }
 }

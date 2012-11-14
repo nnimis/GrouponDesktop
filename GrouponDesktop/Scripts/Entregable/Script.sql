@@ -911,6 +911,7 @@ BEGIN
 	INNER JOIN GRUPO_N.Direccion di ON d.ID = di.ID_Detalle
 	INNER JOIN GRUPO_N.Usuario u ON p.ID = u.ID
 	WHERE u.Activo = 1
+	ORDER BY p.RazonSocial
 END
 GO
 /****** Object:  Table [GRUPO_N].[CompraCupon]    Script Date: 11/12/2012 20:20:14 ******/
@@ -981,6 +982,7 @@ BEGIN
 	INNER JOIN GRUPO_N.Direccion di ON d.ID = di.ID_Detalle
 	INNER JOIN GRUPO_N.Usuario u ON c.ID = u.ID
 	WHERE u.Activo = 1
+	ORDER BY c.Apellido, c.Nombre
 END
 GO
 /****** Object:  StoredProcedure [GRUPO_N].[GetCuponesProveedor]    Script Date: 11/12/2012 20:20:11 ******/
@@ -1107,7 +1109,7 @@ AS
 BEGIN
 	SET NOCOUNT ON;
     
-	SELECT c.* FROM GRUPO_N.Cupon c
+	SELECT DISTINCT c.* FROM GRUPO_N.Cupon c
 	INNER JOIN GRUPO_N.CuponCiudad cc ON cc.ID_Cupon = c.ID
 	INNER JOIN GRUPO_N.ClienteCiudad cu ON cu.ID_Ciudad = cc.ID_Ciudad
 	WHERE c.Publicado = 1
@@ -1812,7 +1814,7 @@ GO
 PRINT 'Ingresar las tarjetas...'
 GO
 INSERT INTO GRUPO_N.Tarjeta (Banco, Numero, ID_Cliente)
-SELECT DISTINCT 'Banco de importacion previa', 'Numero de importacion precia',  p.ID_Cliente FROM GRUPO_N.Pago p
+SELECT DISTINCT 'Banco de importacion previa', 'Numero de importacion previa',  p.ID_Cliente FROM GRUPO_N.Pago p
 INNER JOIN GRUPO_N.TipoPago tp ON tp.ID=p.ID_TipoPago
 WHERE tp.Descripcion='Crédito'
 GO
@@ -2019,7 +2021,7 @@ INSERT INTO GRUPO_N.DetalleEntidad (ID_Usuario, Telefono) VALUES (@ID_Administra
 SET @ID_Detalle_Administrador_Inicial = @@IDENTITY
 
 INSERT INTO GRUPO_N.Direccion (Descripcion, ID_Ciudad, ID_Detalle) VALUES (' ', 1, @ID_Detalle_Administrador_Inicial)
-INSERT INTO GRUPO_N.Cliente (ID, DNI, Nombre, Apellido, FechaNacimiento, Saldo) VALUES (@ID_Administrador_Inicial, 0, 'Administrador', 'Administrador', GETDATE(), 0)
+INSERT INTO GRUPO_N.Cliente (ID, DNI, Nombre, Apellido, FechaNacimiento) VALUES (@ID_Administrador_Inicial, 0, 'Administrador', 'Administrador', GETDATE())
 INSERT INTO GRUPO_N.ClienteCiudad (ID_Ciudad, ID_Cliente) SELECT ID, @ID_Administrador_Inicial FROM GRUPO_N.Ciudad
 INSERT INTO GRUPO_N.Proveedor (CUIT, ID, ID_Rubro, RazonSocial) VALUES ('Administrador', @ID_Administrador_Inicial, 1, 'Administrador')
 GO

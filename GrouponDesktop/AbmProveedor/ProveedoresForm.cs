@@ -33,6 +33,7 @@ namespace GrouponDesktop.AbmProveedor
         {
             var bindingSource = new BindingSource();
             var table = _manager.GetAll();
+            table.Remove(new Proveedor() { UserID = Session.User.UserID });
             proveedoresGrid.AutoGenerateColumns = false;
             proveedoresGrid.DataSourceChanged += new EventHandler(proveedoresGrid_DataSourceChanged);
             proveedoresGrid.DataSource = table;
@@ -102,6 +103,7 @@ namespace GrouponDesktop.AbmProveedor
             var proveedor = e.User as Proveedor;
             if (dataSource.Contains(proveedor)) dataSource.Remove(proveedor);
             dataSource.Add(proveedor);
+            proveedoresGrid.DataSource = new BindingList<Proveedor>(dataSource.OrderBy(x => x.RazonSocial).ToList());
             proveedoresGrid.Refresh();
         }
 
@@ -137,6 +139,7 @@ namespace GrouponDesktop.AbmProveedor
             {
                 proveedores = new BindingList<Proveedor>(proveedores.Where(x => x.CUIT.ToLowerInvariant().Equals(txtCUIT.Text.ToLowerInvariant())).ToList());
             }
+            proveedores.Remove(new Proveedor() { UserID = Session.User.UserID });
             proveedoresGrid.DataSource = proveedores;
             proveedoresGrid.Refresh();
         }

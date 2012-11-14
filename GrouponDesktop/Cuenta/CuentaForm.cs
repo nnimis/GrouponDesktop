@@ -41,8 +41,8 @@ namespace GrouponDesktop.Cuenta
                 var usersManager = new UsersManager();
                 usersManager.DeleteAccount(Session.User);
                 MessageBox.Show("Su cuenta ha sido eliminada del sistema!");
+                Session.Close();
             }
-            Session.Close();
         }
     }
 }

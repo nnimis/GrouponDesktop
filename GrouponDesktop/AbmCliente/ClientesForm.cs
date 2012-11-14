@@ -40,6 +40,7 @@ namespace GrouponDesktop.AbmCliente
             }
             dgvClientes.AutoGenerateColumns = false;
             dgvClientes.DataSourceChanged += new EventHandler(dgvClientes_DataSourceChanged);
+            dataSource.Remove(new Cliente() { UserID = Session.User.UserID });
             dgvClientes.DataSource = dataSource;
             dgvClientes.DoubleClick += new EventHandler(dgvClientes_DoubleClick);
         }
@@ -105,6 +106,7 @@ namespace GrouponDesktop.AbmCliente
             var cliente = e.User as Cliente;
             if (dataSource.Contains(cliente)) dataSource.Remove(cliente);
             dataSource.Add(cliente);
+            dgvClientes.DataSource = new BindingList<Cliente>(dataSource.OrderBy(x => x.Apellido + x.Nombre).ToList());
             dgvClientes.Refresh();
             MessageBox.Show("Se han guardado los datos del cliente " + e.Username);
         }
@@ -153,7 +155,7 @@ namespace GrouponDesktop.AbmCliente
                 clientes = new BindingList<Cliente>(clientes.Where(x => x.DNI == dni).ToList());
             }
             clientes.Remove(new Cliente() { UserID = Session.User.UserID });
-            dgvClientes.DataSource = clientes;
+            dgvClientes.DataSource = new BindingList<Cliente>(clientes.OrderBy(x => x.Apellido + x.Nombre).ToList());
             dgvClientes.Refresh();
         }
     }

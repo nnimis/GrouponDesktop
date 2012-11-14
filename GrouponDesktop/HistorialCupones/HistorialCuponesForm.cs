@@ -66,6 +66,16 @@ namespace GrouponDesktop.HistorialCupones
             if (dataGridView.SelectedRows == null || dataGridView.SelectedRows.Count == 0) return;
             var row = dataGridView.SelectedRows[0];
             var compraCupon = row.DataBoundItem as CompraCupon;
+            if (compraCupon.Estado == CompraCuponManager.ESTADO_CONSUMIDO)
+            {
+                MessageBox.Show("No se puede devolver una compra ya consumida");
+                return;
+            }
+            if (compraCupon.Estado == CompraCuponManager.ESTADO_DEVUELTO)
+            {
+                MessageBox.Show("No se puede devolver una compra ya devuelta");
+                return;
+            }
             var fechaVencimiento = new DateTime(compraCupon.FechaVencimiento.Year, compraCupon.FechaVencimiento.Month, compraCupon.FechaVencimiento.Day, 23, 59, 59);
             if (fechaVencimiento < DateTime.Now)
             {
